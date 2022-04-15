@@ -1,0 +1,25 @@
+.loggedOutNavbar {
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 63px;
+  bottom: 0;
+  background-color: #F9C74F;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+@media screen and (min-width: 660px) {
+  .loggedOutNavbar {
+    top: 0;
+    bottom: auto;
+  }
+}

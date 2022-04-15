@@ -1,0 +1,107 @@
+
+// COLORS 
+
+$blueColor: #577590;
+$clientOrange: #F9C74F;
+$clientOrangeHover: #ffd87d;
+$greenColor: #90BE6D;
+$grayColor: #EEEEEE;
+$errorColor: #F94144;
+
+// FONTS
+
+$Inter: 'Inter', sans-serif;
+$Jost: 'Jost', sans-serif;
+
+// BREAKPOINTS
+
+$breakpoint: 660px;
+
+// MIXINS
+
+@mixin flexCenterCenter() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin navbar($color) {
+  position: fixed; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: $navBarHeight;
+  bottom: 0;
+  background-color: $color;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+@mixin button($color, $fontColor, $fontFamily: $Jost) {
+  padding: 12px 15px;
+  background-color: $color;
+  color: $fontColor;
+  font-family: $fontFamily;
+  border-radius: 10px;
+  font-size: 18px;
+  border: none;
+  flex: 1;
+  transition: 100ms;
+  cursor: pointer;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+@mixin buttonHover($color) {
+  background-color: $color;
+}
+
+@mixin textInput($color) {
+  text-indent: 13px;
+  padding: 12px 0;
+  font-family: $Inter;
+  border: 1px solid $color;
+  border-radius: 10px;
+  font-size: 18px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+@mixin menuIcons() {
+  color: #fff;
+  font-size: 45px;
+  margin: 20px;
+  cursor: pointer;
+}
+
+@mixin navLinks() {
+  flex-direction: column;
+  width: 60%;
+}
+
+@mixin navLink(){
+  text-align: center;
+  display: block;
+  flex: 1;
+  border-bottom: 1px #fff solid;
+  padding: 16px 43px;
+  color: #fff;
+  font-size: 18px;
+  font-family: $Inter;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+@mixin logoutButton($fontColor, $backgroundColor){
+  font-size: 18px;
+  color: $fontColor;
+  background-color: $backgroundColor;
+  padding: 10px 18px;
+  align-self: flex-end;
+  margin: 45px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+// SIZES
+
+$navBarHeight: 63px;

@@ -1,0 +1,90 @@
+@import '../../Variables/Variables.scss';
+
+.loginForm {
+  @include flexCenterCenter();
+  flex-direction: column;
+  flex: 1;
+
+  .formError {
+    color: rgb(255, 77, 77);
+    margin-top: -22px;
+    margin-left: 15px;
+    background-color: white;
+    width: fit-content;
+    align-self: flex-start;
+    border-radius: 0 10px 0 0;
+    padding-right: 5px;
+  }
+
+  h1 {
+    color: $blueColor;
+    font-family: $Jost;
+    font-size: 46px;
+  }
+
+  svg {
+    margin-left: -40px;
+    }
+      
+  form {
+    @include flexCenterCenter();
+    margin-top: -34px;
+    width: 70%;
+    flex-direction: column;
+
+    input {
+      @include textInput($greenColor);
+      margin-bottom: 34px;
+    }
+
+    input::placeholder{
+      color: $greenColor;
+    }
+
+    a {
+      margin-top: -34px;
+      margin-bottom: 34px;
+      width: auto;
+      margin-left: auto;
+    }
+
+    * {
+      width: 100%;
+    }
+
+    .buttonsContainer {
+      margin-top: auto;
+      @include flexCenterCenter();
+      gap: 34px;
+
+      .button {
+        @include button($clientOrange, $blueColor);
+      }
+      .button:hover {
+        @include buttonHover($clientOrangeHover);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint) {
+  .loginForm {
+    form {
+      width: 50%;
+    }      
+  }
+}
+
+@media screen and (max-width: 330px){
+  .loginForm{
+    form {
+      .buttonsContainer{
+        gap: 5px;
+      }
+      
+      .formError {
+        margin-top: -18px;
+      }
+    }
+  }
+}

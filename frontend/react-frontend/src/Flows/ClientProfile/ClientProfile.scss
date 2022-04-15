@@ -1,0 +1,9 @@
+@import '../../Variables/Variables.scss';
+
+.button {
+  @include button($color: $clientOrange, $fontColor: $blueColor)
+}
+
+.button:hover {
+    @include buttonHover($color: $clientOrangeHover)
+}

@@ -1,0 +1,21 @@
+.button {
+  padding: 12px 15px;
+  background-color: #F9C74F;
+  color: #577590;
+  font-family: "Jost", sans-serif;
+  border-radius: 10px;
+  font-size: 18px;
+  border: none;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-transition: 100ms;
+  transition: 100ms;
+  cursor: pointer;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.button:hover {
+  background-color: #ffd87d;
+}

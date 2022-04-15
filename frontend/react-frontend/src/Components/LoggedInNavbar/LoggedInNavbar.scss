@@ -1,0 +1,48 @@
+@import '../../Variables/Variables.scss';
+
+.loggedInNavbar {
+  @include navbar($color: $clientOrange);
+  flex-direction: column;
+}
+
+.navButtons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .menuIcons {
+    @include menuIcons();
+  }
+}
+
+.menuShow {
+  height: auto;
+}
+.navLinks {
+  @include navLinks();
+}
+
+.navLink {
+  @include navLink();
+  color: $blueColor;
+}
+
+.navLink:hover {
+  background-color: #FFD266;
+}
+
+@media screen and (min-width: $breakpoint) {
+  .loggedInNavbar {
+    top: 0;
+    bottom: auto;
+  }
+}
+
+.logoutButton {
+  @include logoutButton($fontColor: #fff, $backgroundColor: $blueColor);
+}
+
+.logoutButton:hover {
+  background-color: #6e8aa3;
+}

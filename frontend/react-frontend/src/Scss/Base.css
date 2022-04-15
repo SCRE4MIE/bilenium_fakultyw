@@ -1,0 +1,322 @@
+.App {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100Vh;
+  width: 660px;
+  overflow-x: hidden;
+  -webkit-box-shadow: 0px 10px 10px #eeeeee;
+          box-shadow: 0px 10px 10px #eeeeee;
+}
+
+@media screen and (max-width: 660px) {
+  .App {
+    width: 100Vw;
+    border: none;
+  }
+}
+
+.loggedInNavbar {
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 63px;
+  bottom: 0;
+  background-color: #F9C74F;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.navButtons {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.navButtons .menuIcons {
+  color: #fff;
+  font-size: 45px;
+  margin: 20px;
+  cursor: pointer;
+}
+
+.menuShow {
+  height: auto;
+}
+
+.navLinks {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 60%;
+}
+
+.navLink {
+  text-align: center;
+  display: block;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border-bottom: 1px #fff solid;
+  padding: 16px 43px;
+  color: #fff;
+  font-size: 18px;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+  color: #577590;
+}
+
+.navLink:hover {
+  background-color: #FFD266;
+}
+
+@media screen and (min-width: 660px) {
+  .loggedInNavbar {
+    top: 0;
+    bottom: auto;
+  }
+}
+
+.logoutButton {
+  font-size: 18px;
+  color: #fff;
+  background-color: #577590;
+  padding: 10px 18px;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  margin: 45px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.logoutButton:hover {
+  background-color: #6e8aa3;
+}
+
+.loggedOutNavbar {
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 63px;
+  bottom: 0;
+  background-color: #F9C74F;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+@media screen and (min-width: 660px) {
+  .loggedOutNavbar {
+    top: 0;
+    bottom: auto;
+  }
+}
+
+.button {
+  padding: 12px 15px;
+  background-color: #F9C74F;
+  color: #577590;
+  font-family: "Jost", sans-serif;
+  border-radius: 10px;
+  font-size: 18px;
+  border: none;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-transition: 100ms;
+  transition: 100ms;
+  cursor: pointer;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.button:hover {
+  background-color: #ffd87d;
+}
+
+.loginForm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.loginForm .formError {
+  color: #ff4d4d;
+  margin-top: -22px;
+  margin-left: 15px;
+  background-color: white;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  border-radius: 0 10px 0 0;
+  padding-right: 5px;
+}
+
+.loginForm h1 {
+  color: #577590;
+  font-family: "Jost", sans-serif;
+  font-size: 46px;
+}
+
+.loginForm svg {
+  margin-left: -40px;
+}
+
+.loginForm form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: -34px;
+  width: 70%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.loginForm form input {
+  text-indent: 13px;
+  padding: 12px 0;
+  font-family: "Inter", sans-serif;
+  border: 1px solid #90BE6D;
+  border-radius: 10px;
+  font-size: 18px;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 34px;
+}
+
+.loginForm form input::-webkit-input-placeholder {
+  color: #90BE6D;
+}
+
+.loginForm form input:-ms-input-placeholder {
+  color: #90BE6D;
+}
+
+.loginForm form input::-ms-input-placeholder {
+  color: #90BE6D;
+}
+
+.loginForm form input::placeholder {
+  color: #90BE6D;
+}
+
+.loginForm form a {
+  margin-top: -34px;
+  margin-bottom: 34px;
+  width: auto;
+  margin-left: auto;
+}
+
+.loginForm form * {
+  width: 100%;
+}
+
+.loginForm form .buttonsContainer {
+  margin-top: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 34px;
+}
+
+.loginForm form .buttonsContainer .button {
+  padding: 12px 15px;
+  background-color: #F9C74F;
+  color: #577590;
+  font-family: "Jost", sans-serif;
+  border-radius: 10px;
+  font-size: 18px;
+  border: none;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-transition: 100ms;
+  transition: 100ms;
+  cursor: pointer;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.loginForm form .buttonsContainer .button:hover {
+  background-color: #ffd87d;
+}
+
+@media screen and (min-width: 660px) {
+  .loginForm form {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .loginForm form .buttonsContainer {
+    gap: 5px;
+  }
+  .loginForm form .formError {
+    margin-top: -18px;
+  }
+}

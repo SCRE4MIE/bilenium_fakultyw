@@ -1,0 +1,17 @@
+@import './Variables/Variables.scss';
+
+.App {
+  @include flexCenterCenter();
+  height: 100Vh;;
+  width: 660px;;
+  // border-left: 1px solid black;;
+  // border-right: 1px solid black;;
+  overflow-x: hidden;;
+  box-shadow: 0px 10px 10px #eeeeee;
+}
+@media screen and (max-width: $breakpoint) {
+  .App {
+    width: 100Vw;
+    border: none;
+  }
+}
