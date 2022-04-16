@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'rest_framework',
     'drf_yasg',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
 
     # 3rd-party
     'fontawesomefree',
@@ -144,6 +147,19 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'public/uploads/')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+
+# Following is added to enable registration with email instead of username
+AUTHENTICATION_BACKENDS = (
+ # Needed to login by username in Django admin, regardless of `allauth`
+ "django.contrib.auth.backends.ModelBackend",
+
+ # `allauth` specific authentication methods, such as login by e-mail
+ "allauth.account.auth_backends.AuthenticationBackend",
+)
 
 try:
     from project.settings_local import *  # noqa: F401, F403
