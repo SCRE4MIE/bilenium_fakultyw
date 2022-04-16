@@ -1,0 +1,9 @@
+@import '../../Variables/Variables.scss';
+
+.register {
+  @include flexCenterCenter();
+  flex-direction: column;
+  width: 100%;
+  padding-top: 63px;
+  padding-bottom: 63px;
+}

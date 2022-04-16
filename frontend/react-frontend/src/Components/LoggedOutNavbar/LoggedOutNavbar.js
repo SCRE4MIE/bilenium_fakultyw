@@ -1,9 +1,15 @@
 import React from 'react'
-import '../../Scss/Base.css'
+import './LoggedOutNavbar.css'
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import { Link } from 'react-router-dom';
 
 const LoggedOutNavbar = () => {
+
+
   return (
-    <div className='loggedOutNavbar'>loggedOutNavbar</div>
+    <div className='loggedOutNavbar'>
+      <Link to='/'><HomeOutlinedIcon className='menuIcons'/></Link>
+    </div>
   )
 }
 

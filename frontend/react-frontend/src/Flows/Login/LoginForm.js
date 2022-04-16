@@ -1,9 +1,9 @@
-import '../../Scss/Base.css'
-// import './LoginForm.css'
+import './LoginForm.css'
 import { useFormik } from 'formik';
 import { loginSchema } from '../../Validation/LoginValidation';
 import instance from '../../axios';
 import requests from '../../requests';
+import { Link } from 'react-router-dom';
 
 const LoginForm = ({ signIn }) => {
 
@@ -95,7 +95,7 @@ const LoginForm = ({ signIn }) => {
         <a href='' style={{color: '#577590'}}>Forgot your password?</a>
 
         <div className='buttonsContainer'>
-          <button className='button' >Sign Up!</button>
+          <Link to={'/register'} className='button' >Sign Up!</Link>
           <button className='button' type='submit'>Sign in!</button>
         </div>
 

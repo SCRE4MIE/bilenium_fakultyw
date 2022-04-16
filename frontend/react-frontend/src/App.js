@@ -1,26 +1,63 @@
 
 import { useState } from 'react';
-import ClientProfile from './Flows/ClientProfile/ClientProfile';
+import ClientProfile from './Flows/ClientFlow/ClientFlow';
 import LoggedInNavbar from './Components/LoggedInNavbar/LoggedInNavbar';
 import LoginForm from './Flows/Login/LoginForm';
-import './Scss/Base.css';
+import LoggedInTrainerNavbar from './Components/LoggedInTrainerNavbar/LoggedInTrainerNavbar';
+import './App.css'
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Register from './Flows/Registration/Register';
 
 function App() {
 
-  const [token, setToken] = useState(null)
+  const [userData, setUserData] = useState({token: false, userType: 'client'})
+
+  let location = useLocation();
 
   const handleSignIn = () => {
-    setToken(true);
+    setUserData({
+      token: true,
+      userType: 'client'
+    });
   }
 
   const handleSignOut = () => {
-    setToken(null);
+    location.pathname = '/';
+    setUserData({
+      token: false,
+      userType: ''
+    });
   }
+
+
 
   return (
     <div className="App">
-      {token ? <ClientProfile signOut={handleSignOut}/> : <LoginForm signIn={handleSignIn}/>}
-      {token && <LoggedInNavbar signOut={handleSignOut}/>}
+      <Routes>
+        {/* Register path */}
+        {
+          !userData.token
+          && 
+          <Route path='/register/*'
+            element={<Register />}
+          />
+        }
+        
+        {/* Login path */}
+        {
+          !userData.token
+          && 
+          <Route path='/'
+            element={<LoginForm signIn={handleSignIn}/>}
+          />
+        }
+
+      </Routes>
+
+      {userData.token && userData.userType === 'client' && <ClientProfile signOut={handleSignOut} /> }
+      {userData.token && userData.userType === 'client' && <LoggedInNavbar userType={userData.userType} signOut={handleSignOut} />}
+      {userData.token && userData.userType === 'trainer' && <p>Trainer profile</p>}
+      {userData.token && userData.userType === 'trainer' && <LoggedInTrainerNavbar userType={userData.userType} signOut={handleSignOut} />}
     </div>
   );
 }

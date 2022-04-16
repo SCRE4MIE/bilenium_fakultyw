@@ -2,16 +2,21 @@
 
 .App {
   @include flexCenterCenter();
-  height: 100Vh;;
-  width: 660px;;
+  min-height: 100%;
+  width: 660px;
   // border-left: 1px solid black;;
   // border-right: 1px solid black;;
-  overflow-x: hidden;;
-  box-shadow: 0px 10px 10px #eeeeee;
+  overflow-x: hidden;
+  box-shadow: 0px 0px 10px #eeeeee;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
+
 @media screen and (max-width: $breakpoint) {
   .App {
     width: 100Vw;
     border: none;
+    margin-top: 0;
   }
 }

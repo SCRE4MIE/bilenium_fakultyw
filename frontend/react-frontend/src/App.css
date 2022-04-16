@@ -8,16 +8,21 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 100Vh;
+  min-height: 100%;
   width: 660px;
   overflow-x: hidden;
-  -webkit-box-shadow: 0px 10px 10px #eeeeee;
-          box-shadow: 0px 10px 10px #eeeeee;
+  -webkit-box-shadow: 0px 0px 10px #eeeeee;
+          box-shadow: 0px 0px 10px #eeeeee;
+}
+
+.App ::-webkit-scrollbar {
+  display: none;
 }
 
 @media screen and (max-width: 660px) {
   .App {
     width: 100Vw;
     border: none;
+    margin-top: 0;
   }
 }

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import './LoggedInNavbar.css'
+import './LoggedInTrainerNavbar.css'
 import MenuIcon from '@mui/icons-material/Menu';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 
-const LoggedInNavbar = ({ signOut, userType }) => {
+const LoggedInTrainerNavbar = ({ signOut }) => {
 
   const [navHidden, setNavHidden] = useState(true)
 
@@ -25,7 +25,7 @@ const LoggedInNavbar = ({ signOut, userType }) => {
   }
 
   return (
-    <div className={`loggedInNavbar ${!navHidden && 'menuShow'}`}>
+    <div className={`loggedInTrainerNavbar ${!navHidden && 'menuShow'}`}>
       <div className='navButtons'>
         {navHidden && <ArrowBackIcon className='menuIcons'/>}
         <AccountCircleOutlinedIcon className='menuIcons'/>
@@ -42,15 +42,13 @@ const LoggedInNavbar = ({ signOut, userType }) => {
           }
       </div>
       <div className='navLinks' style={hideElements}>
-        <a className='navLink'>Order a walk</a>
-        <a className='navLink'>Trainers</a>
-        <a className='navLink'>History</a>
+        <a className='navLink'>Incoming walks</a>
         <a className='navLink'>Active walks</a>
-        <a className='navLink'>Future walks</a>
+        <a className='navLink'>History</a>
       </div>
       {!navHidden && <button className='logoutButton' onClick={handleSignOut}>Logout</button>}
     </div>
   )
 }
 
-export default LoggedInNavbar
+export default LoggedInTrainerNavbar

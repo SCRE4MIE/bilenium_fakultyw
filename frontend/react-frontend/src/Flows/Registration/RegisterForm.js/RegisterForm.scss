@@ -1,9 +1,10 @@
-@import '../../Variables/Variables.scss';
+@import '../../../Variables/Variables.scss';
 
-.loginForm {
+.registerForm {
   @include flexCenterCenter();
   flex-direction: column;
   flex: 1;
+  padding-bottom: 20px;
 
   .formError {
     color: rgb(255, 77, 77);
@@ -29,7 +30,7 @@
       
   form {
     @include flexCenterCenter();
-    margin-top: -34px;
+    margin-top: 34px;
     width: 70%;
     flex-direction: column;
 
@@ -56,10 +57,14 @@
     .buttonsContainer {
       margin-top: auto;
       @include flexCenterCenter();
-      gap: 34px;
+      flex-direction: column;
+      align-items:unset;
+      gap: 20px;
+      margin-top: 20px;
 
       .button {
         @include button($clientOrange, $blueColor);
+        flex: 1;
         text-decoration: none;
         text-align: center;
         margin: 0;
@@ -69,26 +74,5 @@
       }
     }
   }
-}
-
-@media screen and (min-width: $breakpoint) {
-  .loginForm {
-    form {
-      width: 50%;
-    }      
-  }
-}
-
-@media screen and (max-width: 330px){
-  .loginForm{
-    form {
-      .buttonsContainer{
-        gap: 5px;
-      }
-      
-      .formError {
-        margin-top: -18px;
-      }
-    }
-  }
+  
 }

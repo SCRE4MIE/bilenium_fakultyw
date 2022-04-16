@@ -1,7 +1,7 @@
 @import '../../Variables/Variables.scss';
 
-.loggedInNavbar {
-  @include navbar($color: $clientOrange);
+.loggedInTrainerNavbar {
+  @include navbar($color: $blueColor);
   flex-direction: column;
 
   .navButtons {
@@ -15,35 +15,35 @@
     }
   }
 
-
   .navLinks {
     @include navLinks();
   }
 
   .navLink {
     @include navLink();
-    color: $blueColor;
+    color: white;
   }
 
   .navLink:hover {
-    background-color: #FFD266;
+    background-color: #718DA7;
   }
 
   .logoutButton {
-    @include logoutButton($fontColor: #fff, $backgroundColor: $blueColor);
+    @include logoutButton($fontColor: $blueColor, $backgroundColor: $clientOrange);
   }
 
   .logoutButton:hover {
-    background-color: #6e8aa3;
+    background-color: #ffd87d;
   }
-}  
+
+}
 
 .menuShow {
-    height: auto;
+  height: auto;
 }
 
 @media screen and (min-width: $breakpoint) {
-  .loggedInNavbar {
+  .loggedInTrainerNavbar {
     top: 0;
     bottom: auto;
   }
