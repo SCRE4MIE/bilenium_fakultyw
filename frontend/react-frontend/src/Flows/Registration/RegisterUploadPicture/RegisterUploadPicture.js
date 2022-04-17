@@ -20,8 +20,6 @@ const RegisterUploadPicture = (props) => {
     setProfilePicture(e.target.files);
   }
 
-  console.log(typeof(profilePicture));
-
   const resetForm = () => {
     props.resetForm();
   }

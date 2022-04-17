@@ -4,26 +4,20 @@ import { loginSchema } from '../../Validation/LoginValidation';
 import instance from '../../axios';
 import requests from '../../requests';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useContext } from 'react';
+import { Context } from '../../App';
 
 const LoginForm = ({ signIn }) => {
 
-  const handleSignIn = (values) => {
-    console.log(values)
+  const handleSignIn = () => {
 
     instance.post(requests.login, {
-      body: {
-        username: "string1234",
-        email: formik.values.email,
-        password: formik.values.password,
-      }
+        email: `${formik.values.email}`,
+        password: `${formik.values.password}`,
+    }).then(response => {
+      signIn(response.data.key);
     })
-    .then(response => {
-      console.log(response);
-    }).catch(error =>{
-      console.log(error);
-    });
-
-    // signIn();
   }
 
   const formik = useFormik({
@@ -32,7 +26,7 @@ const LoginForm = ({ signIn }) => {
       password: '',
     },
     validationSchema: loginSchema,
-    onSubmit: (values) => handleSignIn(values),
+    onSubmit: () => handleSignIn(),
   })
 
   return (
