@@ -11,4 +11,15 @@ class CustomUser(AbstractUser):
     )
 
     avatar = models.ImageField()
+    email = models.EmailField('email address', unique=True)
+    is_trainer = models.BooleanField(
+        'Trener',
+        default=False,
+    )
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
+
+    def __str__(self):
+        return self.username
 
