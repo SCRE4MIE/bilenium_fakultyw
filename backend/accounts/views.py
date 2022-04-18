@@ -27,15 +27,16 @@ class CustomUserCreate(generics.GenericAPIView):
 
 class BlacklistTokenView(APIView):
     """
-    Logout user by using token in header: 'refresh_token'
+    Logout user by using token in header: 'Authorization'
 
     """
     permission_classes = [AllowAny]
 
     def post(self, request):
         try:
-            refresh_token = request.data['refresh_token']
+            refresh_token = request.META.get('HTTP_AUTHORIZATION')
             token = RefreshToken(refresh_token)
             token.blacklist()
+            return Response(status=status.HTTP_200_OK)
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
