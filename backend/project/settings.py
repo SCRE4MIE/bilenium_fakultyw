@@ -50,8 +50,10 @@ INSTALLED_APPS = [
     # 3rd-party
     'fontawesomefree',
     # custom apps
+    'accounts',
 ]
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
 REST_FRAMEWORK = {'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'}
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -173,8 +175,6 @@ SWAGGER_SETTINGS = {
         }
     },
 }
-
-CSRF_COOKIE_NAME = "csrftoken"
 
 try:
     from project.settings_local import *  # noqa: F401, F403
