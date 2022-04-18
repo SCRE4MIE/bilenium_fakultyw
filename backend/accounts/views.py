@@ -3,8 +3,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .serializers import RegisterUserSerializer
-from rest_framework.permissions import AllowAny
+from .models import CustomUser
+from .serializers import RegisterUserSerializer, UserDetailSerializer
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import generics
 
 
@@ -40,3 +41,22 @@ class BlacklistTokenView(APIView):
             return Response(status=status.HTTP_200_OK)
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserDetailView(generics.GenericAPIView):
+    """
+    Get user details.
+
+    Auth header: Authorization: JWT access token.
+    """
+    serializer_class = UserDetailSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+        try:
+            user = CustomUser.objects.get(id=request.user.id)
+            serializer = UserDetailSerializer(user)
+            return Response(serializer.data)
+        except CustomUser.DoesNotExist:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+

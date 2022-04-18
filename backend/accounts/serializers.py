@@ -19,3 +19,14 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         return instance
 
 
+class UserDetailSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CustomUser
+        fields = (
+            'username',
+            'email',
+            'phone_number',
+            'is_trainer',
+            'avatar_url',
+        )
