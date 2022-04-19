@@ -5,10 +5,12 @@ import instance from '../../axios';
 import requests from '../../requests';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Context } from '../../App';
 
 const LoginForm = ({ signIn }) => {
+
+  const [loginError, setLoginError] = useState(false);
 
   const handleSignIn = () => {
 
@@ -16,8 +18,18 @@ const LoginForm = ({ signIn }) => {
         email: `${formik.values.email}`,
         password: `${formik.values.password}`,
     }).then(response => {
-      sessionStorage.setItem('token', response.data.key);
-      signIn(response.data.key);
+      console.log(response);
+      sessionStorage.setItem('access', response.data.access);
+      sessionStorage.setItem('refresh', response.data.refresh);
+      instance.defaults.headers['Authorization'] = 
+        'JWT ' + sessionStorage.getItem('access');
+      signIn({
+        access: response.data.access,
+        refresh: response.data.refresh,
+      });
+    }).catch(error => {
+      console.log(error);
+      setLoginError(true);
     })
   }
 
@@ -94,6 +106,7 @@ const LoginForm = ({ signIn }) => {
           <button className='button' type='submit'>Sign in!</button>
         </div>
 
+        {loginError && <p style={{color: 'red', marginTop: '20px', textAlign: 'center', fontSize: '21px'}}>Invalid e-mail address or password.</p>}
       </form>
     </div>
   )

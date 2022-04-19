@@ -14,7 +14,9 @@ const RegisterUploadPicture = (props) => {
     const newImageURL = [];
     Array.from(profilePicture).forEach(picture => newImageURL.push(URL.createObjectURL(picture)));
     setImageURL(newImageURL);
-  }, [profilePicture])
+  }, [profilePicture]);
+
+  console.log(imageURL);
 
   const onImageChange = (e) => {
     setProfilePicture(e.target.files);

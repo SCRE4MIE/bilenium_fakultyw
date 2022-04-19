@@ -26,6 +26,7 @@ const Register = () => {
       profilePicture: '',
     })
   }
+  
   return (
     <div className='register'>
       <Routes>

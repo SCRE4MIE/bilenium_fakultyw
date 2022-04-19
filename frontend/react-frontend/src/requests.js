@@ -1,9 +1,10 @@
 
 const requests = {
-  registration: `rest-auth/registration/`,
-  login: `auth/login/`,
-  logout: `auth/logout/`,
-  user: 'auth/user/',
+  registration: `user/register/`,
+  login: `token/`,
+  refresh: `token/refresh/`,
+  logout: `user/logout/blacklist/`,
+  userDetails: 'user/get-user-details/',
   
 }
 
