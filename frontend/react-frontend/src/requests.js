@@ -1,9 +1,9 @@
 
 const requests = {
-  registration: `/rest-auth/registration/`,
-  login: `/auth/login/`,
-  logout: `/auth/logout/`,
-  user: '/auth/user/',
+  registration: `rest-auth/registration/`,
+  login: `auth/login/`,
+  logout: `auth/logout/`,
+  user: 'auth/user/',
   
 }
 

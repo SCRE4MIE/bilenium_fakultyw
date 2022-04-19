@@ -17,7 +17,7 @@ function App() {
 
   const context = useContext(Context);
   
-  const [userData, setUserData] = useState({token: false, userType: 'client'});
+  const [userData, setUserData] = useState({token: sessionStorage.getItem('token'), userType: 'client'});
 
   let location = useLocation();
 
@@ -29,19 +29,59 @@ function App() {
     }));
   }
 
+  console.log(userData.token);
+
+  function getCookie(cookieName) {
+    let cookie = {};
+    document.cookie.split(';').forEach(function(el) {
+      let [key,value] = el.split('=');
+      cookie[key.trim()] = value;
+    })
+    return cookie[cookieName];
+  }
+
   const handleSignOut = () => {
+    sessionStorage.removeItem('token');
+
+    const csrftoken = getCookie('csrftoken');
     location.pathname = '/';
-    instance.post(requests.logout, {
-      headers: {
-        key: `${userData.token}`,
+
+    var axios = require('axios');
+
+    var config = {
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/v1/auth/logout/',
+      headers: { 
+        'accept': 'application/json', 
+        'X-CSRFToken': `${csrftoken}`, 
       }
-    }).then(response => {
-      console.log(response)
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
       setUserData({
         token: false,
         userType: ''
       });
+    })
+    .catch(function (error) {
+      console.log(error);
     });
+
+    // instance.post(requests.logout, {
+    //     // 'X-CSRFToken': `X-CSRFToken: ${userData.token}`,
+    //     // 'X-CSRFToken': `${csrftoken}`,
+    //   body: {
+    //     "X-CSRFToken": `${csrftoken}`
+    //   }
+    // }).then(response => {
+    //   console.log(response)
+    //   setUserData({
+    //     token: false,
+    //     userType: ''
+    //   });
+    // });
   }
 
   return (

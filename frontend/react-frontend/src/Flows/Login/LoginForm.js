@@ -16,6 +16,7 @@ const LoginForm = ({ signIn }) => {
         email: `${formik.values.email}`,
         password: `${formik.values.password}`,
     }).then(response => {
+      sessionStorage.setItem('token', response.data.key);
       signIn(response.data.key);
     })
   }
