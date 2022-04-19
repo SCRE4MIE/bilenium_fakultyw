@@ -56,10 +56,12 @@
       -ms-flex: 1;
           flex: 1;
   border-bottom: 1px #fff solid;
-  padding: 16px 43px;
+  padding: 16px 0;
   color: #fff;
-  font-size: 18px;
+  font-size: 22px;
   font-family: "Inter", sans-serif;
+  letter-spacing: 0.1em;
+  font-weight: 500;
   cursor: pointer;
   -webkit-transition: 300ms;
   transition: 300ms;
@@ -74,10 +76,10 @@
   font-size: 18px;
   color: #fff;
   background-color: #577590;
-  padding: 10px 18px;
+  padding: 10px 25px;
   -ms-flex-item-align: end;
       align-self: flex-end;
-  margin: 45px;
+  margin: 20px 45px;
   border: none;
   border-radius: 10px;
   cursor: pointer;

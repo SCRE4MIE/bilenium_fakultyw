@@ -20,7 +20,6 @@ const LoggedInNavbar = ({ signOut, userType }) => {
 
   const hideElements = {
     display: navHidden ? 'none' : 'flex',
-    marginTop: '32px',
     marginBottom: '19px'
   }
 
