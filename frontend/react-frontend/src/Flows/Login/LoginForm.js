@@ -15,18 +15,22 @@ const LoginForm = ({ signIn }) => {
   const handleSignIn = () => {
 
     instance.post(requests.login, {
+
         email: `${formik.values.email}`,
         password: `${formik.values.password}`,
+        
     }).then(response => {
-      console.log(response);
+
       sessionStorage.setItem('access', response.data.access);
       sessionStorage.setItem('refresh', response.data.refresh);
+
       instance.defaults.headers['Authorization'] = 
         'JWT ' + sessionStorage.getItem('access');
       signIn({
         access: response.data.access,
         refresh: response.data.refresh,
       });
+
     }).catch(error => {
       console.log(error);
       setLoginError(true);

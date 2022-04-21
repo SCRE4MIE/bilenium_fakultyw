@@ -39,6 +39,8 @@
   font-size: 45px;
   margin: 20px;
   cursor: pointer;
+  -webkit-transition: 100ms;
+  transition: 100ms;
 }
 
 .loggedInTrainerNavbar .navLinks {
@@ -98,4 +100,9 @@
     top: 0;
     bottom: auto;
   }
+}
+
+.menuIcons:hover {
+  -webkit-transform: scale(1.4);
+          transform: scale(1.4);
 }

@@ -14,6 +14,8 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   cursor: pointer;
+  -webkit-transition: 300ms;
+  transition: 300ms;
 }
 
 .addDogButton .empty {
@@ -27,4 +29,19 @@
   color: #577590;
   margin-right: auto;
   margin-left: auto;
+}
+
+.addDogButton .icon {
+  -webkit-transition: 100ms;
+  transition: 100ms;
+}
+
+.icon:hover {
+  -webkit-transform: scale(1.3);
+          transform: scale(1.3);
+}
+
+.addDogButton:hover {
+  -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
 }

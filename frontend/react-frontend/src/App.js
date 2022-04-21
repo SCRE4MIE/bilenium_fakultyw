@@ -1,6 +1,5 @@
 
 import { createContext, useContext, useState } from 'react';
-import ClientProfile from './Flows/ClientFlow/ClientFlow';
 import LoggedInNavbar from './Components/LoggedInNavbar/LoggedInNavbar';
 import LoginForm from './Flows/Login/LoginForm';
 import LoggedInTrainerNavbar from './Components/LoggedInTrainerNavbar/LoggedInTrainerNavbar';
@@ -9,6 +8,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Register from './Flows/Registration/Register';
 import instance from './axios';
 import requests from './requests';
+import ClientFlow from './Flows/ClientFlow/ClientFlow';
 
 
 export const Context = createContext({})
@@ -91,7 +91,7 @@ function App() {
 
         </Routes>
 
-        {userData.access && userData.userType === 'client' && <ClientProfile signOut={handleSignOut} /> }
+        {userData.access && userData.userType === 'client' && <ClientFlow signOut={handleSignOut} /> }
         {userData.access && userData.userType === 'client' && <LoggedInNavbar userType={userData.userType} signOut={handleSignOut} />}
         {userData.access && userData.userType === 'trainer' && <p>Trainer profile</p>}
         {userData.access && userData.userType === 'trainer' && <LoggedInTrainerNavbar userType={userData.userType} signOut={handleSignOut} />}

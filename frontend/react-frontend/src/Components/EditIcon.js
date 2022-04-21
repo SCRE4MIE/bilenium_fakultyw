@@ -1,12 +1,14 @@
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import { Tooltip } from '@mui/material';
 
 const EditIcon = () => {
-  return (
+  return (            
+    <Tooltip title='Edit your profile'>
     <div style={{
-        backgroundColor: 'transparent',
-        border: '#577590 4px solid',
-        height: '28px',
-        width: '28px',
+      backgroundColor: 'transparent',
+      border: '#577590 4px solid',
+      height: '28px',
+      width: '28px',
         borderRadius: '10px',
         cursor: 'pointer'
       }}>
@@ -21,6 +23,7 @@ const EditIcon = () => {
         }}
       />
     </div>
+    </Tooltip>
   )
 }
 

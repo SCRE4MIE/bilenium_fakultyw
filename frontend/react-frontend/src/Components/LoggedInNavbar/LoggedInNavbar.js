@@ -4,8 +4,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import CloseIcon from '@mui/icons-material/Close';
+import { useNavigate } from 'react-router-dom';
 
 const LoggedInNavbar = ({ signOut, userType }) => {
+
+  const navigate = useNavigate();
 
   const [navHidden, setNavHidden] = useState(true)
 
@@ -18,6 +21,14 @@ const LoggedInNavbar = ({ signOut, userType }) => {
     setNavHidden(prevState => !prevState);
   }
 
+  const navigateBack = () => {
+    navigate(-1);
+  }
+
+  const navigateToProfile = () => {
+    navigate('/');
+  }
+
   const hideElements = {
     display: navHidden ? 'none' : 'flex',
     marginBottom: '19px'
@@ -26,8 +37,8 @@ const LoggedInNavbar = ({ signOut, userType }) => {
   return (
     <div className={`loggedInNavbar ${!navHidden && 'menuShow'}`}>
       <div className='navButtons'>
-        {navHidden && <ArrowBackIcon className='menuIcons'/>}
-        <AccountCircleOutlinedIcon className='menuIcons'/>
+        {navHidden && <ArrowBackIcon className='menuIcons' onClick={navigateBack}/>}
+        <AccountCircleOutlinedIcon className='menuIcons' onClick={navigateToProfile}/>
         {navHidden ? 
           <MenuIcon 
             className='menuIcons'

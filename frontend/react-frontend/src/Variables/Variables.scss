@@ -70,6 +70,7 @@ $breakpoint: 660px;
   font-size: 45px;
   margin: 20px;
   cursor: pointer;
+  transition: 100ms;
 }
 
 @mixin navLinks() {
