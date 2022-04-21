@@ -10,7 +10,7 @@ class CustomUser(AbstractUser):
         blank=True,
     )
 
-    avatar = models.ImageField()
+    avatar = models.ImageField(null=True, blank=True)
     email = models.EmailField('email address', unique=True)
     is_trainer = models.BooleanField(
         'Trener',
