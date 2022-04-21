@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import CloseIcon from '@mui/icons-material/Close';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoggedInNavbar = ({ signOut, userType }) => {
 
@@ -26,6 +26,7 @@ const LoggedInNavbar = ({ signOut, userType }) => {
   }
 
   const navigateToProfile = () => {
+    toggleNav();
     navigate('/');
   }
 
@@ -52,11 +53,11 @@ const LoggedInNavbar = ({ signOut, userType }) => {
           }
       </div>
       <div className='navLinks' style={hideElements}>
-        <a className='navLink'>Order a walk</a>
-        <a className='navLink'>Trainers</a>
-        <a className='navLink'>History</a>
-        <a className='navLink'>Active walks</a>
-        <a className='navLink'>Future walks</a>
+        <Link onClick={toggleNav} to='' className='navLink'>Order a walk</Link>
+        <Link onClick={toggleNav} to='/trainerList' className='navLink'>Trainers</Link>
+        <Link onClick={toggleNav} to='' className='navLink'>History</Link>
+        <Link onClick={toggleNav} to='' className='navLink'>Active walks</Link>
+        <Link onClick={toggleNav} to='' className='navLink'>Future walks</Link>
       </div>
       {!navHidden && <button className='logoutButton' onClick={handleSignOut}>Logout</button>}
     </div>

@@ -64,6 +64,7 @@
   font-family: "Inter", sans-serif;
   letter-spacing: 0.1em;
   font-weight: 500;
+  text-decoration: none;
   cursor: pointer;
   -webkit-transition: 300ms;
   transition: 300ms;
