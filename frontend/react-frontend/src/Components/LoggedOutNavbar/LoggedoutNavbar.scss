@@ -1,0 +1,18 @@
+@import '../../Variables/Variables.scss';
+
+.loggedOutNavbar {
+  @include navbar($color: $clientOrange);
+  position: fixed;
+  bottom: 0;
+
+  .menuIcons {
+    @include menuIcons();
+  }
+}
+
+@media screen and (min-width: $breakpoint) {
+  .loggedOutNavbar {
+    top: 0;
+    bottom: auto;
+  }
+}

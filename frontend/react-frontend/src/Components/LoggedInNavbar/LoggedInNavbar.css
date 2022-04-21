@@ -1,0 +1,109 @@
+.loggedInNavbar {
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 63px;
+  bottom: 0;
+  background-color: #F9C74F;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.loggedInNavbar .navButtons {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.loggedInNavbar .navButtons .menuIcons {
+  color: #fff;
+  font-size: 45px;
+  margin: 20px;
+  cursor: pointer;
+  -webkit-transition: 100ms;
+  transition: 100ms;
+}
+
+.loggedInNavbar .navLinks {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 60%;
+}
+
+.loggedInNavbar .navLink {
+  text-align: center;
+  display: block;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border-bottom: 1px #fff solid;
+  padding: 16px 0;
+  color: #fff;
+  font-size: 22px;
+  font-family: "Inter", sans-serif;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+  color: #577590;
+}
+
+.loggedInNavbar .navLink:hover {
+  background-color: #FFD266;
+}
+
+.loggedInNavbar .logoutButton {
+  font-size: 18px;
+  color: #fff;
+  background-color: #577590;
+  padding: 10px 25px;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  margin: 20px 45px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.loggedInNavbar .logoutButton:hover {
+  background-color: #6e8aa3;
+}
+
+.menuShow {
+  height: auto;
+}
+
+@media screen and (min-width: 660px) {
+  .loggedInNavbar {
+    top: 0;
+    bottom: auto;
+  }
+}
+
+.menuIcons:hover {
+  -webkit-transform: scale(1.4);
+          transform: scale(1.4);
+}
