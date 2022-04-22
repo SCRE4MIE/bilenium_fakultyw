@@ -56,7 +56,7 @@ class UserDetailView(generics.GenericAPIView):
         try:
             user = CustomUser.objects.get(id=request.user.id)
             serializer = UserDetailSerializer(user)
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         except CustomUser.DoesNotExist:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 

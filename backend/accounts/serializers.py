@@ -31,3 +31,4 @@ class UserDetailSerializer(serializers.ModelSerializer):
             'is_trainer',
             'avatar_url',
         )
+

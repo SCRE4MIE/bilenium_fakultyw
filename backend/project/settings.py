@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'fontawesomefree',
     # custom apps
     'accounts',
+    'api',
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
