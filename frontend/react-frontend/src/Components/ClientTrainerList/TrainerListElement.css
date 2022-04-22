@@ -1,4 +1,4 @@
-.dogListElement {
+.trainerListElement {
   -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
@@ -15,7 +15,7 @@
   transition: 300ms;
 }
 
-.dogListElement .dogPictureContainer {
+.trainerListElement .trainerPictureContainer {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -27,11 +27,11 @@
   transition: 100ms;
 }
 
-.dogListElement .dogPictureContainer img {
+.trainerListElement .trainerPictureContainer img {
   height: 100%;
 }
 
-.dogListElement .dogName {
+.trainerListElement .trainerName {
   font-family: "Inter", sans-serif;
   font-size: 18px;
   color: #577590;
@@ -39,20 +39,29 @@
   margin-left: 20px;
 }
 
-.dogListElement .icon {
+.trainerListElement .trainerRating {
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
   color: #577590;
-  font-size: 36px;
-  -webkit-transition: 100ms;
-  transition: 100ms;
+  margin-left: 20px;
+  vertical-align: middle;
+  display: inline-block;
 }
 
-.dogPictureContainer:hover {
+.trainerListElement .starIcon {
+  font-size: 22px;
+  color: #577590;
+  margin-left: 2px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.trainerPictureContainer:hover {
   -webkit-transform: scale(1.4);
           transform: scale(1.4);
 }
 
-.dogListElement:hover {
+.trainerListElement:hover {
   -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
           box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
 }
-/*# sourceMappingURL=DogListElement.css.map */
