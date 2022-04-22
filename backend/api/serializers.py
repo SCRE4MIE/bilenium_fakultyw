@@ -30,6 +30,8 @@ class TrainerSerializer(serializers.ModelSerializer):
 
 class DogSerializer(serializers.ModelSerializer):
 
+    owner = UserDetailSerializer()
+
     class Meta:
         model = Dog
         fields = ['pk', 'name', 'breed', 'avatar_url', 'age', 'description', 'owner']

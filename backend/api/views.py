@@ -30,7 +30,7 @@ class GetTrainerView(generics.GenericAPIView):
     Get trainer by id.
     """
     serializer_class = TrainerSerializer
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
         try:
@@ -44,6 +44,7 @@ class GetTrainerView(generics.GenericAPIView):
 class DogsListView(generics.GenericAPIView):
 
     serializer_class = DogSerializer
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
         try:
