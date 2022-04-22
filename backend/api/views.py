@@ -42,6 +42,9 @@ class GetTrainerView(generics.GenericAPIView):
 
 
 class DogsListView(generics.GenericAPIView):
+    """
+    Get dogs list.
+    """
 
     serializer_class = DogSerializer
     permission_classes = (IsAuthenticated,)
