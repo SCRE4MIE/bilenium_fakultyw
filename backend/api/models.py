@@ -13,7 +13,7 @@ class Rating(models.Model):
 
     trainer = models.ForeignKey(
         CustomUser,
-        related_name='trainer',
+        related_name='rating_trainer',
         null=True,
         blank=False,
         on_delete=models.SET_NULL,
