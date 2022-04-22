@@ -20,7 +20,7 @@ const TrainerListElement = ({ imageSrc, name, id, rating }) => {
       <p className='trainerName'>{name}</p>
       <span>
         <p className="trainerRating">{rating}/5</p>
-        <StarIcon className='starIcon' style={{cursor: 'pointer'}}/>
+        <StarIcon className='starIcon'/>
       </span>
     </div>
   )
