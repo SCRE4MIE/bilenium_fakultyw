@@ -44,6 +44,7 @@ class Dog(models.Model):
     )
     owner = models.ForeignKey(
         CustomUser,
+        related_name='dog_owner',
         null=False,
         blank=False,
         on_delete=models.CASCADE,
@@ -51,6 +52,11 @@ class Dog(models.Model):
 
     def __str__(self):
         return self.name
+
+    def avatar_url(self):
+        if self.avatar:
+            return self.avatar.url
+        return None
 
     class Meta:
         verbose_name = 'Piesek'
