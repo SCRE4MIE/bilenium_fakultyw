@@ -26,7 +26,7 @@ const LoggedInNavbar = ({ signOut, userType }) => {
   }
 
   const navigateToProfile = () => {
-    toggleNav();
+    !navHidden && toggleNav();
     navigate('/');
   }
 
@@ -53,11 +53,11 @@ const LoggedInNavbar = ({ signOut, userType }) => {
           }
       </div>
       <div className='navLinks' style={hideElements}>
-        <Link onClick={toggleNav} to='' className='navLink'>Order a walk</Link>
+        <Link onClick={toggleNav} to='/orderAWalk' className='navLink'>Order a walk</Link>
         <Link onClick={toggleNav} to='/trainerList' className='navLink'>Trainers</Link>
-        <Link onClick={toggleNav} to='' className='navLink'>History</Link>
-        <Link onClick={toggleNav} to='' className='navLink'>Active walks</Link>
-        <Link onClick={toggleNav} to='' className='navLink'>Future walks</Link>
+        <Link onClick={toggleNav} to='/walksHistory' className='navLink'>History</Link>
+        <Link onClick={toggleNav} to='/activeWalks' className='navLink'>Active walks</Link>
+        <Link onClick={toggleNav} to='/futureWalks' className='navLink'>Incoming walks</Link>
       </div>
       {!navHidden && <button className='logoutButton' onClick={handleSignOut}>Logout</button>}
     </div>
