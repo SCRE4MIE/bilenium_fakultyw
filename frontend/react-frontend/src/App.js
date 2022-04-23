@@ -4,7 +4,7 @@ import LoggedInNavbar from './Components/LoggedInNavbar/LoggedInNavbar';
 import LoginForm from './Flows/Login/LoginForm';
 import LoggedInTrainerNavbar from './Components/LoggedInTrainerNavbar/LoggedInTrainerNavbar';
 import './App.css'
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Register from './Flows/Registration/Register';
 import instance from './axios';
 import requests from './requests';
@@ -17,6 +17,8 @@ function App() {
 
   const context = useContext(Context);
 
+  const navigate = useNavigate();
+
   const [userDetails, setUserDetails] = useState({})
 
   const [userData, setUserData] = useState({
@@ -28,9 +30,8 @@ function App() {
 
   
 
-  let location = useLocation();
-
   const handleSignIn = (e) => {
+    navigate('/');
     instance.get(requests.userDetails)
     .then(response => {
 
@@ -52,6 +53,7 @@ function App() {
 
 
   const handleSignOut = () => {
+    navigate('/');
     instance.defaults.headers['Authorization'] = sessionStorage.getItem('refresh');
     instance.post(requests.logout, {
     }).then(response => {
@@ -85,6 +87,13 @@ function App() {
             !userData.access
             && 
             <Route path='/'
+              element={<LoginForm signIn={handleSignIn}/>}
+            />
+          }
+          {
+            !userData.access
+            && 
+            <Route path='*'
               element={<LoginForm signIn={handleSignIn}/>}
             />
           }
