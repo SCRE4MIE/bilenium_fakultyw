@@ -52,11 +52,21 @@ class UserEditProfileSerializer(serializers.ModelSerializer):
             'avatar',
 
         )
+        extra_kwargs = {
+            'first_name': {'required': False},
+            'last_name': {'required': False},
+            'phone_number': {'required': False},
+            'avatar': {'required': False},
+        }
 
     def update(self, instance, validated_data):  # noqa: D102
-        instance.first_name = validated_data['first_name']
-        instance.last_name = validated_data['last_name']
-        instance.phone_number = validated_data['phone_number']
-        instance.avatar = validated_data['avatar']
+        if validated_data.get('first_name'):
+            instance.first_name = validated_data['first_name']
+        if validated_data.get('last_name'):
+            instance.last_name = validated_data['last_name']
+        if validated_data.get('phone_number'):
+            instance.phone_number = validated_data['phone_number']
+        if validated_data.get('avatar'):
+            instance.avatar = validated_data['avatar']
         instance.save()
         return instance
