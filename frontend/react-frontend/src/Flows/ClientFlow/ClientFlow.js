@@ -32,4 +32,4 @@ const ClientFlow = () => {
   )
 }
 
-export default ClientFlow
+export default ClientFlow;
