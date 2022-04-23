@@ -1,21 +1,28 @@
-from rest_framework import serializers
-
+"""Api serializers."""
+# 3rd-party
 from accounts.models import CustomUser
 from accounts.serializers import UserDetailSerializer
-from api.models import Rating, Dog
+from rest_framework import serializers
+
+# Project
+from api.models import Dog
+from api.models import Rating
 
 
 class RatingSerializer(serializers.ModelSerializer):
+    """Rating serializer."""
 
-    class Meta:
+    class Meta:  # noqa: D106
         model = Rating
         fields = '__all__'
 
 
 class TrainerSerializer(serializers.ModelSerializer):
+    """Trainer serializer."""
+
     rating_trainer = RatingSerializer(many=True, read_only=True)
 
-    class Meta:
+    class Meta:  # noqa: D106
         model = CustomUser
         fields = [
             'pk',
@@ -29,9 +36,10 @@ class TrainerSerializer(serializers.ModelSerializer):
 
 
 class DogSerializer(serializers.ModelSerializer):
+    """Dog serializer."""
 
     owner = UserDetailSerializer()
 
-    class Meta:
+    class Meta:  # noqa: D106
         model = Dog
         fields = ['pk', 'name', 'breed', 'avatar_url', 'age', 'description', 'owner']

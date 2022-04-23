@@ -1,10 +1,16 @@
+"""Api models."""
+# Django
+from django.core.validators import MaxValueValidator
+from django.core.validators import MinValueValidator
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator
 
+# 3rd-party
 from accounts.models import CustomUser
 
 
 class Rating(models.Model):
+    """Rating model."""
+
     value = models.FloatField(
         validators=[MinValueValidator(0.0), MaxValueValidator(5.0)],
     )
@@ -19,11 +25,16 @@ class Rating(models.Model):
         on_delete=models.SET_NULL,
     )
 
-    def __str__(self):
+    def __str__(self):  # noqa: D105
         return self.trainer.first_name + ' ' + self.trainer.last_name
+
+    class Meta:  # noqa: D106
+        verbose_name = 'Ocena'
+        verbose_name_plural = 'Oceny'
 
 
 class Dog(models.Model):
+    """Dog model."""
 
     name = models.CharField(
         max_length=255,
@@ -49,20 +60,22 @@ class Dog(models.Model):
         on_delete=models.CASCADE,
     )
 
-    def __str__(self):
+    def __str__(self):  # noqa: D105
         return self.name
 
     def avatar_url(self):
+        """Get avatars urls."""
         if self.avatar:
             return self.avatar.url
         return None
 
-    class Meta:
+    class Meta:  # noqa: D106
         verbose_name = 'Piesek'
         verbose_name_plural = 'Piesełki'
 
 
 class Walk(models.Model):
+    """Walk model."""
 
     trainer = models.ForeignKey(
         CustomUser,

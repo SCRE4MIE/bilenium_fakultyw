@@ -1,6 +1,10 @@
+"""API admin."""
+# Django
 from django.contrib import admin
 
-from api.models import Rating, Dog
+# Project
+from api.models import Dog
+from api.models import Rating
 
 
 @admin.register(Rating)

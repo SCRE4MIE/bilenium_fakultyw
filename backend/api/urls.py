@@ -1,10 +1,11 @@
 """API url config."""
 # Django
-from django.urls import include
 from django.urls import path
 
 # Project
-from api.views import TrainersListView, GetTrainerView, DogsListView
+from api.views import DogsListView
+from api.views import GetTrainerView
+from api.views import TrainersListView
 
 app_name = 'api_v1'
 # urlpatterns = [
