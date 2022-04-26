@@ -1,0 +1,64 @@
+@import '../../../Variables/Variables.scss';
+
+
+.DogProfile{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    p{
+        margin-top: 20px;
+        font-family: $Inter;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 22px;
+        display:flex;
+        color: $blueColor;
+        text-align: justify;
+        width:38ch;
+    }
+
+    h2{
+        @include text($fontSize: 24px);
+        display: flex;
+        margin-top: 10px;
+      }
+}
+
+.DogProfile--icons{
+    display:flex;
+}
+
+.DogProfile--imageContainer{
+    flex:1;
+}
+
+.DogProfile--image{
+    border-radius: 50%;
+    width:200px;
+}
+
+.editIcon{
+    flex:1;
+    color: $blueColor;
+    transition: 100ms;
+}
+
+.editIcon:hover {
+    transform: scale(1.4);
+  }
+
+.DogProfile--header {
+    @include text($fontSize: 36px);
+    display: flex;
+    margin-bottom: 25px;
+  }
+
+
+
+
+
+

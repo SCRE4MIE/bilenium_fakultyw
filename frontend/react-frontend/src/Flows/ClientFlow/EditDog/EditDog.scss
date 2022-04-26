@@ -1,0 +1,63 @@
+@import '../../../Variables/Variables.scss';
+
+  .EditDog{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  
+      .EditDog--header {
+        font-family: "Jost", sans-serif;
+        color: #577590;
+        font-weight: 400;
+        display: flex;
+        margin-bottom: 25px;
+      }
+
+      .EditDog--form {
+        display: flex;
+        flex-direction: column;
+        gap: 34px;
+        align-items: center;
+
+        input[type=text]{
+            @include textInput($greenColor);
+            width: 300px;
+        }
+  
+        textarea{
+          border:1px solid $greenColor;
+          min-height: 100px;
+          width: 300px;
+          border-radius: 11px;
+      }
+  
+        .EditDog--buttons{
+          width: 320px;
+          align-items: center;
+          
+      
+          input[type=button], input[type=submit]{
+              @include button($clientOrange, $blueColor);
+              margin: 20px;
+              margin-left: 10px;
+              width:300px;
+              
+          }
+      }
+      }
+  }
+
+    
+  *::placeholder{
+    color: $greenColor;
+    font-size: 20px;
+}
+
+
+  
+  
+
+
+
