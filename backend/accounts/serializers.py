@@ -1,16 +1,20 @@
+"""Accounts serializers."""
+# 3rd-party
 from rest_framework import serializers
+
+# Local
 from .models import CustomUser
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):
     """Custom register user for JWT token auth."""
 
-    class Meta:
+    class Meta:  # noqa: D106
         model = CustomUser
         fields = ('email', 'username', 'phone_number', 'password')
         extra_kwargs = {'password': {'write_only': True}}
 
-    def create(self, validated_data):
+    def create(self, validated_data):  # noqa: D102
         password = validated_data.pop('password', None)
         instance = self.Meta.model(**validated_data)
         if password is not None:
@@ -20,14 +24,49 @@ class RegisterUserSerializer(serializers.ModelSerializer):
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
+    """User detail serializer."""
 
-    class Meta:
+    class Meta:  # noqa: D106
         model = CustomUser
         fields = (
             'pk',
             'username',
             'email',
+            'first_name',
+            'last_name',
             'phone_number',
             'is_trainer',
             'avatar_url',
         )
+
+
+class UserEditProfileSerializer(serializers.ModelSerializer):
+    """User profile edit serializer."""
+
+    class Meta:  # noqa: D106
+        model = CustomUser
+        fields = (
+            'first_name',
+            'last_name',
+            'phone_number',
+            'avatar',
+
+        )
+        extra_kwargs = {
+            'first_name': {'required': False},
+            'last_name': {'required': False},
+            'phone_number': {'required': False},
+            'avatar': {'required': False},
+        }
+
+    def update(self, instance, validated_data):  # noqa: D102
+        if validated_data.get('first_name'):
+            instance.first_name = validated_data['first_name']
+        if validated_data.get('last_name'):
+            instance.last_name = validated_data['last_name']
+        if validated_data.get('phone_number'):
+            instance.phone_number = validated_data['phone_number']
+        if validated_data.get('avatar'):
+            instance.avatar = validated_data['avatar']
+        instance.save()
+        return instance
