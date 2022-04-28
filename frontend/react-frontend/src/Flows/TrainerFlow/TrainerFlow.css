@@ -1,0 +1,11 @@
+.trainerFlow {
+  width: 100%;
+  padding-top: 63px;
+}
+
+@media screen and (max-width: 660px) {
+  .trainerFlow {
+    padding-bottom: 63px;
+    padding-top: 0px;
+  }
+}

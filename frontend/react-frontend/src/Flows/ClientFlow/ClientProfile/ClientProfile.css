@@ -25,6 +25,7 @@
   font-family: "Jost", sans-serif;
   color: #577590;
   font-weight: 400;
+  margin-bottom: 20px;
 }
 
 .clientProfile h2 {
@@ -60,8 +61,8 @@
 }
 
 .clientProfile .userInfo .avatarSection .profilePicture {
-  height: 100px;
-  width: 100px;
+  height: 200px;
+  width: 200px;
   -o-object-fit: contain;
      object-fit: contain;
   border-radius: 50%;
@@ -145,7 +146,7 @@
   content: "";
   position: absolute;
   left: 0px;
-  margin-top: 45px;
+  margin-top: 95px;
   width: 100%;
   height: 10px;
   background-color: #e1eaf3;

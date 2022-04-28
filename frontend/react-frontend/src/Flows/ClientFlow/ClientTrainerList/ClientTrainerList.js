@@ -1,9 +1,15 @@
 import React from 'react'
 import './ClientTrainerList.css'
+import TrainerList from '../../../Components/ClientTrainerList/TrainerList';
+
+
 
 const ClientTrainerList = () => {
   return (
-    <div>ClientTrainerList</div>
+    <div className='clientTrainerList'>
+      <TrainerList/>
+    </div>
+
   )
 }
 
