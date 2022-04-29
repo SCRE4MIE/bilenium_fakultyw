@@ -36,6 +36,7 @@ class GetTrainerView(generics.GenericAPIView):
 
     serializer_class = TrainerSerializer
     permission_classes = (IsAuthenticated,)
+    queryset = ''
 
     def get(self, request, *args, **kwargs):  # noqa: D102
         try:
