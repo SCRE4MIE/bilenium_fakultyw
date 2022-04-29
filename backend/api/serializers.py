@@ -50,7 +50,7 @@ class DogSerializer(serializers.ModelSerializer):
 
     class Meta:  # noqa: D106
         model = Dog
-        fields = ['pk', 'name', 'breed', 'avatar', 'age', 'description', 'owner']
+        fields = ['pk', 'name', 'breed', 'avatar', 'age', 'description']
         extra_kwargs = {
             'name': {'required': False},
             'breed': {'required': False},
@@ -59,18 +59,23 @@ class DogSerializer(serializers.ModelSerializer):
             'description': {'required': False},
         }
 
-        def update(self, instance, validated_data):  # noqa: D102
-            if validated_data.get('name'):
-                instance.first_name = validated_data['name']
-            if validated_data.get('breed'):
-                instance.last_name = validated_data['breed']
-            if validated_data.get('avatar'):
-                instance.phone_number = validated_data['avatar']
-            if validated_data.get('age'):
-                instance.avatar = validated_data['age']
-            if validated_data.get('description'):
-                instance.avatar = validated_data['description']
-            if validated_data.get('owner'):
-                instance.avatar = validated_data['owner']
-            instance.save()
-            return instance
+    def update(self, instance, validated_data):  # noqa: D102
+        if validated_data.get('name'):
+            instance.name = validated_data['name']
+        if validated_data.get('breed'):
+            instance.breed = validated_data['breed']
+        if validated_data.get('avatar'):
+            instance.avatar = validated_data['avatar']
+        if validated_data.get('age'):
+            instance.age = validated_data['age']
+        if validated_data.get('description'):
+            instance.description = validated_data['description']
+        instance.save()
+        return instance
+
+    def create(self, validated_data):  # noqa:  D102
+        request = self.context.get("request")
+        instance = self.Meta.model(**validated_data)
+        instance.owner_id = request.user.id
+        instance.save()
+        return instance

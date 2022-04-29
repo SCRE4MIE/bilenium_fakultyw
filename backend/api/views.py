@@ -70,12 +70,22 @@ class GetUpdateDeleteDog(generics.RetrieveUpdateDestroyAPIView):
     parser_classes = (MultiPartParser, FormParser)
 
 
-class CreateDogView(generics.CreateAPIView):
+class CreateDogView(generics.GenericAPIView):
     """Create dog."""
 
     serializer_class = DogSerializer
     permission_classes = (IsAuthenticated,)
     parser_classes = (MultiPartParser, FormParser)
+
+    def post(self, request):  # noqa: D102
+        context = {'request': request}
+        reg_serializer = DogSerializer(data=request.data, context=context)
+        if reg_serializer.is_valid():
+            new_dog = reg_serializer.save()
+            if new_dog:
+                return Response(status=status.HTTP_201_CREATED)
+        return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 
