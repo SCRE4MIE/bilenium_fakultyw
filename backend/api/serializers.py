@@ -35,7 +35,7 @@ class TrainerSerializer(serializers.ModelSerializer):
         ]
 
 
-class DogSerializer(serializers.ModelSerializer):
+class DogListSerializer(serializers.ModelSerializer):
     """Dog serializer."""
 
     owner = UserDetailSerializer()
@@ -43,3 +43,34 @@ class DogSerializer(serializers.ModelSerializer):
     class Meta:  # noqa: D106
         model = Dog
         fields = ['pk', 'name', 'breed', 'avatar_url', 'age', 'description', 'owner']
+
+
+class DogSerializer(serializers.ModelSerializer):
+    """Dog serializer."""
+
+    class Meta:  # noqa: D106
+        model = Dog
+        fields = ['pk', 'name', 'breed', 'avatar', 'age', 'description', 'owner']
+        extra_kwargs = {
+            'name': {'required': False},
+            'breed': {'required': False},
+            'avatar': {'required': False},
+            'age': {'required': False},
+            'description': {'required': False},
+        }
+
+        def update(self, instance, validated_data):  # noqa: D102
+            if validated_data.get('name'):
+                instance.first_name = validated_data['name']
+            if validated_data.get('breed'):
+                instance.last_name = validated_data['breed']
+            if validated_data.get('avatar'):
+                instance.phone_number = validated_data['avatar']
+            if validated_data.get('age'):
+                instance.avatar = validated_data['age']
+            if validated_data.get('description'):
+                instance.avatar = validated_data['description']
+            if validated_data.get('owner'):
+                instance.avatar = validated_data['owner']
+            instance.save()
+            return instance
