@@ -8,6 +8,7 @@ import IncomingWalks from './IncomingWalks/IncomingWalks';
 import OrderAWalk from './OrderAWalk/OrderAWalk';
 import WalksHistory from './WalksHistory/WalksHistory';
 import ActiveWalks from './ActiveWalks/ActiveWalks';
+import EditDog from './EditDog/EditDog';
 import ClientTrainerProfile from './ClientTrainerProfile/ClientTrainerProfile';
 
 const ClientFlow = () => {
@@ -24,6 +25,7 @@ const ClientFlow = () => {
           <Route exact path='/activeWalks' element={<ActiveWalks />} />
           <Route exact path='/futureWalks' element={<IncomingWalks />} />
           <Route exact path='/trainerProfile' element={<ClientTrainerProfile />} />
+          <Route exact path='/editDog' element={<EditDog />} />
         </Routes>
       </div>
       // to='/walksHistory'
