@@ -6,8 +6,29 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import woman from '../../../Images/womanPlaceholder.jpg';
 import StarIcon from '@mui/icons-material/Star';
 import OpinionAboutTrainerElement from '../../../Components/OpinionAboutTrainer/OpinionAboutTrainerElement';
+import ApiPicture from '../../../Components/ApiPicture';
+import { useEffect } from 'react';
+import instance from '../../../axios';
+import requests from '../../../requests';
+import { useNavigate } from 'react-router-dom';
 
 const TrainerProfile = () => {
+
+  const navigate = useNavigate();
+
+  const goToEditProfile = () => {
+    navigate('/editProfile');
+  }
+
+  useEffect(() => {
+    instance.get(requests.userDetails)
+    .then(response => {
+      sessionStorage.setItem('userType', response.data.is_trainer ? 'trainer' : 'client');
+      sessionStorage.setItem('userDetails', JSON.stringify(response.data));
+    }).catch(error => {
+      console.log(error.details);
+    })
+  }, [])
 
   const details = JSON.parse(sessionStorage.getItem('userDetails'));
 
@@ -24,9 +45,7 @@ const TrainerProfile = () => {
         <div className='avatarSection'>
           <div className='empty'></div>
           <div className='trainerProfilePicture'>
-            {/* <img src={details.avatar_url} alt='user profile picture'/> */}
-            {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
-            <img src={woman} alt='user profile picture' />
+            <ApiPicture src={details.avatar_url} />
           </div>
           <div className='notifications-rating'>
             <div className='icons'>
@@ -34,7 +53,7 @@ const TrainerProfile = () => {
                 <NotificationsNoneOutlinedIcon className='icon'  style={{cursor: 'pointer'}}/>
               </Tooltip>
               <Tooltip title='Edit your profile'>
-                <EditOutlinedIcon className='icon'  style={{cursor: 'pointer'}}/>
+                <EditOutlinedIcon className='icon'  style={{cursor: 'pointer'}} onClick={goToEditProfile}/>
               </Tooltip>
             </div>
             <Tooltip title='Your average rating'>
