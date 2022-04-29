@@ -1,0 +1,29 @@
+@import '../../../Variables/Variables.scss';
+
+.registerSuccess {
+  @include flexCenterCenter();
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  max-width: 70%;
+
+  h2 {
+    color: $blueColor;
+    font-family: $Jost;
+    font-size: 46px;
+    text-align: center;
+    margin-bottom: 34px;
+  }
+
+  .button {
+    @include button($clientOrange, $blueColor);
+    flex: 1;
+    text-decoration: none;
+    text-align: center;
+    margin: 0;
+  }
+  .button:hover {
+    @include buttonHover($clientOrangeHover);
+  }
+
+}
