@@ -1,4 +1,4 @@
-.clientProfile {
+.trainerProfile {
   text-align: center;
   position: relative;
   width: 100%;
@@ -15,26 +15,28 @@
 }
 
 @media screen and (max-width: 660px) {
-  .clientProfile .profilePicture {
+  .trainerProfile .trainerProfilePicture {
     height: 150px;
     width: 150px;
   }
 }
 
-.clientProfile h1 {
+.trainerProfile h1 {
   font-family: "Jost", sans-serif;
   color: #577590;
   font-weight: 400;
+  font-size: 36px;
   margin-bottom: 20px;
 }
 
-.clientProfile h2 {
+.trainerProfile h2 {
   font-family: "Jost", sans-serif;
   color: #577590;
   font-weight: 400;
+  font-size: 24px;
 }
 
-.clientProfile .userInfo {
+.trainerProfile .userInfo {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -44,7 +46,7 @@
           flex-direction: column;
 }
 
-.clientProfile .userInfo .avatarSection {
+.trainerProfile .userInfo .avatarSection {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -55,12 +57,12 @@
   padding-top: 10px;
 }
 
-.clientProfile .userInfo .avatarSection .empty {
+.trainerProfile .userInfo .avatarSection .empty {
   width: 100px;
   height: 100px;
 }
 
-.clientProfile .userInfo .avatarSection .profilePicture {
+.trainerProfile .userInfo .avatarSection .trainerProfilePicture {
   height: 200px;
   width: 200px;
   -o-object-fit: contain;
@@ -73,17 +75,17 @@
 }
 
 @media screen and (max-width: 660px) {
-  .clientProfile .userInfo .avatarSection .profilePicture {
+  .trainerProfile .userInfo .avatarSection .trainerProfilePicture {
     height: 150px;
     width: 150px;
   }
 }
 
-.clientProfile .userInfo .avatarSection .profilePicture img {
+.trainerProfile .userInfo .avatarSection .trainerProfilePicture img {
   height: 100%;
 }
 
-.clientProfile .userInfo .avatarSection .icons {
+.trainerProfile .userInfo .avatarSection .notifications-rating {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -94,24 +96,58 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.trainerProfile .userInfo .avatarSection .notifications-rating .rating {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+  font-family: "Jost", sans-serif;
+  color: #577590;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.trainerProfile .userInfo .avatarSection .notifications-rating .rating .starIcon {
+  font-size: 22px;
+  color: #577590;
+}
+
+.trainerProfile .userInfo .avatarSection .icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   width: 100px;
 }
 
-.clientProfile .userInfo .avatarSection .icons .icon {
+.trainerProfile .userInfo .avatarSection .icons .icon {
   font-size: 40px;
   color: #577590;
   -webkit-transition: 100ms;
   transition: 100ms;
 }
 
-.clientProfile .dogList {
+.trainerProfile .opinionList {
   width: 70%;
 }
 
-.clientProfile .dogListTitle {
+.trainerProfile .opinionList .opinionListHeader {
   font-family: "Inter", sans-serif;
   color: #577590;
   font-weight: 400;
@@ -120,7 +156,7 @@
   text-align: left;
 }
 
-.clientProfile .button {
+.trainerProfile .button {
   padding: 12px 15px;
   background-color: #F9C74F;
   color: #577590;
@@ -138,30 +174,30 @@
           box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 }
 
-.clientProfile .button:hover {
+.trainerProfile .button:hover {
   background-color: #ffd87d;
 }
 
-.profilePicture::after {
+.trainerProfilePicture::after {
   content: "";
   position: absolute;
   left: 0px;
   margin-top: 95px;
   width: 100%;
   height: 10px;
-  background-color: #e1eaf3;
+  background-color: #ffe8b1;
   z-index: -1;
 }
 
 @media screen and (max-width: 660px) {
-  .profilePicture::after {
+  .trainerProfilePicture::after {
     content: "";
     position: absolute;
     left: 0px;
     margin-top: 70px;
     width: 100%;
     height: 10px;
-    background-color: #e1eaf3;
+    background-color: #ffe8b1;
     z-index: -1;
   }
 }

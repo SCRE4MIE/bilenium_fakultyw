@@ -9,6 +9,7 @@ import Register from './Flows/Registration/Register';
 import instance from './axios';
 import requests from './requests';
 import ClientFlow from './Flows/ClientFlow/ClientFlow';
+import TrainerFlow from './Flows/TrainerFlow/TrainerFlow';
 
 
 export const Context = createContext({})
@@ -24,7 +25,7 @@ function App() {
   const [userData, setUserData] = useState({
     access: sessionStorage.getItem('access'), 
     refresh: sessionStorage.getItem('refresh'),
-    userType: 'client',
+    userType: sessionStorage.getItem('userType'),
     userDetails: userDetails,
   });
 
@@ -35,8 +36,8 @@ function App() {
     instance.get(requests.userDetails)
     .then(response => {
 
-      sessionStorage.setItem('userType', 'client')
-      sessionStorage.setItem('userDetails', JSON.stringify(response.data))
+      sessionStorage.setItem('userType', response.data.is_trainer ? 'trainer' : 'client');
+;      sessionStorage.setItem('userDetails', JSON.stringify(response.data))
 
       setUserData(prevUserData => ({
         ...prevUserData,
@@ -100,9 +101,9 @@ function App() {
 
         </Routes>
 
-        {userData.access && userData.userType === 'client' && <ClientFlow signOut={handleSignOut} /> }
+        {userData.access && userData.userType === 'client' && <ClientFlow /> }
         {userData.access && userData.userType === 'client' && <LoggedInNavbar userType={userData.userType} signOut={handleSignOut} />}
-        {userData.access && userData.userType === 'trainer' && <p>Trainer profile</p>}
+        {userData.access && userData.userType === 'trainer' && <TrainerFlow />}
         {userData.access && userData.userType === 'trainer' && <LoggedInTrainerNavbar userType={userData.userType} signOut={handleSignOut} />}
       </div>
     </Context.Provider>
