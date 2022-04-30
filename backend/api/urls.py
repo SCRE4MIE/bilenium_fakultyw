@@ -3,7 +3,7 @@
 from django.urls import path
 
 # Project
-from api.views import DogsListView
+from api.views import DogsListView, GetUpdateDeleteDog, CreateDogView
 from api.views import GetTrainerView
 from api.views import TrainersListView
 
@@ -16,4 +16,6 @@ urlpatterns = [
     path('trainers-list/', TrainersListView.as_view(), name='trainers_list'),
     path('get-trainer/<int:pk>/', GetTrainerView.as_view(), name='get_trainer'),
     path('get-dog-list/', DogsListView.as_view(), name='get_dogs_list'),
+    path('get-update-del-dog/<int:pk>/', GetUpdateDeleteDog.as_view(), name='get_update_del_dog'),
+    path('create-dog/', CreateDogView.as_view(), name='create_dog'),
 ]

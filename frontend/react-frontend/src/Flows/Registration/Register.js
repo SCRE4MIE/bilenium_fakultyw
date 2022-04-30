@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import LoggedOutNavbar from '../../Components/LoggedOutNavbar/LoggedOutNavbar'
 import './Register.css'
-import RegisterForm from './RegisterForm.js/RegisterForm'
+import RegisterForm from './RegisterForm/RegisterForm'
+import RegisterSuccess from './RegisterSuccess/RegisterSuccess'
 import RegisterUploadPicture from './RegisterUploadPicture/RegisterUploadPicture'
 
 const Register = () => {
@@ -36,8 +37,13 @@ const Register = () => {
         />
 
         <Route 
-        path='/image'
-            element={<RegisterUploadPicture resetForm={resetForm}/>}
+          path='/image'
+          element={<RegisterUploadPicture resetForm={resetForm}/>}
+        />
+
+        <Route
+          path='/registerSuccess'
+          element={<RegisterSuccess resetForm={resetForm} />}
         />
 
       </Routes>
