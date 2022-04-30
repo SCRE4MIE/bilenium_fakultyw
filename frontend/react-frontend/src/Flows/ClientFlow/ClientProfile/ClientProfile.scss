@@ -47,6 +47,8 @@
       }
 
       .profilePicture {
+        display: flex;
+        justify-content: center;
         height: 200px;
         width: 200px;
         object-fit: contain;
@@ -54,6 +56,7 @@
         overflow: hidden;
         box-shadow: 0px 2px 4px rgba($color: #000000, $alpha: 0.25);
         border: 4px solid white;
+        background-color: white;
 
         @media screen and (max-width: $breakpoint){
             height: 150px;
