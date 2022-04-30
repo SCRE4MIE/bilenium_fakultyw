@@ -37,7 +37,7 @@ function App() {
     .then(response => {
 
       sessionStorage.setItem('userType', response.data.is_trainer ? 'trainer' : 'client');
-;      sessionStorage.setItem('userDetails', JSON.stringify(response.data))
+      sessionStorage.setItem('userDetails', JSON.stringify(response.data));
 
       setUserData(prevUserData => ({
         ...prevUserData,

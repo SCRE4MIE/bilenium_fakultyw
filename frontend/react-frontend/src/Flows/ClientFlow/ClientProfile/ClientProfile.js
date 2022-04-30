@@ -4,12 +4,19 @@ import DogListElement from '../../../Components/ClientDogList/DogListElement';
 import './ClientProfile.css';
 import dogPicture from '../../../Images/dogPlaceholder.jpg';
 import cashtan from '../../../Images/Cashtan.png';
-import woman from '../../../Images/womanPlaceholder.jpg'
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Tooltip } from '@mui/material/';
+import { useNavigate } from 'react-router-dom';
+import ApiPicture from '../../../Components/ApiPicture';
 
 const ClientProfile = () => {
+
+  const navigate = useNavigate();
+
+  const goToEditProfile = () => {
+    navigate('/editProfile');
+  }
 
   const details = JSON.parse(sessionStorage.getItem('userDetails'));
 
@@ -26,16 +33,14 @@ const ClientProfile = () => {
         <div className='avatarSection'>
           <div className='empty'></div>
           <div className='profilePicture'>
-            {/* <img src={details.avatar_url} alt='user profile picture'/> */}
-            {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
-            <img src={woman} alt='user profile picture' />
+            <ApiPicture src={details.avatar_url} />
           </div>
           <div className='icons'>
             <Tooltip title='Notifications'>
               <NotificationsNoneOutlinedIcon className='icon'  style={{marginTop: '8px', cursor: 'pointer'}}/>
             </Tooltip>
             <Tooltip title='Edit your profile'>
-              <EditOutlinedIcon className='icon'  style={{marginBottom: '8px', cursor: 'pointer'}}/>
+              <EditOutlinedIcon className='icon'  style={{marginBottom: '8px', cursor: 'pointer'}} onClick={goToEditProfile}/>
             </Tooltip>
           </div>
         </div>
