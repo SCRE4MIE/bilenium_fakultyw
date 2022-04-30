@@ -2,7 +2,6 @@
   width: 100%;
   padding-top: 63px;
 }
-
 @media screen and (max-width: 660px) {
   .clientFlow {
     padding-bottom: 63px;

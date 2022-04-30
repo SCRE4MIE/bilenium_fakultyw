@@ -21,16 +21,17 @@
         gap: 34px;
         align-items: center;
 
-        input[type=text]{
+        input[type=text], input[type=number]{
             @include textInput($greenColor);
             width: 300px;
         }
   
-        textarea{
+        .AddDog--desc{
           border:1px solid $greenColor;
           min-height: 100px;
           width: 300px;
           border-radius: 11px;
+          @include textInput($greenColor);
       }
   
         .AddNewDog--buttons{
@@ -53,19 +54,6 @@
   *::placeholder{
     color: $greenColor;
     font-size: 20px;
-}
-
-.name{
-  z-index: 2;
-  background-color: white;
-  position: absolute;
-}
-
-.svgHead{
-  position: relative;
-  top: -25px;
-  left: 15px;
-  z-index: 1;
 }
 
 
