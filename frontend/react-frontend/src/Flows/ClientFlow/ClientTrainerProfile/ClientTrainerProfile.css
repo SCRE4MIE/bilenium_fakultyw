@@ -42,12 +42,8 @@
   padding-top: 10px;
 }
 .trainerProfile .userInfo .avatarSection .profilePicture {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
   height: 100px;
   width: 100px;
   -o-object-fit: contain;
