@@ -29,53 +29,50 @@ const AddNewDog = () => {
     setProfilePicture(e.target.files);
   }
 
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      breed: "",
+      age: 1,
+      description: "",
+    },
+    validationSchema: AddDogSchema,
+    onSubmit: () =>{
+      handleSubmit();
+    } 
+  });
+
   const handleSubmit = () => {
     console.log("new dog added");
 
     let formData = new FormData();
-    const imageFile = document.querySelector('#avatar_url');
-    console.log(formik.values.name);
-    formData.append("name", "");
-    formData.append("breed", "");
-    formData.append("age", "");
-    formData.append("description", "");
+    const imageFile = document.querySelector('#avatar');
+    formData.append("name", formik.values.name);
+    formData.append("breed", formik.values.breed);
+    formData.append("age", formik.values.age);
+    formData.append("description", formik.values.description);
 
     imageFile.files[0] ? formData.append("avatar", imageFile.files[0]) : formData.append("avatar", "");
 
-    console.log(imageFile.files[0]);
-
-    instance.patch(requests.editProfile, formData, {
+    instance.post(requests.addDog, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         'accept': 'application/json',
       },
     })
-      .then(response => {
-        instance.get(requests.dogDetails)
-        .then(response => {
-          sessionStorage.setItem('dogDetails', JSON.stringify(response.data));
-          navigate('/');
-        }).catch(error => {
-          console.log(error.details);
-        })
-      }).catch(error => {
-        console.log(error.response.data);
-      });
-    // navigate("/");
-  }
-
-  const formik = useFormik({
-    initialValues: {
-      phone_number: "",
-    },
-    validationSchema: AddDogSchema,
-    onSubmit: () => handleSubmit(),
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
   });
+}
+
 
   return (
     <div className='AddNewDog'>
       <h1 className='AddNewDog--header '>Add new dog</h1>
-      <form className='AddNewDog--form' onSubmit={formik.handleSubmit}>
+      <form id = "addDog" className='AddNewDog--form' onSubmit={formik.handleSubmit}>
             {formik.errors.name && formik.touched.name ? <p className="formError">{formik.errors.name}</p> : null}
             <input 
               name='name' 
@@ -119,7 +116,7 @@ const AddNewDog = () => {
             </label>
             <input 
               name='avatar' 
-              id="avatar" 
+              id="avatar"  
               className='button' 
               type='file' 
               onChange={onImageChange} 
