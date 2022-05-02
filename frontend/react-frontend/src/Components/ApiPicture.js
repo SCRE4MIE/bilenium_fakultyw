@@ -6,11 +6,11 @@ const ApiPicture = ({ src }) => {
   return (
     <>
       {
-        src ? 
+        src ?
         <img src={`http://127.0.0.1:8000${src}`} alt='user profile picture' />
         : <PersonIcon style={{alignSelf: 'center', fontSize: '100px', color: 'lightgray'}}/>
       }
-      
+
     </>
   )
 }

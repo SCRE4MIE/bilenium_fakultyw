@@ -17,11 +17,9 @@
         object-fit: contain;
         background-color: gray;
         overflow: hidden;
+        display: flex;
+        justify-content: center;
         transition: 100ms;
-
-        img {
-            height: 100%;
-        }
     }
 
     .trainerName {
