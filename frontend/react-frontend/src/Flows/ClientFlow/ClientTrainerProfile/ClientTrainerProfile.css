@@ -72,8 +72,8 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 100px;
-  width: 100px;
+  height: 200px;
+  width: 200px;
   -o-object-fit: contain;
      object-fit: contain;
   border-radius: 50%;
