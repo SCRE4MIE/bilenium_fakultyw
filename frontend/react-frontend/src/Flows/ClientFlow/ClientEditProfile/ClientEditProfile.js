@@ -30,7 +30,6 @@ const ClientEditProfile = () => {
   }
 
   const handleSubmit = () => {
-    console.log("profile updated");
 
     let formData = new FormData();
     const imageFile = document.querySelector('#avatar_url');
@@ -40,8 +39,6 @@ const ClientEditProfile = () => {
     formData.append("phone_number", formik.values.phone_number);
 
     imageFile.files[0] ? formData.append("avatar", imageFile.files[0]) : formData.append("avatar", "");
-
-    console.log(imageFile.files[0]);
 
     instance.patch(requests.editProfile, formData, {
       headers: {
@@ -56,10 +53,10 @@ const ClientEditProfile = () => {
           sessionStorage.setItem('userDetails', JSON.stringify(response.data));
           navigate('/');
         }).catch(error => {
-          console.log(error.details);
+          console.log(error);
         })
       }).catch(error => {
-        console.log(error.response.data);
+        console.log(error);
       });
     // navigate("/");
   }
