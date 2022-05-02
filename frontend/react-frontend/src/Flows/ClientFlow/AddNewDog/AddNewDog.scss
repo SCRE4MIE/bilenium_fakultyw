@@ -41,9 +41,8 @@
       
           input[type=button], input[type=submit]{
               @include button($clientOrange, $blueColor);
-              margin: 20px;
-              margin-left: 10px;
-              width:300px;
+              width:100%;
+              margin-bottom: 20px;
               
           }
       }
@@ -56,9 +55,38 @@
     font-size: 20px;
 }
 
+.buttonLabel{
+  @include button($clientOrange, $blueColor);
+  padding: 12px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-decoration: none;
+  margin: 0;
+  margin-bottom: 34px;
+  width:100%;
+}
 
+input[type="file"] {
+      display: none;
+    }
+
+
+.dogPicContainer {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: contain;
+  background-color: gray;
+  overflow: hidden;
+  margin-bottom: 30px;
   
-  
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
 
 
 

@@ -1,4 +1,3 @@
-import { ClassNames } from '@emotion/react'
 import "./AddNewDog.css"
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,7 +6,6 @@ import requests from '../../../requests';
 import instance from '../../../axios';
 import { AddDogSchema } from '../../../Validation/AddDogValidation';
 import ImageIcon from '@mui/icons-material/Image';
-import ApiPicture from '../../../Components/ApiPicture';
 
 const AddNewDog = () => {
 
@@ -25,15 +23,37 @@ const AddNewDog = () => {
     setImageURL(newImageURL);
   }, [profilePicture]);
 
+  const [selectedFile, setSelectedFile] = useState()
+  const [preview, setPreview] = useState()
+
+  useEffect(() => {
+    if (!selectedFile) {
+        setPreview(undefined)
+        return
+    }
+
+    const objectUrl = URL.createObjectURL(selectedFile)
+    setPreview(objectUrl)
+
+    
+    return () => URL.revokeObjectURL(objectUrl)
+  }, [selectedFile])
+
+
   const onImageChange = (e) => {
     setProfilePicture(e.target.files);
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile(undefined)
+      return
+    }
+    setSelectedFile(e.target.files[0])
   }
 
   const formik = useFormik({
     initialValues: {
       name: "",
       breed: "",
-      age: 1,
+      age: "",
       description: "",
     },
     validationSchema: AddDogSchema,
@@ -66,12 +86,14 @@ const AddNewDog = () => {
     .catch(function (error) {
       console.log(error);
   });
-}
-
+  }
 
   return (
     <div className='AddNewDog'>
       <h1 className='AddNewDog--header '>Add new dog</h1>
+      <div className='dogPicContainer' >
+        {selectedFile &&  <img src={preview}/> }
+      </div>
       <form id = "addDog" className='AddNewDog--form' onSubmit={formik.handleSubmit}>
             {formik.errors.name && formik.touched.name ? <p className="formError">{formik.errors.name}</p> : null}
             <input 
@@ -111,7 +133,7 @@ const AddNewDog = () => {
               onChange={formik.handleChange}
             />
             <div className='AddNewDog--buttons'>
-            <label htmlFor="avatar" className="button">
+            <label htmlFor="avatar" className="buttonLabel">
             <ImageIcon />Upload a new picture
             </label>
             <input 
@@ -127,7 +149,6 @@ const AddNewDog = () => {
         </form>
     </div>
   )
-
 }
 
 export default AddNewDog
