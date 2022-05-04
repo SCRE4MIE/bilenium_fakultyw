@@ -8,12 +8,14 @@ import IncomingWalks from './IncomingWalks/IncomingWalks';
 import OrderAWalk from './OrderAWalk/OrderAWalk';
 import WalksHistory from './WalksHistory/WalksHistory';
 import ActiveWalks from './ActiveWalks/ActiveWalks';
+import ClientTrainerProfile from './ClientTrainerProfile/ClientTrainerProfile';
+import ClientEditProfile from './ClientEditProfile/ClientEditProfile';
 
 const ClientFlow = () => {
 
   return (
       <div className='clientFlow'>
-        <Routes >        
+        <Routes >
           <Route path="*" element={<ClientProfile />} />
           <Route path='/' element={<ClientProfile />} />
           <Route exact path='/dogProfile' element={<DogProfile dogId={sessionStorage.getItem('currentDog')}/>} />
@@ -22,12 +24,14 @@ const ClientFlow = () => {
           <Route exact path='/walksHistory' element={<WalksHistory />} />
           <Route exact path='/activeWalks' element={<ActiveWalks />} />
           <Route exact path='/futureWalks' element={<IncomingWalks />} />
+          <Route exact path='/trainerProfile' element={<ClientTrainerProfile />} />
+          <Route exact path='/editProfile' element={<ClientEditProfile />} />
         </Routes>
       </div>
-      // to='/walksHistory' 
-      // to='/activeWalks' 
-      // to='/futureWalks' 
+      // to='/walksHistory'
+      // to='/activeWalks'
+      // to='/futureWalks'
   )
 }
 
-export default ClientFlow
+export default ClientFlow;
