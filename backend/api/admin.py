@@ -3,7 +3,8 @@
 from django.contrib import admin
 
 # Project
-from api.models import Dog
+from api.forms import M2MDogsLimit
+from api.models import Dog, Walk
 from api.models import Rating
 
 
@@ -23,3 +24,12 @@ class DogAdmin(admin.ModelAdmin):  # noqa: D101
         'name',
         'owner',
     ]
+
+
+@admin.register(Walk)
+class WalkAdmin(admin.ModelAdmin):  # noqa: D101
+    list_display = [
+        'pk',
+        'trainer',
+    ]
+    form = M2MDogsLimit

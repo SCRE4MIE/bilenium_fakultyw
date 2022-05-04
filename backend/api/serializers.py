@@ -79,3 +79,7 @@ class DogSerializer(serializers.ModelSerializer):
         instance.owner_id = request.user.id
         instance.save()
         return instance
+
+
+class AssigningDogToTrainerSerializer(serializers.Serializer):
+    pass

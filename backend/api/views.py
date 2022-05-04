@@ -88,5 +88,10 @@ class CreateDogView(generics.GenericAPIView):
         return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class AssigningDogToTrainer(generics.GenericAPIView):
+    """Assigning the dog to a trainer"""
+
+
+
 
 
