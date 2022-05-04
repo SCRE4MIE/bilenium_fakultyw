@@ -1,0 +1,27 @@
+@import '../../../Variables/Variables.scss';
+
+@mixin text($fontSize) {
+    font-family: $Jost;
+    color: $blueColor;
+    font-weight: 400;
+}
+
+.walksHistory {
+
+    text-align: center;
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h1 {
+        @include text($fontSize: 36px);
+    }
+
+    h2 {
+        @include text($fontSize: 24px);
+    }
+    .walksList{
+        width: 80%;
+    }
+}
