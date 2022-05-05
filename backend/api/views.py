@@ -1,18 +1,20 @@
 """APi views."""
 
 # 3rd-party
-from rest_framework.parsers import MultiPartParser, FormParser
-
 from accounts.models import CustomUser
-from accounts.permissions import IsTrainer, IsDogOwner
+from accounts.permissions import IsDogOwner
+from accounts.permissions import IsTrainer
 from rest_framework import generics
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.parsers import FormParser
+from rest_framework.parsers import MultiPartParser
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 # Local
 from .models import Dog
-from .serializers import DogListSerializer, DogSerializer
+from .serializers import DogListSerializer
+from .serializers import DogSerializer
 from .serializers import TrainerSerializer
 
 
@@ -88,5 +90,12 @@ class CreateDogView(generics.GenericAPIView):
         return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class UsersDogsListView(generics.ListAPIView):
+    """User's dogs list."""
 
+    serializer_class = DogSerializer
+    permission_classes = (IsAuthenticated, IsDogOwner)
 
+    def get_queryset(self):  # noqa: D102
+        dogs = Dog.objects.filter(owner_id=self.request.user.id)
+        return dogs

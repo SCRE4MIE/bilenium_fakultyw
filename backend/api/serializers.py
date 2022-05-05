@@ -74,7 +74,7 @@ class DogSerializer(serializers.ModelSerializer):
         return instance
 
     def create(self, validated_data):  # noqa:  D102
-        request = self.context.get("request")
+        request = self.context.get('request')
         instance = self.Meta.model(**validated_data)
         instance.owner_id = request.user.id
         instance.save()
