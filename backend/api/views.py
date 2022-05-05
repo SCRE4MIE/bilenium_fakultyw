@@ -19,7 +19,11 @@ from .serializers import TrainerSerializer
 
 
 class TrainersListView(generics.GenericAPIView):
-    """Get list of trainers."""
+    """
+    Get list of trainers.
+
+    permissions - is authenticated
+    """
 
     serializer_class = TrainerSerializer
     permission_classes = (IsAuthenticated,)
@@ -34,7 +38,13 @@ class TrainersListView(generics.GenericAPIView):
 
 
 class GetTrainerView(generics.GenericAPIView):
-    """Get trainer by id."""
+    """
+    Get trainer.
+
+    Get trainer details.
+    id = trainer's id
+    permissions - is authenticated
+    """
 
     serializer_class = TrainerSerializer
     permission_classes = (IsAuthenticated,)
@@ -50,7 +60,12 @@ class GetTrainerView(generics.GenericAPIView):
 
 
 class DogsListView(generics.GenericAPIView):
-    """Get dogs list."""
+    """
+    Get dogs list.
+
+    Get all dogs.
+    permissions - is authenticated, trainer
+    """
 
     serializer_class = DogListSerializer
     permission_classes = (IsAuthenticated,  IsTrainer)
@@ -65,7 +80,13 @@ class DogsListView(generics.GenericAPIView):
 
 
 class GetUpdateDeleteDog(generics.RetrieveUpdateDestroyAPIView):
-    """Get dog profile."""
+    """
+    Update dog profile.
+
+    Edit dog profile.
+    id = dog's id
+    permissions - is authenticated, is dog owner
+    """
 
     serializer_class = DogSerializer
     permission_classes = (IsAuthenticated, IsDogOwner)
@@ -74,7 +95,11 @@ class GetUpdateDeleteDog(generics.RetrieveUpdateDestroyAPIView):
 
 
 class CreateDogView(generics.GenericAPIView):
-    """Create dog."""
+    """
+    Create dog.
+
+    permissions - is authenticated
+    """
 
     serializer_class = DogSerializer
     permission_classes = (IsAuthenticated,)
@@ -91,7 +116,11 @@ class CreateDogView(generics.GenericAPIView):
 
 
 class UsersDogsListView(generics.ListAPIView):
-    """User's dogs list."""
+    """
+    User's dogs list.
+
+    permissions - is authenticated, is dog owner
+    """
 
     serializer_class = DogSerializer
     permission_classes = (IsAuthenticated, IsDogOwner)

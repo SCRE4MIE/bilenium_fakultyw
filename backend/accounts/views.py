@@ -12,13 +12,18 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 # Local
 from .models import CustomUser
+from .permissions import IsTrainer
 from .serializers import RegisterUserSerializer
 from .serializers import UserDetailSerializer
 from .serializers import UserEditProfileSerializer
 
 
 class CustomUserCreate(generics.GenericAPIView):
-    """Create a new user in the system."""
+    """
+    Create a new user in the system.
+
+    permissions - allow any
+    """
 
     permission_classes = [AllowAny]
     serializer_class = RegisterUserSerializer
@@ -33,7 +38,12 @@ class CustomUserCreate(generics.GenericAPIView):
 
 
 class BlacklistTokenView(APIView):
-    """Logout user by using token in header: 'Authorization'."""
+    """
+    Logout.
+
+    Logout user by using token in header: 'Authorization'.
+    permissions - allow any
+    """
 
     permission_classes = [AllowAny]
 
@@ -51,7 +61,8 @@ class UserDetailView(generics.GenericAPIView):
     """
     Get user details.
 
-    Auth header: Authorization: JWT access token.
+    Auth header -  Authorization: JWT access token.
+    permissions - is authenticated
     """
 
     serializer_class = UserDetailSerializer
@@ -67,7 +78,12 @@ class UserDetailView(generics.GenericAPIView):
 
 
 class UserProfileEdit(generics.UpdateAPIView):
-    """Update user profile."""
+    """
+    Update user profile.
+
+    Edit user profile by sending form data.
+    permissions - is authenticated
+    """
 
     serializer_class = UserEditProfileSerializer
     permission_classes = (IsAuthenticated,)
@@ -76,3 +92,19 @@ class UserProfileEdit(generics.UpdateAPIView):
     def get_object(self, *args, **kwargs):  # noqa: D102
         user = CustomUser.objects.get(id=self.request.user.id)
         return user
+
+
+class UsersList(generics.ListAPIView):
+    """
+    Users list without trainers.
+
+    Users list (without trainers!)
+    permissions - is authenticated, trainer
+    """
+
+    serializer_class = UserDetailSerializer
+    permission_classes = (IsAuthenticated, IsTrainer)
+
+    def get_queryset(self):  # noqa: D102
+        users = CustomUser.objects.filter(is_trainer=False)
+        return users
