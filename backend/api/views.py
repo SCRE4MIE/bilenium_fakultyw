@@ -99,3 +99,19 @@ class UsersDogsListView(generics.ListAPIView):
     def get_queryset(self):  # noqa: D102
         dogs = Dog.objects.filter(owner_id=self.request.user.id)
         return dogs
+
+
+class UsersDogsListForTrainerView(generics.ListAPIView):
+    """
+    User's dogs list for trainer.
+
+    id = user's id
+    permissions - trainer
+    """
+
+    serializer_class = DogSerializer
+    permission_classes = (IsAuthenticated, IsTrainer)
+
+    def get_queryset(self):  # noqa: D102
+        dogs = Dog.objects.filter(owner_id=self.kwargs['pk'])
+        return dogs

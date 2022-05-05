@@ -8,6 +8,7 @@ from api.views import DogsListView
 from api.views import GetTrainerView
 from api.views import GetUpdateDeleteDog
 from api.views import TrainersListView
+from api.views import UsersDogsListForTrainerView
 from api.views import UsersDogsListView
 
 app_name = 'api_v1'
@@ -19,4 +20,9 @@ urlpatterns = [
     path('get-update-del-dog/<int:pk>/', GetUpdateDeleteDog.as_view(), name='get_update_del_dog'),
     path('create-dog/', CreateDogView.as_view(), name='create_dog'),
     path('users-dog-list/', UsersDogsListView.as_view(), name='users_dog_list'),
+    path(
+        'users-dog-list-for-trainer/<int:pk>/',
+        UsersDogsListForTrainerView.as_view(),
+        name='users_dog_list',
+    ),
 ]
