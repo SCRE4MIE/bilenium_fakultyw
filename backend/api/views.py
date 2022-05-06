@@ -151,6 +151,7 @@ class AddRating(generics.GenericAPIView):
     """
     Rating create.
 
+    evaluator = request.user(automatically)
     permissions - is authenticated
     """
 
