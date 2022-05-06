@@ -25,6 +25,13 @@ class Rating(models.Model):
         on_delete=models.SET_NULL,
     )
 
+    evaluator = models.ForeignKey(
+        CustomUser,
+        null=True,
+        blank=False,
+        on_delete=models.SET_NULL
+    )
+
     def __str__(self):  # noqa: D105
         return self.trainer.first_name + ' ' + self.trainer.last_name
 
