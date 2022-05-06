@@ -29,7 +29,7 @@ class Rating(models.Model):
         CustomUser,
         null=True,
         blank=False,
-        on_delete=models.SET_NULL
+        on_delete=models.SET_NULL,
     )
 
     def __str__(self):  # noqa: D105

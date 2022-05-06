@@ -3,6 +3,7 @@
 from django.urls import path
 
 # Project
+from api.views import AddRating
 from api.views import CreateDogView
 from api.views import DogsListView
 from api.views import GetTrainerView
@@ -25,4 +26,5 @@ urlpatterns = [
         UsersDogsListForTrainerView.as_view(),
         name='users_dog_list',
     ),
+    path('add-rating/', AddRating.as_view(), name='add_rating'),
 ]

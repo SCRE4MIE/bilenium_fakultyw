@@ -15,6 +15,7 @@ from rest_framework.response import Response
 from .models import Dog
 from .serializers import DogListSerializer
 from .serializers import DogSerializer
+from .serializers import RatingSerializer
 from .serializers import TrainerSerializer
 
 
@@ -144,3 +145,23 @@ class UsersDogsListForTrainerView(generics.ListAPIView):
     def get_queryset(self):  # noqa: D102
         dogs = Dog.objects.filter(owner_id=self.kwargs['pk'])
         return dogs
+
+
+class AddRating(generics.GenericAPIView):
+    """
+    Rating create.
+
+    permissions - is authenticated
+    """
+
+    serializer_class = RatingSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):  # noqa: D102
+        context = {'request': request}
+        reg_serializer = RatingSerializer(data=request.data, context=context)
+        if reg_serializer.is_valid():
+            new_rating = reg_serializer.save()
+            if new_rating:
+                return Response(status=status.HTTP_201_CREATED)
+        return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

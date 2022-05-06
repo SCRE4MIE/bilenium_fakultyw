@@ -12,9 +12,19 @@ from api.models import Rating
 class RatingSerializer(serializers.ModelSerializer):
     """Rating serializer."""
 
+    def create(self, validated_data):  # noqa:  D102
+        request = self.context.get('request')
+        instance = self.Meta.model(**validated_data)
+        instance.evaluator_id = request.user.id
+        instance.save()
+        return instance
+
     class Meta:  # noqa: D106
         model = Rating
-        fields = '__all__'
+        fields = ['pk', 'value', 'comment', 'trainer', 'evaluator']
+        extra_kwargs = {
+            'evaluator': {'read_only': True},
+        }
 
 
 class TrainerSerializer(serializers.ModelSerializer):
