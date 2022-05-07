@@ -117,3 +117,5 @@ class Walk(models.Model):
         null=False,
         blank=False,
     )
+
+
