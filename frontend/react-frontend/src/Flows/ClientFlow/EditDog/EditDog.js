@@ -4,14 +4,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import requests from '../../../requests';
 import instance from '../../../axios';
-import { AddDogSchema } from '../../../Validation/AddDogValidation';
+import { EditDogSchema } from '../../../Validation/EditDogValidation';
 import ImageIcon from '@mui/icons-material/Image';
 
 const EditDog = () => {
 
-  const navigate = useNavigate();
-
-  const avatar = JSON.parse(sessionStorage.getItem('userDetails')).avatar_url;
+  //const avatar = JSON.parse(sessionStorage.getItem('userDetails')).avatar_url;
 
   const [profilePicture, setProfilePicture] = useState([])
   const [imageURL, setImageURL] = useState([])
@@ -56,12 +54,12 @@ const EditDog = () => {
       age: "",
       description: "",
     },
-    validationSchema: AddDogSchema,
+    validationSchema: EditDogSchema,
     onSubmit: () =>{
       handleSubmit();
     } 
   });
-
+  
   const handleSubmit = () => {
     console.log("dog eddited");
 
@@ -74,19 +72,18 @@ const EditDog = () => {
 
     imageFile.files[0] ? formData.append("avatar", imageFile.files[0]) : formData.append("avatar", "");
 
-    instance.patch(requests.editDog, formData, {
+    instance.patch(`${requests.dogDetails}${sessionStorage.getItem('id')}/`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         'accept': 'application/json',
       },
     })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-  });
-  }
+    .then(response => {
+      instance.get(requests.userDogList)
+    }).catch(error => {
+        console.log(error);
+      })
+    }
 
   return (
     <div className='EditDog'>

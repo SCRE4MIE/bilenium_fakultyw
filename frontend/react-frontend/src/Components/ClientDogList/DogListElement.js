@@ -9,12 +9,12 @@ const DogListElement = ({ imageSrc, name, id }) => {
   const navigate = useNavigate();
 
   const openDogProfile = () => {
-    sessionStorage.setItem('currentDog', id);
+    sessionStorage.setItem('id', id);
     navigate('/dogProfile');
   };
 
   const openDogEdit = () => {
-    sessionStorage.setItem('currentDog', id);
+    sessionStorage.setItem('id', id);
     navigate('/editDog');
   };
 

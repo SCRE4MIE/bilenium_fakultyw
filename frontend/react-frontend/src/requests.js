@@ -8,6 +8,9 @@ const requests = {
   editProfile: 'user/edit-user-profile/',
   trainerList: 'v1/trainers-list/',
   trainerDetails: 'v1/get-trainer/',
+  addDog: 'v1/create-dog/',
+  userDogList: 'v1/users-dog-list/',
+  dogDetails: 'v1/get-update-del-dog/',
 }
 
 export default requests;
