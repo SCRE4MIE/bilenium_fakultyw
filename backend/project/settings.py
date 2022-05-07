@@ -8,6 +8,11 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
+
+Backend created by:
+Mateusz Baran,
+Robert Kochański
+
 """
 # Standard Library
 import os
