@@ -1,11 +1,13 @@
 """Api serializers."""
 # 3rd-party
+from datetime import date
+
 from accounts.models import CustomUser
 from accounts.serializers import UserDetailSerializer
 from rest_framework import serializers
 
 # Project
-from api.models import Dog
+from api.models import Dog, Walk
 from api.models import Rating
 
 
@@ -91,5 +93,24 @@ class DogSerializer(serializers.ModelSerializer):
         return instance
 
 
-class AssigningDogToTrainerSerializer(serializers.Serializer):
-    pass
+class WalkSerializer(serializers.ModelSerializer):
+    """Walks serializer."""
+
+    class Meta:
+        model = Walk
+        fields = '__all__'
+
+    def validate_dogs(self, value):
+        if len(value) > 3:
+            raise serializers.ValidationError('Mogą być tylko 3 psy!')
+        return value
+
+    def validate(self, attrs):
+        req_date = attrs.get('date')
+        trainer = attrs.get('trainer')
+        walks = trainer.walk_set.filter(date__day=req_date.day, date__month=req_date.month, date__year=req_date.year)
+        if walks.count() >= 5:
+            raise serializers.ValidationError('Trener może mieć dziennie tylko 5 spacerów!')
+        return attrs
+
+

@@ -81,28 +81,6 @@ class Dog(models.Model):
         verbose_name_plural = 'Piesełki'
 
 
-# class AllowedTrainerDays(models.Model):  # in progress
-#
-#     trainer = models.ForeignKey(
-#         CustomUser,
-#         null=False,
-#         blank=False,
-#         on_delete=models.CASCADE,
-#     )
-#
-#     monday = models.BooleanField(
-#         default=False,
-#     )
-#
-#
-#     def __str__(self):
-#         return self.trainer.first_name + ' ' + self.trainer.last_name
-#
-#     class Meta:   # noqa: D106
-#         verbose_name = 'Dni dostępności trenera'
-#         verbose_name_plural = 'Dni dostępności trenera'
-
-
 class Walk(models.Model):
     """Walk model."""
 
@@ -117,5 +95,3 @@ class Walk(models.Model):
         null=False,
         blank=False,
     )
-
-

@@ -6,7 +6,7 @@ from django.urls import path
 from api.views import AddRating
 from api.views import CreateDogView
 from api.views import DogsListView
-from api.views import DogsListView, GetUpdateDeleteDog, CreateDogView, AssigningDogToTrainer
+from api.views import DogsListView, GetUpdateDeleteDog, CreateDogView, CreateWalk
 from api.views import GetTrainerView
 from api.views import GetUpdateDeleteDog
 from api.views import TrainersListView
@@ -28,5 +28,5 @@ urlpatterns = [
         name='users_dog_list',
     ),
     path('add-rating/', AddRating.as_view(), name='add_rating'),
-    path('assigning-dog-to-trainer/', AssigningDogToTrainer.as_view(), name='assigning_dog_to_trainer'),
+    path('create-walk/', CreateWalk.as_view(), name='create_walk'),
 ]

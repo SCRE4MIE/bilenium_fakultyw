@@ -13,7 +13,7 @@ from rest_framework.response import Response
 
 # Local
 from .models import Dog
-from .serializers import DogListSerializer
+from .serializers import DogListSerializer, WalkSerializer
 from .serializers import DogSerializer
 from .serializers import RatingSerializer
 from .serializers import TrainerSerializer
@@ -168,8 +168,10 @@ class AddRating(generics.GenericAPIView):
         return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class AssigningDogToTrainer(generics.GenericAPIView):
+class CreateWalk(generics.CreateAPIView):
     """Assigning the dog to a trainer"""
+    serializer_class = WalkSerializer
+    permission_classes = (IsAuthenticated,)
 
 
 
