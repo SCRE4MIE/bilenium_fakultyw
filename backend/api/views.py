@@ -13,10 +13,12 @@ from rest_framework.response import Response
 
 # Local
 from .models import Dog
-from .serializers import DogListSerializer, WalkSerializer
+from .models import Walk
+from .serializers import DogListSerializer
 from .serializers import DogSerializer
 from .serializers import RatingSerializer
 from .serializers import TrainerSerializer
+from .serializers import WalkSerializer
 
 
 class TrainersListView(generics.GenericAPIView):
@@ -169,11 +171,27 @@ class AddRating(generics.GenericAPIView):
 
 
 class CreateWalk(generics.CreateAPIView):
-    """Assigning the dog to a trainer"""
+    """
+    Create walk.
+
+    permissions - is authenticated
+    max 3 dogs per walk
+    max 5 walks for trainer per day
+    """
+
     serializer_class = WalkSerializer
     permission_classes = (IsAuthenticated,)
 
 
+class UpdateWalk(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Update walk.
 
+    permissions - is authenticated
+    max 3 dogs per walk
+    max 5 walks for trainer per day
+    """
 
-
+    serializer_class = WalkSerializer
+    permission_classes = (IsAuthenticated,)
+    queryset = Walk.objects.all()

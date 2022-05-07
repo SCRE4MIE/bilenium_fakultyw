@@ -5,11 +5,12 @@ from django.urls import path
 # Project
 from api.views import AddRating
 from api.views import CreateDogView
+from api.views import CreateWalk
 from api.views import DogsListView
-from api.views import DogsListView, GetUpdateDeleteDog, CreateDogView, CreateWalk
 from api.views import GetTrainerView
 from api.views import GetUpdateDeleteDog
 from api.views import TrainersListView
+from api.views import UpdateWalk
 from api.views import UsersDogsListForTrainerView
 from api.views import UsersDogsListView
 
@@ -29,4 +30,5 @@ urlpatterns = [
     ),
     path('add-rating/', AddRating.as_view(), name='add_rating'),
     path('create-walk/', CreateWalk.as_view(), name='create_walk'),
+    path('update-walk/<int:pk>/', UpdateWalk.as_view(), name='update_walk'),
 ]
