@@ -1,23 +1,30 @@
 """APi views."""
 
 # 3rd-party
-from rest_framework.parsers import MultiPartParser, FormParser
-
 from accounts.models import CustomUser
-from accounts.permissions import IsTrainer, IsDogOwner
+from accounts.permissions import IsDogOwner
+from accounts.permissions import IsTrainer
 from rest_framework import generics
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.parsers import FormParser
+from rest_framework.parsers import MultiPartParser
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 # Local
 from .models import Dog
-from .serializers import DogListSerializer, DogSerializer
+from .serializers import DogListSerializer
+from .serializers import DogSerializer
+from .serializers import RatingSerializer
 from .serializers import TrainerSerializer
 
 
 class TrainersListView(generics.GenericAPIView):
-    """Get list of trainers."""
+    """
+    Get list of trainers.
+
+    permissions - is authenticated
+    """
 
     serializer_class = TrainerSerializer
     permission_classes = (IsAuthenticated,)
@@ -32,7 +39,13 @@ class TrainersListView(generics.GenericAPIView):
 
 
 class GetTrainerView(generics.GenericAPIView):
-    """Get trainer by id."""
+    """
+    Get trainer.
+
+    Get trainer details.
+    id = trainer's id
+    permissions - is authenticated
+    """
 
     serializer_class = TrainerSerializer
     permission_classes = (IsAuthenticated,)
@@ -48,7 +61,12 @@ class GetTrainerView(generics.GenericAPIView):
 
 
 class DogsListView(generics.GenericAPIView):
-    """Get dogs list."""
+    """
+    Get dogs list.
+
+    Get all dogs.
+    permissions - is authenticated, trainer
+    """
 
     serializer_class = DogListSerializer
     permission_classes = (IsAuthenticated,  IsTrainer)
@@ -63,7 +81,13 @@ class DogsListView(generics.GenericAPIView):
 
 
 class GetUpdateDeleteDog(generics.RetrieveUpdateDestroyAPIView):
-    """Get dog profile."""
+    """
+    Update dog profile.
+
+    Edit dog profile.
+    id = dog's id
+    permissions - is authenticated, is dog owner
+    """
 
     serializer_class = DogSerializer
     permission_classes = (IsAuthenticated, IsDogOwner)
@@ -72,7 +96,11 @@ class GetUpdateDeleteDog(generics.RetrieveUpdateDestroyAPIView):
 
 
 class CreateDogView(generics.GenericAPIView):
-    """Create dog."""
+    """
+    Create dog.
+
+    permissions - is authenticated
+    """
 
     serializer_class = DogSerializer
     permission_classes = (IsAuthenticated,)
@@ -88,5 +116,53 @@ class CreateDogView(generics.GenericAPIView):
         return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class UsersDogsListView(generics.ListAPIView):
+    """
+    User's dogs list.
+
+    permissions - is authenticated, is dog owner
+    """
+
+    serializer_class = DogSerializer
+    permission_classes = (IsAuthenticated, IsDogOwner)
+
+    def get_queryset(self):  # noqa: D102
+        dogs = Dog.objects.filter(owner_id=self.request.user.id)
+        return dogs
 
 
+class UsersDogsListForTrainerView(generics.ListAPIView):
+    """
+    User's dogs list for trainer.
+
+    id = user's id
+    permissions - trainer
+    """
+
+    serializer_class = DogSerializer
+    permission_classes = (IsAuthenticated, IsTrainer)
+
+    def get_queryset(self):  # noqa: D102
+        dogs = Dog.objects.filter(owner_id=self.kwargs['pk'])
+        return dogs
+
+
+class AddRating(generics.GenericAPIView):
+    """
+    Rating create.
+
+    evaluator = request.user(automatically)
+    permissions - is authenticated
+    """
+
+    serializer_class = RatingSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):  # noqa: D102
+        context = {'request': request}
+        reg_serializer = RatingSerializer(data=request.data, context=context)
+        if reg_serializer.is_valid():
+            new_rating = reg_serializer.save()
+            if new_rating:
+                return Response(status=status.HTTP_201_CREATED)
+        return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

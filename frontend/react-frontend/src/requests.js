@@ -6,7 +6,8 @@ const requests = {
   logout: `user/logout/blacklist/`,
   userDetails: 'user/get-user-details/',
   editProfile: 'user/edit-user-profile/',
-  addDog: 'v1/create-dog/',
+  trainerList: 'v1/trainers-list/',
+  trainerDetails: 'v1/get-trainer/',
 }
 
 export default requests;

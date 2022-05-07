@@ -1,17 +1,31 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import woman from "../../../Images/womanPlaceholder.jpg"
 import './ClientTrainerProfile.css';
 import StarIcon from '@mui/icons-material/Star';
 import OpinionAboutTrainerElement from "../../../Components/OpinionAboutTrainer/OpinionAboutTrainerElement";
+import requests from "../../../requests";
+import instance from "../../../axios";
+import ApiPicture from "../../../Components/ApiPicture";
+
 
 const ClientTrainerProfile = () => {
-    const trainer = {
-      id: 1,
-      username: "Sophia",
-      phone_number: "999652123",
-      imageSrc: woman,
-      rating: 4,
-    }
+    const currentTrainerId = sessionStorage.getItem('currentTrainer');
+    const [trainerDetails, setTrainerDetails] = useState({});
+    const trainer = trainerDetails.trainerDetails;
+    useEffect(() => {
+        instance.get(requests.trainerDetails + currentTrainerId.toString())
+        .then(response => {
+
+        setTrainerDetails(prevUserData => ({
+            ...prevUserData,
+            trainerDetails: response.data,
+        }));
+
+        }).catch(error => {
+        console.log(error.details);
+        })
+    }, []);
+
 
     const opinion = [
         {
@@ -30,24 +44,35 @@ const ClientTrainerProfile = () => {
         }
     ]
 
-    const phone_number = [
+    const phone_number = trainer ? [
     trainer.phone_number.slice(0, 3), " ",
     trainer.phone_number.slice(3, 6), " ",
     trainer.phone_number.slice(6, 9)]
-    .join('');
+    .join('') : null;
+
+    const ratingSum = (ratingArr) => {
+        let rating = 0;
+        for (let index = 0; index < ratingArr.length; ++index) {
+        rating = rating + ratingArr[index].value;
+        }
+        return Math.round((rating/ratingArr.length)*100)/100;
+    };
 
     return (
         <div className='trainerProfile'>
-            <h1>{trainer.username} profile</h1>
+            {trainer ? (
+            <>
+            <h1>{trainer.username}'s profile</h1>
             <div className='userInfo'>
                 <div className='avatarSection'>
                 <div className='profilePicture'>
-                    <img src={woman} alt='trainer profile picture' />
+                    <ApiPicture src={trainer.avatar_url} />
                 </div>
                 </div>
                 <span>
                     <h2 className="rating">
-                    {trainer.rating}/5
+                    4/5
+                    {/* {ratingSum(trainer.rating_trainer)}/5 */}
                     </h2>
                     <StarIcon className='starIcon'/>
                 </span>
@@ -69,6 +94,10 @@ const ClientTrainerProfile = () => {
                 rating = {opinion[1].rating}
                 opinion={opinion[1].opinion}/>
             </div>
+            </>
+            ):
+                null
+            }
 
 
         </div>
