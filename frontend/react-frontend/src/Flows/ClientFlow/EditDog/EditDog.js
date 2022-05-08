@@ -6,10 +6,13 @@ import requests from '../../../requests';
 import instance from '../../../axios';
 import { EditDogSchema } from '../../../Validation/EditDogValidation';
 import ImageIcon from '@mui/icons-material/Image';
+import ApiPicture from '../../../Components/ApiPicture';
 
 const EditDog = () => {
 
-  const oldAvatar = JSON.parse(sessionStorage.getItem('dogDetails')).avatar;
+  const navigate = useNavigate();
+
+  const avatar = JSON.parse(sessionStorage.getItem('dogDetails')).avatar;
 
   const [profilePicture, setProfilePicture] = useState([])
   const [imageURL, setImageURL] = useState([])
@@ -21,31 +24,9 @@ const EditDog = () => {
     setImageURL(newImageURL);
   }, [profilePicture]);
 
-  const [selectedFile, setSelectedFile] = useState()
-  const [preview, setPreview] = useState()
-
-  useEffect(() => {
-    if (!selectedFile) {
-        setPreview(undefined)
-        return
-    }
-
-    const objectUrl = URL.createObjectURL(selectedFile)
-    setPreview(objectUrl)
-
-    
-    return () => URL.revokeObjectURL(objectUrl)
-  }, [selectedFile])
-
-
   const onImageChange = (e) => {
     setProfilePicture(e.target.files);
-    if (!e.target.files || e.target.files.length === 0) {
-      setSelectedFile(undefined)
-      return
     }
-    setSelectedFile(e.target.files[0])
-  }
 
   const formik = useFormik({
     initialValues: {
@@ -84,12 +65,12 @@ const EditDog = () => {
         console.log(error);
       })
     }
-
+    //style={{backgroundImage: `url(${oldAvatar})`}}
   return (
     <div className='EditDog'>
       <h1 className='EditDog--header '>Edit dog</h1>
-      <div className='dogPicContainer' style={{backgroundImage: `url(${oldAvatar})`}}>
-        {selectedFile &&  <img src={preview}/> }
+      <div className='dogPicContainer'> 
+        {imageURL[0] ? <img src={imageURL[0]} alt=''/> : <ApiPicture src={avatar}/>}
       </div>
       <form id = "EditDog--form" className='EditDog--form' onSubmit={formik.handleSubmit}>
             {formik.errors.name && formik.touched.name ? <p className="formError">{formik.errors.name}</p> : null}

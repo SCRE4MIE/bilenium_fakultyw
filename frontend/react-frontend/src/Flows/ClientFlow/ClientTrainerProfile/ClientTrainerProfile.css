@@ -2,103 +2,70 @@
   text-align: center;
   position: relative;
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
 }
-
 @media screen and (max-width: 660px) {
   .trainerProfile .profilePicture {
     height: 150px;
     width: 150px;
   }
 }
-
 .trainerProfile h1 {
   font-family: "Jost", sans-serif;
   color: #577590;
   font-weight: 400;
 }
-
 .trainerProfile h2 {
   font-family: "Jost", sans-serif;
   color: #577590;
   font-weight: 400;
 }
-
 .trainerProfile .starIcon {
   vertical-align: middle;
   color: #577590;
   margin-left: 2px;
 }
-
 .trainerProfile .rating {
   display: inline-block;
   vertical-align: middle;
 }
-
 .trainerProfile .userInfo {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
-
 .trainerProfile .userInfo .avatarSection {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  justify-content: space-evenly;
   padding-bottom: 10px;
   padding-top: 10px;
 }
-
 .trainerProfile .userInfo .avatarSection .profilePicture {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
   height: 200px;
   width: 200px;
   -o-object-fit: contain;
      object-fit: contain;
   border-radius: 50%;
   overflow: hidden;
-  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border: 4px solid white;
   background-color: white;
 }
-
 @media screen and (max-width: 660px) {
   .trainerProfile .userInfo .avatarSection .profilePicture {
     height: 150px;
     width: 150px;
   }
 }
-
 .trainerProfile .userInfo .avatarSection .profilePicture img {
   height: 100%;
 }
-
 .trainerProfile .opinionList {
   width: 70%;
 }
-
 .trainerProfile .opinionListTitle {
   font-family: "Inter", sans-serif;
   color: #577590;

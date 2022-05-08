@@ -11,8 +11,8 @@ const DogListElement = ({ imageSrc, name, id }) => {
   const navigate = useNavigate();
 
   const openDogProfile = () => { //wchodzi do profilu psa i dopiero zmienia details na innego
-    sessionStorage.setItem('id', id);
-    instance.get(`${requests.dogDetails}${sessionStorage.getItem('id')}/`)
+    sessionStorage.setItem('idPsa', id);
+    instance.get(`${requests.dogDetails}${sessionStorage.getItem('idPsa')}/`)
         .then(response => {
           sessionStorage.setItem('dogDetails', JSON.stringify(response.data));
           navigate('/dogProfile');

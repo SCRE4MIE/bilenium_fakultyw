@@ -108,9 +108,9 @@ input[type=file] {
   border-radius: 50%;
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: gray;
   overflow: hidden;
   margin-bottom: 30px;
+  background-color: gray;
 }
 .dogPicContainer img {
   height: 100%;
