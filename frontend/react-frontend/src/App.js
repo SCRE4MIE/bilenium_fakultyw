@@ -1,10 +1,10 @@
 
-import { createContext, useContext, useState } from 'react';
+import { useState } from 'react';
 import LoggedInNavbar from './Components/LoggedInNavbar/LoggedInNavbar';
 import LoginForm from './Flows/Login/LoginForm';
 import LoggedInTrainerNavbar from './Components/LoggedInTrainerNavbar/LoggedInTrainerNavbar';
 import './App.css'
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Register from './Flows/Registration/Register';
 import instance from './axios';
 import requests from './requests';
@@ -12,14 +12,11 @@ import ClientFlow from './Flows/ClientFlow/ClientFlow';
 import TrainerFlow from './Flows/TrainerFlow/TrainerFlow';
 
 
-export const Context = createContext({})
-
 function App() {
-
-  const context = useContext(Context);
 
   const navigate = useNavigate();
 
+  // eslint-disable-next-line no-unused-vars
   const [userDetails, setUserDetails] = useState({})
 
   const [userData, setUserData] = useState({
@@ -71,42 +68,38 @@ function App() {
   }
 
   return (
-    <Context.Provider value={userData}>
-      <div className="App">
-        <Routes>
-          {/* Register path */}
-          {
-            !userData.access
-            && 
-            <Route path='/register/*'
-              element={<Register />}
-            />
-          }
-          
-          {/* Login path */}
-          {
-            (!userData.access || userData.refresh === 'undefined')
-            && 
-            <Route path='/'
-              element={<LoginForm signIn={handleSignIn}/>}
-            />
-          }
-          {
-            !userData.access
-            && 
-            <Route path='*'
-              element={<LoginForm signIn={handleSignIn}/>}
-            />
-          }
-
-        </Routes>
-
-        {userData.access && userData.refresh !=='undefined' && userData.userType === 'client' && <ClientFlow /> }
-        {userData.access && userData.refresh !=='undefined' && userData.userType === 'client' && <LoggedInNavbar userType={userData.userType} signOut={handleSignOut} />}
-        {userData.access && userData.refresh !=='undefined' && userData.userType === 'trainer' && <TrainerFlow />}
-        {userData.access && userData.refresh !=='undefined' && userData.userType === 'trainer' && <LoggedInTrainerNavbar userType={userData.userType} signOut={handleSignOut} />}
-      </div>
-    </Context.Provider>
+    <div className="App">
+      <Routes>
+        {/* Register path */}
+        {
+          !userData.access
+          && 
+          <Route path='/register/*'
+            element={<Register />}
+          />
+        }
+        
+        {/* Login path */}
+        {
+          (!userData.access || userData.refresh === 'undefined')
+          && 
+          <Route path='/'
+            element={<LoginForm signIn={handleSignIn}/>}
+          />
+        }
+        {
+          !userData.access
+          && 
+          <Route path='*'
+            element={<LoginForm signIn={handleSignIn}/>}
+          />
+        }
+      </Routes>
+      {userData.access && userData.refresh !=='undefined' && userData.userType === 'client' && <ClientFlow /> }
+      {userData.access && userData.refresh !=='undefined' && userData.userType === 'client' && <LoggedInNavbar userType={userData.userType} signOut={handleSignOut} />}
+      {userData.access && userData.refresh !=='undefined' && userData.userType === 'trainer' && <TrainerFlow />}
+      {userData.access && userData.refresh !=='undefined' && userData.userType === 'trainer' && <LoggedInTrainerNavbar userType={userData.userType} signOut={handleSignOut} />}
+    </div>
   );
 }
 

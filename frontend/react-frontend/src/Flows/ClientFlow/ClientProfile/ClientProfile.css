@@ -87,7 +87,7 @@
 }
 
 .clientProfile .userInfo .avatarSection .profilePicture img {
-  height: 100%;
+  width: 100%;
 }
 
 .clientProfile .userInfo .avatarSection .icons {

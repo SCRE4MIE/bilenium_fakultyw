@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import AddDogButton from '../../../Components/AddDogButton/AddDogButton';
 import DogListElement from '../../../Components/ClientDogList/DogListElement';
 import './ClientProfile.css';
-import dogPicture from '../../../Images/dogPlaceholder.jpg';
-import cashtan from '../../../Images/Cashtan.png';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Tooltip } from '@mui/material/';
@@ -29,7 +27,6 @@ const ClientProfile = () => {
     details.phone_number.slice(3, 6), " ",
     details.phone_number.slice(6, 9)]
     .join('');
-
 
   useEffect(() => {
     instance.get(requests.ownerDogList)
