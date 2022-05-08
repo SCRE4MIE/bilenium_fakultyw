@@ -76,9 +76,9 @@ input[type="file"] {
   height: 200px;
   border-radius: 50%;
   object-fit: contain;
-  background-color: gray;
   overflow: hidden;
   margin-bottom: 30px;
+  background-image: url(${oldAvatar}`);
   
   img {
     height: 100%;

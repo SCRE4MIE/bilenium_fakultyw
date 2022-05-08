@@ -3,18 +3,32 @@ import './DogListElement.css'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Tooltip } from '@mui/material/';
 import { useNavigate } from 'react-router-dom';
+import requests from '../../requests';
+import instance from '../../axios';
 
 const DogListElement = ({ imageSrc, name, id }) => {
   
   const navigate = useNavigate();
 
-  const openDogProfile = () => {
+  const openDogProfile = () => { //wchodzi do profilu psa i dopiero zmienia details na innego
     sessionStorage.setItem('id', id);
-    navigate('/dogProfile');
+    instance.get(`${requests.dogDetails}${sessionStorage.getItem('id')}/`)
+        .then(response => {
+          sessionStorage.setItem('dogDetails', JSON.stringify(response.data));
+          navigate('/dogProfile');
+        }).catch(error => {
+          console.log(error);
+        });
   };
 
   const openDogEdit = () => {
     sessionStorage.setItem('id', id);
+    instance.get(`${requests.dogDetails}${sessionStorage.getItem('id')}/`)
+        .then(response => {
+          sessionStorage.setItem('dogDetails', JSON.stringify(response.data));
+        }).catch(error => {
+          console.log(error);
+        });
     navigate('/editDog');
   };
 

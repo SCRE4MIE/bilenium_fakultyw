@@ -9,7 +9,7 @@ import ImageIcon from '@mui/icons-material/Image';
 
 const EditDog = () => {
 
-  //const avatar = JSON.parse(sessionStorage.getItem('userDetails')).avatar_url;
+  const oldAvatar = JSON.parse(sessionStorage.getItem('dogDetails')).avatar;
 
   const [profilePicture, setProfilePicture] = useState([])
   const [imageURL, setImageURL] = useState([])
@@ -88,7 +88,7 @@ const EditDog = () => {
   return (
     <div className='EditDog'>
       <h1 className='EditDog--header '>Edit dog</h1>
-      <div className='dogPicContainer' >
+      <div className='dogPicContainer' style={{backgroundImage: `url(${oldAvatar})`}}>
         {selectedFile &&  <img src={preview}/> }
       </div>
       <form id = "EditDog--form" className='EditDog--form' onSubmit={formik.handleSubmit}>
