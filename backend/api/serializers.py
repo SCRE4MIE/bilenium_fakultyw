@@ -128,6 +128,7 @@ class WalkSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError(f'{dogs[i]} jest już na spacerze w tym czasie!')
 
         if trainer.walk_set.filter(date_end__gte=req_date, date__lte=req_date_end).exists():
+            # check if trainer is available in that time
             raise serializers.ValidationError('Trener jest już na spacerze w tym czasie!')
 
         return attrs
