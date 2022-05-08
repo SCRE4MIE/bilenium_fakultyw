@@ -85,7 +85,7 @@ function App() {
           
           {/* Login path */}
           {
-            !userData.access
+            (!userData.access || userData.refresh === 'undefined')
             && 
             <Route path='/'
               element={<LoginForm signIn={handleSignIn}/>}
@@ -101,10 +101,10 @@ function App() {
 
         </Routes>
 
-        {userData.access && userData.userType === 'client' && <ClientFlow /> }
-        {userData.access && userData.userType === 'client' && <LoggedInNavbar userType={userData.userType} signOut={handleSignOut} />}
-        {userData.access && userData.userType === 'trainer' && <TrainerFlow />}
-        {userData.access && userData.userType === 'trainer' && <LoggedInTrainerNavbar userType={userData.userType} signOut={handleSignOut} />}
+        {userData.access && userData.refresh !=='undefined' && userData.userType === 'client' && <ClientFlow /> }
+        {userData.access && userData.refresh !=='undefined' && userData.userType === 'client' && <LoggedInNavbar userType={userData.userType} signOut={handleSignOut} />}
+        {userData.access && userData.refresh !=='undefined' && userData.userType === 'trainer' && <TrainerFlow />}
+        {userData.access && userData.refresh !=='undefined' && userData.userType === 'trainer' && <LoggedInTrainerNavbar userType={userData.userType} signOut={handleSignOut} />}
       </div>
     </Context.Provider>
   );
