@@ -3,7 +3,8 @@
 from django.urls import path
 
 # Project
-from api.views import AddRating, CheckTrainerInWalk
+from api.views import AddRating
+from api.views import CheckTrainerInWalk
 from api.views import CreateDogView
 from api.views import CreateWalk
 from api.views import DogsListView

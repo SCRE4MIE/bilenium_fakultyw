@@ -41,7 +41,7 @@ class WalkLimit(forms.ModelForm):
             raise ValidationError('Data początkowa jest starsza od daty końca!')
 
         for i in range(len(dogs)):  # check if dog is not in other walk in the same time
-            if Walk.objects.filter(dogs=dogs[i], date_end__gte=start_date, date__lte=end_date).exists():
+            if Walk.objects.filter(dogs=dogs[i], date_end__gte=start_date, date__lte=end_date).exists():  # noqa: E501
                 raise ValidationError(f'{dogs[i]} jest już na spacerze w tym czasie!')
 
         if trainer.walk_set.filter(date_end__gte=start_date, date__lte=end_date).exists():

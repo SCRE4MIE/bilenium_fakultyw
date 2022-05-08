@@ -11,7 +11,6 @@ from api.models import Rating
 from api.models import Walk
 
 
-
 class RatingSerializer(serializers.ModelSerializer):
     """Rating serializer."""
 
@@ -125,7 +124,7 @@ class WalkSerializer(serializers.ModelSerializer):
 
         dogs = attrs.get('dogs')
         for i in range(len(dogs)):  # check if dog is not in other walk in the same time
-            if Walk.objects.filter(dogs=dogs[i], date_end__gte=req_date, date__lte=req_date_end).exists():
+            if Walk.objects.filter(dogs=dogs[i], date_end__gte=req_date, date__lte=req_date_end).exists():  # noqa: E501
                 raise serializers.ValidationError(f'{dogs[i]} jest już na spacerze w tym czasie!')
 
         if trainer.walk_set.filter(date_end__gte=req_date, date__lte=req_date_end).exists():
@@ -135,15 +134,14 @@ class WalkSerializer(serializers.ModelSerializer):
 
 
 class CheckTrainerInWalkSerializer(serializers.Serializer):
+    """Check if trainer is available."""
+
     trainer_id = serializers.IntegerField()
     date_start = serializers.DateTimeField()
     date_end = serializers.DateTimeField()
 
-    def create(self, validated_data):
+    def create(self, validated_data):  # noqa: D102
         pass
 
-    def update(self, instance, validated_data):
+    def update(self, instance, validated_data):  # noqa: D102
         pass
-
-
-

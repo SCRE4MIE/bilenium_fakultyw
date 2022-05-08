@@ -1,5 +1,8 @@
 """APi views."""
 
+# Django
+from django.utils.dateparse import parse_datetime
+
 # 3rd-party
 from accounts.models import CustomUser
 from accounts.permissions import IsDogOwner
@@ -14,12 +17,12 @@ from rest_framework.response import Response
 # Local
 from .models import Dog
 from .models import Walk
-from .serializers import DogListSerializer, CheckTrainerInWalkSerializer
+from .serializers import CheckTrainerInWalkSerializer
+from .serializers import DogListSerializer
 from .serializers import DogSerializer
 from .serializers import RatingSerializer
 from .serializers import TrainerSerializer
 from .serializers import WalkSerializer
-from django.utils.dateparse import parse_datetime
 
 
 class TrainersListView(generics.GenericAPIView):
@@ -207,6 +210,7 @@ class CheckTrainerInWalk(generics.GenericAPIView):
     True when trainer is available
     False when trainer is not available
     """
+
     serializer_class = CheckTrainerInWalkSerializer
     permission_classes = (IsAuthenticated,)
 
