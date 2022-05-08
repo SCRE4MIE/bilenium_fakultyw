@@ -34,8 +34,6 @@ const OrderAWalk = () => {
 
   const [time, setFormTime] = useState(minHour);
 
-  const today = dayjs();
-
   const handleDateChange = (e) => {
     setFormData(prevData => {
       return {
