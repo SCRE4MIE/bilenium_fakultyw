@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import AddDogButton from '../../../Components/AddDogButton/AddDogButton';
 import DogListElement from '../../../Components/ClientDogList/DogListElement';
 import './ClientProfile.css';
@@ -7,14 +7,13 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Tooltip } from '@mui/material/';
 import { useNavigate } from 'react-router-dom';
 import ApiPicture from '../../../Components/ApiPicture';
-import instance from '../../../axios';
-import requests from '../../../requests';
+import useOwnerDogs from '../../../CustomHooks/useOwnerDogs';
 
 const ClientProfile = () => {
 
   const navigate = useNavigate();
 
-  const [userDogs, setUserDogs] = useState([]);
+  const userDogs = useOwnerDogs();
 
   const goToEditProfile = () => {
     navigate('/editProfile');
@@ -28,14 +27,8 @@ const ClientProfile = () => {
     details.phone_number.slice(6, 9)]
     .join('');
 
-  useEffect(() => {
-    instance.get(requests.ownerDogList)
-    .then(response => setUserDogs(response.data))
-    .catch(error => console.log(error.response.data));
-  }, [])
-
   const dogList = userDogs.map(dog => {
-    return <DogListElement id={dog.pk} name={dog.name} imageSrc={dog.avatar}/>
+    return <DogListElement key={dog.pk} id={dog.pk} name={dog.name} imageSrc={dog.avatar}/>
   })
 
   return (
