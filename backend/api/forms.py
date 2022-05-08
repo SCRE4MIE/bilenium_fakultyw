@@ -1,6 +1,4 @@
 """Api forms."""
-# Standard Library
-from datetime import date
 
 # Django
 from django import forms
@@ -28,13 +26,25 @@ class WalkLimit(forms.ModelForm):
             raise ValidationError('Mogą być tylko 3 psy!')
 
         trainer = self.cleaned_data.get('trainer')
-        today = date.today()
+        start_date = self.cleaned_data.get('date')
+        end_date = self.cleaned_data.get('date_end')
+
         walks = trainer.walk_set.filter(
-            date__day=today.day,
-            date__month=today.month,
-            date__year=today.year,
+            date__day=start_date.day,
+            date__month=start_date.month,
+            date__year=start_date.year,
         )
         if walks.count() > 5:  # max 5 walks per day
             raise ValidationError('Jednego dnia może być tylko 5 slotów spacerowych!')
+
+        if start_date >= end_date:  # check correct dates
+            raise ValidationError('Data początkowa jest starsza od daty końca!')
+
+        for i in range(len(dogs)):  # check if dog is not in other walk in the same time
+            if Walk.objects.filter(dogs=dogs[i], date_end__gte=start_date, date__lte=end_date).exists():
+                raise ValidationError(f'{dogs[i]} jest już na spacerze w tym czasie!')
+
+        if trainer.walk_set.filter(date_end__gte=start_date, date__lte=end_date).exists():
+            raise ValidationError('Trener jest już na spacerze w tym czasie!')
 
         return self.cleaned_data
