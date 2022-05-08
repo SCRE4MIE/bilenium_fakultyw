@@ -45,6 +45,7 @@ class WalkLimit(forms.ModelForm):
                 raise ValidationError(f'{dogs[i]} jest już na spacerze w tym czasie!')
 
         if trainer.walk_set.filter(date_end__gte=start_date, date__lte=end_date).exists():
+            # check if trainer is available in that time
             raise ValidationError('Trener jest już na spacerze w tym czasie!')
 
         return self.cleaned_data
