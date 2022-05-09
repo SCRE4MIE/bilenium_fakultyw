@@ -3,7 +3,6 @@ import React from 'react';
 import PersonIcon from '@mui/icons-material/Person';
 
 const DogEditPicture = ({ src }) => {
-    console.log(src);
   return (
     <>
       {

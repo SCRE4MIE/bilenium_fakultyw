@@ -63,7 +63,6 @@ const AddNewDog = () => {
   });
 
   const handleSubmit = () => {
-    console.log("new dog added");
 
     let formData = new FormData();
     const imageFile = document.querySelector('#avatar');
@@ -79,13 +78,9 @@ const AddNewDog = () => {
         'Content-Type': 'multipart/form-data',
         'accept': 'application/json',
       },
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-  });
+    }).then(response => {
+      navigate("/dogAdded");
+    });
   }
 
   return (
@@ -138,12 +133,12 @@ const AddNewDog = () => {
             <input 
               name='avatar' 
               id="avatar"  
-              className='button' 
+              className="button" 
               type='file' 
               onChange={onImageChange} 
               accept="image/png, image/gif, image/jpeg" 
             />
-                <input type="submit" value="Finish"/>
+                <input type="submit" value="Finish" className="button"/>
             </div>
         </form>
     </div>

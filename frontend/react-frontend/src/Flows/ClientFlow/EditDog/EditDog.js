@@ -27,8 +27,6 @@ const EditDog = ({dogId}) => {
     instance.get(`${requests.dogDetails}${dogId}/`)
         .then(response => {
           setDogData(response.data);
-        }).catch(error => {
-          console.log(error);
         });
   },[]);
 
@@ -50,7 +48,6 @@ const EditDog = ({dogId}) => {
   });
   
   const handleSubmit = () => {
-    console.log("dog eddited");
 
     let formData = new FormData();
     const imageFile = document.querySelector('#avatar');
@@ -69,12 +66,9 @@ const EditDog = ({dogId}) => {
     })
     .then(response => {
       instance.get(requests.userDogList)
-    }).catch(error => {
-        console.log(error);
-      })
+      navigate("/dogProfile");
+    });
     }
-    //style={{backgroundImage: `url(${oldAvatar})`}}
-    console.log(imageURL[0])
   return (
     <div className='EditDog'>
       <h1 className='EditDog--header '>Edit dog</h1>
@@ -125,12 +119,12 @@ const EditDog = ({dogId}) => {
             <input 
               name='avatar' 
               id="avatar"  
-              className='button' 
+              className="button" 
               type='file' 
               onChange={onImageChange} 
               accept="image/png, image/gif, image/jpeg" 
             />
-                <input type="submit" value="Finish"/>
+                <input type="submit" value="Finish" className="button"/>
             </div>
         </form>
     </div>

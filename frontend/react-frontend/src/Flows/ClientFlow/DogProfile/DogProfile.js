@@ -10,7 +10,7 @@ import requests from '../../../requests';
 import { useEffect, useState } from 'react';
 
 const id = sessionStorage.getItem('currentDog')
-const details = JSON.parse(sessionStorage.getItem('dogDetails'));//daje pierwszy avatar po załadowaniu strony jaki był wyświetlony
+const details = JSON.parse(sessionStorage.getItem('dogDetails'));
 
 const DogProfile = ({dogId}) => {
 
@@ -20,8 +20,6 @@ const DogProfile = ({dogId}) => {
     instance.get(`${requests.dogDetails}${dogId}/`)
     .then(response => {
       setDogData(response.data);
-    }).catch(error => {
-      console.log(error);
     });
   }, []);
 

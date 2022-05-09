@@ -46,8 +46,12 @@
               margin-bottom: 20px;
               
           }
+
+          .button:hover, .buttonLabel:hover {
+            @include buttonHover($clientOrangeHover);
+          }
       }
-      }
+    }
   }
 
     
@@ -88,6 +92,8 @@ input[type="file"] {
     width: 100%;
   }
 }
+
+
 
 
 

@@ -44,7 +44,6 @@
   font-size: 36px;
   -webkit-transition: 100ms;
   transition: 100ms;
-  z-index: 2;
 }
 
 .dogPictureContainer:hover {

@@ -92,6 +92,10 @@
   margin-bottom: 20px;
 }
 
+.EditDog .EditDog--form .EditDog--buttons .button:hover, .EditDog .EditDog--form .EditDog--buttons .buttonLabel:hover {
+  background-color: #ffd87d;
+}
+
 *::-webkit-input-placeholder {
   color: #90BE6D;
   font-size: 20px;
