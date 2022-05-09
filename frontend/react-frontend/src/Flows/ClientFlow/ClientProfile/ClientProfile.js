@@ -17,8 +17,7 @@ const ClientProfile = () => {
 
   const goToEditProfile = () => {
     navigate('/editProfile');
-  }
-
+    }
   const details = JSON.parse(sessionStorage.getItem('userDetails'));
 
   const phone_number = [
