@@ -32,5 +32,7 @@ class WalkAdmin(admin.ModelAdmin):  # noqa: D101
     list_display = [
         'pk',
         'trainer',
+        'date',
+        'date_end',
     ]
     form = WalkLimit

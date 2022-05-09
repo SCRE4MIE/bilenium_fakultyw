@@ -109,12 +109,40 @@ class WalkSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         """Walk limit validation: 5 walks for trainer per day."""
         req_date = attrs.get('date')
+        req_date_end = attrs.get('date_end')
         trainer = attrs.get('trainer')
-        walks = trainer.walk_set.filter(
+        walks_day = trainer.walk_set.filter(
             date__day=req_date.day,
             date__month=req_date.month,
             date__year=req_date.year,
         )
-        if walks.count() >= 5:
+        if walks_day.count() >= 5:  # check walks limit
             raise serializers.ValidationError('Trener może mieć dziennie tylko 5 spacerów!')
+
+        if req_date >= req_date_end:  # check correct dates
+            raise serializers.ValidationError('Data początkowa jest starsza od daty końca!')
+
+        dogs = attrs.get('dogs')
+        for i in range(len(dogs)):  # check if dog is not in other walk in the same time
+            if Walk.objects.filter(dogs=dogs[i], date_end__gte=req_date, date__lte=req_date_end).exists():  # noqa: E501
+                raise serializers.ValidationError(f'{dogs[i]} jest już na spacerze w tym czasie!')
+
+        if trainer.walk_set.filter(date_end__gte=req_date, date__lte=req_date_end).exists():
+            # check if trainer is available in that time
+            raise serializers.ValidationError('Trener jest już na spacerze w tym czasie!')
+
         return attrs
+
+
+class CheckTrainerInWalkSerializer(serializers.Serializer):
+    """Check if trainer is available."""
+
+    trainer_id = serializers.IntegerField()
+    date_start = serializers.DateTimeField()
+    date_end = serializers.DateTimeField()
+
+    def create(self, validated_data):  # noqa: D102
+        pass
+
+    def update(self, instance, validated_data):  # noqa: D102
+        pass

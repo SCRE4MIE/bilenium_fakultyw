@@ -1,5 +1,8 @@
 """APi views."""
 
+# Django
+from django.utils.dateparse import parse_datetime
+
 # 3rd-party
 from accounts.models import CustomUser
 from accounts.permissions import IsDogOwner
@@ -14,6 +17,7 @@ from rest_framework.response import Response
 # Local
 from .models import Dog
 from .models import Walk
+from .serializers import CheckTrainerInWalkSerializer
 from .serializers import DogListSerializer
 from .serializers import DogSerializer
 from .serializers import RatingSerializer
@@ -195,3 +199,42 @@ class UpdateWalk(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = WalkSerializer
     permission_classes = (IsAuthenticated,)
     queryset = Walk.objects.all()
+
+
+class CheckTrainerInWalk(generics.GenericAPIView):
+    """
+    Check trainer available.
+
+    permissions - is authenticated
+    return {'is_available': True/False}
+    True when trainer is available
+    False when trainer is not available
+    """
+
+    serializer_class = CheckTrainerInWalkSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):  # noqa: D102
+        req_serializer = CheckTrainerInWalkSerializer(data=request.data)
+        if req_serializer.is_valid():
+            data = {'is_available': True}
+            trainer_id = req_serializer.data['trainer_id']
+            date_start = parse_datetime(req_serializer.data['date_start'])
+            date_end = parse_datetime(req_serializer.data['date_end'])
+            try:
+                trainer = CustomUser.objects.get(id=trainer_id)
+            except CustomUser.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+            if date_start >= date_end:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+            if trainer.walk_set.filter(date_end__gte=date_start, date__lte=date_end).exists():
+                data['is_available'] = False
+            walks_day = trainer.walk_set.filter(
+                date__day=date_start.day,
+                date__month=date_start.month,
+                date__year=date_start.year,
+            )
+            if walks_day.count() >= 5:
+                data['is_available'] = False
+            return Response(data, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_400_BAD_REQUEST)

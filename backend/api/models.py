@@ -95,3 +95,7 @@ class Walk(models.Model):
         null=False,
         blank=False,
     )
+    date_end = models.DateTimeField(
+        null=False,
+        blank=False,
+    )
