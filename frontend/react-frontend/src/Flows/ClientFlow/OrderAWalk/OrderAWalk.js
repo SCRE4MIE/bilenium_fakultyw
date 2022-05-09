@@ -86,6 +86,10 @@ const OrderAWalk = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData]);
 
+  const handleSubmit = () => {
+    
+  }
+
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -146,7 +150,7 @@ const OrderAWalk = () => {
             {trainers}
           </Accordion>
 
-          <button className='button'><EventAvailableIcon className='icon'/><p>Confirm your choices</p></button>
+          <button className='button' onClick={handleSubmit}><EventAvailableIcon className='icon'/><p>Confirm your choices</p></button>
         </form>
       </div>
     </LocalizationProvider>
