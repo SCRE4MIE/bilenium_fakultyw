@@ -1,0 +1,31 @@
+.walksHistory {
+  text-align: center;
+  position: relative;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.walksHistory h1 {
+  font-family: "Jost", sans-serif;
+  color: #577590;
+  font-weight: 400;
+}
+
+.walksHistory h2 {
+  font-family: "Jost", sans-serif;
+  color: #577590;
+  font-weight: 400;
+}
+
+.walksHistory .walksList {
+  width: 80%;
+}

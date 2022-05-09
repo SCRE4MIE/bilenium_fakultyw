@@ -1,0 +1,137 @@
+.walksHistoryElement {
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  position: relative;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 300px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: clip;
+  max-width: 2000px;
+}
+
+.walksHistoryElement .line {
+  size: 2px;
+  background-color: #577590;
+  height: 1px;
+  width: 90%;
+}
+
+.walksHistoryElement h1 {
+  font-family: "Jost", sans-serif;
+  color: #577590;
+  font-weight: 400;
+}
+
+.walksHistoryElement h2 {
+  font-family: "Jost", sans-serif;
+  color: #577590;
+  font-weight: 400;
+}
+
+.walksHistoryElement .dogContainer {
+  width: 100%;
+  height: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: left;
+  padding-left: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.walksHistoryElement .dogContainer .dog {
+  width: 40%;
+}
+
+.walksHistoryElement .dogContainer .dogNameImage {
+  position: relative;
+  width: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.walksHistoryElement .dogContainer .dogNameImage .dogImage {
+  position: absolute;
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  text-align: left;
+}
+
+.walksHistoryElement .dogContainer .dogNameImage .dogImage img {
+  border-radius: 50%;
+}
+
+.walksHistoryElement .dogContainer .dogNameImage .dogName {
+  position: absolute;
+  padding-left: 90px;
+  width: 50%;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  text-align: left;
+}
+
+.walksHistoryElement img {
+  width: 80px;
+  height: 80px;
+}
+
+.walksHistoryElement .walkSlotContainer {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #577590;
+  margin-top: 10px;
+}
+
+.walksHistoryElement:hover {
+  -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+}

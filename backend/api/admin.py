@@ -3,8 +3,10 @@
 from django.contrib import admin
 
 # Project
+from api.forms import WalkLimit
 from api.models import Dog
 from api.models import Rating
+from api.models import Walk
 
 
 @admin.register(Rating)
@@ -23,3 +25,14 @@ class DogAdmin(admin.ModelAdmin):  # noqa: D101
         'name',
         'owner',
     ]
+
+
+@admin.register(Walk)
+class WalkAdmin(admin.ModelAdmin):  # noqa: D101
+    list_display = [
+        'pk',
+        'trainer',
+        'date',
+        'date_end',
+    ]
+    form = WalkLimit
