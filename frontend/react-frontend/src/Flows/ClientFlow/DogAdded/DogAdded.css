@@ -1,0 +1,57 @@
+.addedDog {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+}
+
+.addedDog .addedDog--header {
+  font-family: "Jost", sans-serif;
+  color: #577590;
+  font-weight: 400;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 25px;
+}
+
+.addedDog .addedDog--buttons {
+  width: 320px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.addedDog .addedDog--buttons .button {
+  padding: 12px 15px;
+  background-color: #F9C74F;
+  color: #577590;
+  font-family: "Jost", sans-serif;
+  border-radius: 10px;
+  font-size: 18px;
+  border: none;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-transition: 100ms;
+  transition: 100ms;
+  cursor: pointer;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.addedDog .addedDog--buttons .button:hover {
+  background-color: #ffd87d;
+}

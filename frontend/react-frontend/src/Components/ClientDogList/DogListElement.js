@@ -3,24 +3,33 @@ import './DogListElement.css'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Tooltip } from '@mui/material/';
 import { useNavigate } from 'react-router-dom';
+import requests from '../../requests';
+import instance from '../../axios';
 
 const DogListElement = ({ imageSrc, name, id }) => {
   
   const navigate = useNavigate();
 
-  const openDogProfile = () => {
+  const openDogProfile = () => { //wchodzi do profilu psa i dopiero zmienia details na innego
     sessionStorage.setItem('currentDog', id);
     navigate('/dogProfile');
   };
 
+  const openDogEdit = () => {
+    sessionStorage.setItem('currentDog', id);
+    navigate('/editDog');
+  };
+
   return (
-    <div className='dogListElement' onClick={openDogProfile}>
-      <div className='dogPictureContainer'>
-        <img src={imageSrc} alt='' />
+    <div className='dogListElement' >
+      <div className='dogDataContainer' onClick={openDogProfile}>
+        <div className='dogPictureContainer'>
+          <img src={imageSrc} alt='' />
+        </div>
+        <p className='dogName'>{name}</p>
       </div>
-      <p className='dogName'>{name}</p>
       <Tooltip title='Edit your dog'>
-        <EditOutlinedIcon className='icon' style={{cursor: 'pointer'}}/>
+        <EditOutlinedIcon className='icon' style={{cursor: 'pointer'}} onClick={openDogEdit}/>
       </Tooltip>
     </div>
   )

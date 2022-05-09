@@ -1,0 +1,102 @@
+@import '../../../Variables/Variables.scss';
+
+@mixin text($fontSize){
+  font-family: $Jost;
+  color: $blueColor;
+  font-weight: 400;
+}
+
+  .EditDog{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  
+      .EditDog--header {
+        font-family: "Jost", sans-serif;
+        color: #577590;
+        font-weight: 400;
+        display: flex;
+        margin-bottom: 25px;
+      }
+
+      .EditDog--form {
+        display: flex;
+        flex-direction: column;
+        gap: 34px;
+        align-items: center;
+
+        input[type=text], input[type=number]{
+            @include textInput($greenColor);
+            width: 100%;
+        }
+  
+        .EditDog--desc{
+          border:1px solid $greenColor;
+          min-height: 100px;
+          width: 100%;
+          border-radius: 11px;
+          @include textInput($greenColor);
+      }
+  
+        .EditDog--buttons{
+          width: 320px;
+          align-items: center;
+          
+      
+          input[type=button], input[type=submit]{
+            @include button($clientOrange, $blueColor);
+            width:100%;
+            margin-bottom: 20px;
+              
+          }
+
+          .button:hover, .buttonLabel:hover {
+            @include buttonHover($clientOrangeHover);
+          }
+      }
+    }
+  }
+
+    
+  *::placeholder{
+    color: $greenColor;
+    font-size: 20px;
+}
+
+.buttonLabel{
+  @include button($clientOrange, $blueColor);
+  padding: 12px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-decoration: none;
+  margin: 0;
+  margin-bottom: 34px;
+  width:100%;
+}
+
+input[type="file"] {
+      display: none;
+    }
+
+.dogPicContainer {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: contain;
+  overflow: hidden;
+  margin-bottom: 30px;
+  background-color: gray;
+  
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+  
+  
+
+
+
