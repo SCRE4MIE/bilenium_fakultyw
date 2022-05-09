@@ -1,13 +1,20 @@
 .trainerListElement {
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   padding: 13px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-bottom: 26px;
   cursor: pointer;
+  -webkit-transition: 300ms;
   transition: 300ms;
 }
+
 .trainerListElement .trainerPictureContainer {
   width: 40px;
   height: 40px;
@@ -16,10 +23,16 @@
      object-fit: contain;
   background-color: gray;
   overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: 100ms;
   transition: 100ms;
 }
+
 .trainerListElement .trainerName {
   font-family: "Inter", sans-serif;
   font-size: 18px;
@@ -27,6 +40,7 @@
   margin-right: auto;
   margin-left: 20px;
 }
+
 .trainerListElement .trainerRating {
   font-family: "Inter", sans-serif;
   font-size: 18px;
@@ -35,6 +49,7 @@
   vertical-align: middle;
   display: inline-block;
 }
+
 .trainerListElement .starIcon {
   font-size: 22px;
   color: #577590;
@@ -44,9 +59,11 @@
 }
 
 .trainerPictureContainer:hover {
-  transform: scale(1.4);
+  -webkit-transform: scale(1.4);
+          transform: scale(1.4);
 }
 
 .trainerListElement:hover {
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
 }

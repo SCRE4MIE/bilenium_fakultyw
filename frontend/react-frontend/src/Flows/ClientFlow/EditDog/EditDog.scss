@@ -1,5 +1,11 @@
 @import '../../../Variables/Variables.scss';
 
+@mixin text($fontSize){
+  font-family: $Jost;
+  color: $blueColor;
+  font-weight: 400;
+}
+
   .EditDog{
     justify-content: center;
     align-items: center;
@@ -22,13 +28,13 @@
 
         input[type=text], input[type=number]{
             @include textInput($greenColor);
-            width: 300px;
+            width: 100%;
         }
   
         .EditDog--desc{
           border:1px solid $greenColor;
           min-height: 100px;
-          width: 300px;
+          width: 100%;
           border-radius: 11px;
           @include textInput($greenColor);
       }

@@ -50,8 +50,8 @@ const ClientProfile = () => {
       </div>
       <div className='dogList'>
         <h3 className='dogListTitle'>Your dogs</h3>
-        <DogListElement id={20} name='Milo' imageSrc={dogPicture}/>
-        <DogListElement id={19} name='Cashtan' imageSrc={cashtan}/>
+        <DogListElement id={1} name='Milo' imageSrc={dogPicture}/>
+        <DogListElement id={2} name='Cashtan' imageSrc={cashtan}/>
         <AddDogButton />
       </div>
     </div>

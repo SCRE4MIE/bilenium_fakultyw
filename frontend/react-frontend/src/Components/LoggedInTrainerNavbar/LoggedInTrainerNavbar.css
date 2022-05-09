@@ -1,36 +1,62 @@
 .loggedInTrainerNavbar {
   position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100%;
   height: 63px;
   bottom: 0;
   background-color: #577590;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-  flex-direction: column;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
+
 .loggedInTrainerNavbar .navButtons {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
+
 .loggedInTrainerNavbar .navButtons .menuIcons {
   color: #fff;
   font-size: 45px;
   margin: 20px;
   cursor: pointer;
+  -webkit-transition: 100ms;
   transition: 100ms;
 }
+
 .loggedInTrainerNavbar .navLinks {
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: 60%;
 }
+
 .loggedInTrainerNavbar .navLink {
   text-align: center;
   display: block;
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   border-bottom: 1px #fff solid;
   padding: 16px 0;
   color: #fff;
@@ -40,23 +66,28 @@
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
+  -webkit-transition: 300ms;
   transition: 300ms;
   color: white;
 }
+
 .loggedInTrainerNavbar .navLink:hover {
   background-color: #718DA7;
 }
+
 .loggedInTrainerNavbar .logoutButton {
   font-size: 18px;
   color: #577590;
   background-color: #F9C74F;
   padding: 10px 25px;
-  align-self: flex-end;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
   margin: 20px 45px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
 }
+
 .loggedInTrainerNavbar .logoutButton:hover {
   background-color: #ffd87d;
 }
@@ -71,6 +102,8 @@
     bottom: auto;
   }
 }
+
 .menuIcons:hover {
-  transform: scale(1.4);
+  -webkit-transform: scale(1.4);
+          transform: scale(1.4);
 }

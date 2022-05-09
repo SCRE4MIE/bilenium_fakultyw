@@ -11,24 +11,12 @@ const DogListElement = ({ imageSrc, name, id }) => {
   const navigate = useNavigate();
 
   const openDogProfile = () => { //wchodzi do profilu psa i dopiero zmienia details na innego
-    sessionStorage.setItem('idPsa', id);
-    instance.get(`${requests.dogDetails}${sessionStorage.getItem('idPsa')}/`)
-        .then(response => {
-          sessionStorage.setItem('dogDetails', JSON.stringify(response.data));
-          navigate('/dogProfile');
-        }).catch(error => {
-          console.log(error);
-        });
+    sessionStorage.setItem('currentDog', id);
+    navigate('/dogProfile');
   };
 
   const openDogEdit = () => {
-    sessionStorage.setItem('id', id);
-    instance.get(`${requests.dogDetails}${sessionStorage.getItem('id')}/`)
-        .then(response => {
-          sessionStorage.setItem('dogDetails', JSON.stringify(response.data));
-        }).catch(error => {
-          console.log(error);
-        });
+    sessionStorage.setItem('currentDog', id);
     navigate('/editDog');
   };
 

@@ -6,16 +6,15 @@ import requests from '../../../requests';
 import instance from '../../../axios';
 import { EditDogSchema } from '../../../Validation/EditDogValidation';
 import ImageIcon from '@mui/icons-material/Image';
-import ApiPicture from '../../../Components/ApiPicture';
+import DogEditPicture from '../../../Components/DogEditPicture';
 
-const EditDog = () => {
+const EditDog = ({dogId}) => {
 
   const navigate = useNavigate();
 
-  const avatar = JSON.parse(sessionStorage.getItem('dogDetails')).avatar;
-
-  const [profilePicture, setProfilePicture] = useState([])
-  const [imageURL, setImageURL] = useState([])
+  const [profilePicture, setProfilePicture] = useState([]);
+  const [imageURL, setImageURL] = useState([]);
+  const [dogData, setDogData] = useState({});
 
   useEffect(() => {
     if (profilePicture.length < 1) return;
@@ -23,6 +22,15 @@ const EditDog = () => {
     Array.from(profilePicture).forEach(picture => newImageURL.push(URL.createObjectURL(picture)));
     setImageURL(newImageURL);
   }, [profilePicture]);
+
+  useEffect(() => {
+    instance.get(`${requests.dogDetails}${dogId}/`)
+        .then(response => {
+          setDogData(response.data);
+        }).catch(error => {
+          console.log(error);
+        });
+  },[]);
 
   const onImageChange = (e) => {
     setProfilePicture(e.target.files);
@@ -53,7 +61,7 @@ const EditDog = () => {
 
     imageFile.files[0] ? formData.append("avatar", imageFile.files[0]) : formData.append("avatar", "");
 
-    instance.patch(`${requests.dogDetails}${sessionStorage.getItem('id')}/`, formData, {
+    instance.patch(`${requests.dogDetails}${dogId}/`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         'accept': 'application/json',
@@ -66,18 +74,19 @@ const EditDog = () => {
       })
     }
     //style={{backgroundImage: `url(${oldAvatar})`}}
+    console.log(imageURL[0])
   return (
     <div className='EditDog'>
       <h1 className='EditDog--header '>Edit dog</h1>
       <div className='dogPicContainer'> 
-        {imageURL[0] ? <img src={imageURL[0]} alt=''/> : <ApiPicture src={avatar}/>}
+        {imageURL[0] ? <img src={imageURL[0]} alt=''/> : <DogEditPicture src={dogData.avatar}/>}
       </div>
       <form id = "EditDog--form" className='EditDog--form' onSubmit={formik.handleSubmit}>
             {formik.errors.name && formik.touched.name ? <p className="formError">{formik.errors.name}</p> : null}
             <input 
               name='name' 
               type="text" 
-              placeholder="Dog's name" 
+              placeholder={dogData.name} 
               onBlur={formik.handleBlur} 
               value={formik.values.name} 
               onChange={formik.handleChange} 
@@ -86,7 +95,7 @@ const EditDog = () => {
             <input 
               name='breed' 
               type="text" 
-              placeholder="Dog's breed" 
+              placeholder={dogData.breed} 
               onBlur={formik.handleBlur} 
               value={formik.values.breed} 
               onChange={formik.handleChange}
@@ -95,17 +104,16 @@ const EditDog = () => {
             <input 
               name='age' 
               type="number" 
-              placeholder="Dog's age" 
+              placeholder={dogData.age}
               onBlur={formik.handleBlur} 
               value={formik.values.age} 
               onChange={formik.handleChange}
             />
             {formik.errors.description && formik.touched.description ? <p className="formError">{formik.errors.description}</p> : null}
-            <input
+            <textarea
               className='EditDog--desc' 
               name='description' 
-              type="textarea" 
-              placeholder="Description" 
+              placeholder={dogData.description} 
               onBlur={formik.handleBlur} 
               value={formik.values.description} 
               onChange={formik.handleChange}

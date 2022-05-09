@@ -123,10 +123,9 @@ const AddNewDog = () => {
               onChange={formik.handleChange}
             />
             {formik.errors.description && formik.touched.description ? <p className="formError">{formik.errors.description}</p> : null}
-            <input
+            <textarea
               className='AddDog--desc' 
               name='description' 
-              type="textarea" 
               placeholder="Description" 
               onBlur={formik.handleBlur} 
               value={formik.values.description} 

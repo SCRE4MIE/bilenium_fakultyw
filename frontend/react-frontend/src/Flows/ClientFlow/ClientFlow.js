@@ -28,8 +28,8 @@ const ClientFlow = () => {
           <Route exact path='/futureWalks' element={<IncomingWalks />} />
           <Route exact path='/trainerProfile' element={<ClientTrainerProfile />} />
           <Route exact path='/editProfile' element={<ClientEditProfile />} />
-          <Route exact path='/editDog' element={<EditDog />} />
-          <Route exact path='/addNewDog' element={<AddNewDog/>} />
+          <Route exact path='/editDog' element={<EditDog dogId={sessionStorage.getItem('currentDog')}/>} />
+          <Route exact path='/addNewDog' element={<AddNewDog dogId={sessionStorage.getItem('currentDog')}/>} />
         </Routes>
       </div>
       // to='/walksHistory'

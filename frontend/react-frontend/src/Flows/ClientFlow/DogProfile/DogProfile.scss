@@ -1,5 +1,11 @@
 @import '../../../Variables/Variables.scss';
 
+@mixin text($fontSize){
+    font-family: $Jost;
+    color: $blueColor;
+    font-weight: 400;
+  }
+
 
 .DogProfile{
     justify-content: center;
@@ -34,11 +40,12 @@
 
 .DogProfile--imageContainer{
     flex:1;
-}
 
-.DogProfile--image{
-    border-radius: 50%;
-    width:200px;
+    .DogProfile--image{
+        border-radius: 50%;
+        width:200px;
+        height:200px;
+    }
 }
 
 .editIcon{
