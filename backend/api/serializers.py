@@ -108,6 +108,10 @@ class WalkSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         """Walk limit validation: 5 walks for trainer per day."""
+        try:
+            pk = self.context['pk']
+        except KeyError:
+            pk = None
         req_date = attrs.get('date')
         req_date_end = attrs.get('date_end')
         trainer = attrs.get('trainer')
@@ -124,10 +128,10 @@ class WalkSerializer(serializers.ModelSerializer):
 
         dogs = attrs.get('dogs')
         for i in range(len(dogs)):  # check if dog is not in other walk in the same time
-            if Walk.objects.filter(dogs=dogs[i], date_end__gte=req_date, date__lte=req_date_end).exists():  # noqa: E501
+            if Walk.objects.filter(dogs=dogs[i], date_end__gte=req_date, date__lte=req_date_end).exclude(pk=pk).exists():  # noqa: E501
                 raise serializers.ValidationError(f'{dogs[i]} jest już na spacerze w tym czasie!')
 
-        if trainer.walk_set.filter(date_end__gte=req_date, date__lte=req_date_end).exists():
+        if trainer.walk_set.filter(date_end__gte=req_date, date__lte=req_date_end).exclude(pk=pk).exists():
             # check if trainer is available in that time
             raise serializers.ValidationError('Trener jest już na spacerze w tym czasie!')
 
