@@ -241,3 +241,30 @@ class CheckTrainerInWalk(generics.GenericAPIView):
                 data['is_available'] = False
             return Response(data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class WalksList(generics.ListAPIView):
+    """
+    Walks list.
+
+    permissions - is authenticated
+    """
+
+    serializer_class = WalkSerializer
+    permission_classes = (IsAuthenticated,)
+    queryset = Walk.objects.all()
+
+
+class TrainersWalksList(generics.ListAPIView):
+    """
+    Trainer's walks list.
+
+    permissions - is authenticated
+    """
+
+    serializer_class = WalkSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        return Walk.objects.filter(trainer_id=self.kwargs['pk'])
+
