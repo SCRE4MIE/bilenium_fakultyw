@@ -21,6 +21,11 @@ class WalkLimit(forms.ModelForm):
         fields = '__all__'
 
     def clean(self):  # noqa: D102
+        try:
+            pk = self.instance.id
+        except KeyError:
+            pk = None
+
         dogs = self.cleaned_data.get('dogs')
         if dogs and dogs.count() > 3:  # max 3  dogs per walk
             raise ValidationError('Mogą być tylko 3 psy!')
@@ -41,10 +46,10 @@ class WalkLimit(forms.ModelForm):
             raise ValidationError('Data początkowa jest starsza od daty końca!')
 
         for i in range(len(dogs)):  # check if dog is not in other walk in the same time
-            if Walk.objects.filter(dogs=dogs[i], date_end__gte=start_date, date__lte=end_date).exists():  # noqa: E501
+            if Walk.objects.filter(dogs=dogs[i], date_end__gte=start_date, date__lte=end_date).exclude(id=pk).exists():  # noqa: E501
                 raise ValidationError(f'{dogs[i]} jest już na spacerze w tym czasie!')
 
-        if trainer.walk_set.filter(date_end__gte=start_date, date__lte=end_date).exists():
+        if trainer.walk_set.filter(date_end__gte=start_date, date__lte=end_date).exclude(id=pk).exists():
             # check if trainer is available in that time
             raise ValidationError('Trener jest już na spacerze w tym czasie!')
 

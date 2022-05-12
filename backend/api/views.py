@@ -200,6 +200,9 @@ class UpdateWalk(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Walk.objects.all()
 
+    def get_serializer_context(self):
+        return {'pk': self.kwargs['pk']}
+
 
 class CheckTrainerInWalk(generics.GenericAPIView):
     """
