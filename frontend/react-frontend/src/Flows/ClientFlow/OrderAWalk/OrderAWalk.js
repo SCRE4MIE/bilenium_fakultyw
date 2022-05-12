@@ -10,6 +10,9 @@ import useTrainerList from '../../../CustomHooks/useTrainerList';
 import { Accordion, AccordionSummary, Avatar } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import ClearIcon from '@mui/icons-material/Clear';
+import instance from '../../../axios';
+import requests from '../../../requests';
 
 
 const OrderAWalk = () => {
@@ -49,17 +52,40 @@ const OrderAWalk = () => {
 
   const [activeTrainer, setActiveTrainer] = useState({});
 
-  const [activeDog, setActiveDog] = useState({});
+  const [activeDog, setActiveDog] = useState([]);
 
-  const chooseDog = (id, avatar, name, chooseDog) => {
-    setActiveDog({id: id, component: <DogListElement id={id} avatar={avatar} name={name}/>});
-  };
+  const [dogCount, setDogCount] = useState(activeDog.length);
 
-  const chooseTrainer = (id, avatar, name, rating) => {
-    setActiveTrainer({id: id, component: <TrainerListElement id={id} avatar={avatar} name={name} rating={rating} />});
+  const clearDogs = () => {
+    const elements = document.getElementsByClassName('dogListElement'); // get all elements
+    for(let i = 0; i < elements.length; i++){
+      elements[i].style.backgroundColor = "white";
+    }
+    setDogCount(0)
+    setActiveDog([]);
   }
 
+  const chooseDog = (id, avatar, name, chooseDog) => {
+    if(dogCount < 3) {
+      setActiveDog(prevDogs => {
+        return [...prevDogs, {id: id, component: <DogListElement key={id} id={id} avatar={avatar} name={name}/>}]
+      });
+      setDogCount(prevDogCount => (prevDogCount + 1))
+    }
+  };
+
+  const clearTrainer = () => {
+    const elements = document.getElementsByClassName('trainerListElement'); // get all elements
+    for(let i = 0; i < elements.length; i++){
+      elements[i].style.backgroundColor = "white";
+    }
+    setActiveTrainer({});
+  }
   
+  const chooseTrainer = (id, avatar, name, rating) => {
+    setActiveTrainer({id: id, component: <TrainerListElement id={id} avatar={avatar} name={name} rating={rating} clear={clearTrainer}/>});
+  }  
+
   const dogs = useOwnerDogs().map(e => {
     return <DogListElement 
       key={e.pk}
@@ -67,6 +93,7 @@ const OrderAWalk = () => {
       avatar={e.avatar} 
       name={e.name}
       chooseDog={chooseDog}
+      count={dogCount}
     />
   });
 
@@ -86,16 +113,50 @@ const OrderAWalk = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData]);
 
-  const handleSubmit = () => {
+  const [trainerAvailible, setTrainerAvailible] = useState(true);
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const startDate = `${formData.date.format("YYYY-MM-DD")}T${time.add(1, 'minute').format("HH:mm:ss")}`;
+    const endDate = `${formData.date.format("YYYY-MM-DD")}T${time.add(1, 'hour').format("HH:mm:ss")}`;
+    const dogs = activeDog?.map(element => {
+      return element.id;
+    });
+    const body = {
+      date: startDate,
+      date_end: endDate,
+      trainer: activeTrainer.id,
+      dogs: dogs,
+    }
     
+    instance.post(requests.trainerAvailible, {
+      trainer_id: activeTrainer.id,
+      date_start: startDate,
+      date_end: endDate,
+    }).then(response => {
+      if (response.data.is_available === false) {
+        console.log(response.data);
+        setTrainerAvailible(false);
+        // return;
+      } else {
+        instance.post(requests.orderAWalk, body)
+        .then(response => {
+          console.log(response.data);
+        }).catch(error => {
+          console.log(error.response.data);
+        });
+      }
+    })
   }
 
+  const displayDogs = activeDog ? 
+    activeDog.map(e => {return e.component})
+    : null;
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className='orderAWalk'>
         <h1>Order a walk</h1>
-        DODAJ W RIKŁEŚCIE MINUTĘ DO CZASU ROZPOCZĘCIA
         <form>
           <Accordion>
             <AccordionSummary
@@ -104,7 +165,10 @@ const OrderAWalk = () => {
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-            {activeDog.component ? activeDog.component : "Choose one of your dogs"}
+              <div className='displayDogs'>
+                {displayDogs.length > 0 ? displayDogs : "Choose your dogs"}
+              </div>
+              <ClearIcon style={{alignSelf: 'center', marginLeft: 'auto', marginRight: '30px'}} onClick={clearDogs} className='clearIcon'/>
             </AccordionSummary>
             {dogs}
           </Accordion>
@@ -138,6 +202,7 @@ const OrderAWalk = () => {
               renderInput={(params) => <TextField  {...params} />}
             />
           </div>
+          {!trainerAvailible && <p>Trainer unavailible at the time</p>}
           <Accordion>
             <AccordionSummary
               className='summary'
@@ -146,6 +211,7 @@ const OrderAWalk = () => {
               id="panel1a-header"
             >
             {activeTrainer.component ? activeTrainer.component : "Choose one of our Trainers"}
+            <ClearIcon style={{alignSelf: 'center', marginLeft: 'auto', marginRight: '30px'}} onClick={clearTrainer} className='clearIcon'/>
             </AccordionSummary>
             {trainers}
           </Accordion>
@@ -158,9 +224,25 @@ const OrderAWalk = () => {
   )
 }
 
-const DogListElement = ({id, avatar, name, chooseDog}) => {
+const DogListElement = ({id, avatar, name, chooseDog, count}) => {
+
+  const [selected, setSelected] = useState(false);
+
+  const handleSelect = () => {
+    if(!selected && count < 3){
+      setSelected(true);
+      chooseDog(id, avatar, name);
+    }
+  }
+
+  useEffect(() => {
+    if(count === 0) {
+      setSelected(false);
+    }
+  }, [count]);
+
   return (
-    <div className='listElement' id={id} onClick={() => chooseDog(id, avatar, name)}>
+    <div style={selected ? {backgroundColor: '#ffd87d',} : {backgroundColor: 'white'} } className='dogListElement' id={id} onClick={handleSelect}>
       <div>
         <Avatar src={avatar}/>
         <p>{name}</p>
@@ -172,6 +254,15 @@ const DogListElement = ({id, avatar, name, chooseDog}) => {
 
 const TrainerListElement = ({id, avatar, name, rating, chooseTrainer}) => {
 
+  const [selected, setSelected] = useState(false);
+
+  const handleSelect = () => {
+    if(!selected){
+     setSelected(true);
+     chooseTrainer(id, avatar, name, rating);
+    }
+  }
+
   let averageRating = 0;
 
   if (rating.length > 0) {
@@ -179,10 +270,10 @@ const TrainerListElement = ({id, avatar, name, rating, chooseTrainer}) => {
       averageRating += Number(element);
     });
     averageRating = averageRating / rating.length;
-  }
+  } 
 
   return (
-    <div className='listElement' id={id} onClick={() => chooseTrainer(id, avatar, name, rating)}>
+    <div style={selected ? {backgroundColor: '#ffd87d',} : {backgroundColor: 'white'} } className='trainerListElement' id={id} onClick={handleSelect}>
       <div>
         <Avatar src={avatar}/>
         <p>{name}</p>

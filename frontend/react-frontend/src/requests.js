@@ -12,6 +12,8 @@ const requests = {
   addDog: 'v1/create-dog/',
   userDogList: 'v1/users-dog-list/',
   dogDetails: 'v1/get-update-del-dog/',
+  trainerAvailible: 'v1/check_trainer_in_walks/',
+  orderAWalk: 'v1/create-walk/'
 }
 
 export default requests;

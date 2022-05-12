@@ -31,7 +31,6 @@
     flex-direction: column;  
     gap: 47px;
 
-
   .button {
     @include button($color: $clientOrange, $fontColor: $blueColor); 
     width: fit-content;
@@ -45,8 +44,8 @@
     background-color: $clientOrangeHover;
   }
 
-    .summary .listElement:hover {
-      background-color: white;
+    .summary .dogListElement:hover, .summary .trainerListElement:hover {
+      background-color: $clientOrangeHover;
     }
 
     fieldset {
@@ -78,14 +77,15 @@
       }
     }
 
-    div .listElement {
+    div .dogListElement,  div .trainerListElement{
       display:flex;
       justify-content: center;
       align-items: center;
       padding: 10px 14px;
       transition: 200ms;
       cursor: pointer;
-
+      box-shadow: none;
+      border-radius: 0px;
       > div {
         display: flex;
         width: 200px;
@@ -103,9 +103,19 @@
       }
     }
 
-    div .listElement:hover {
+    div .dogListElement:hover,  div .trainerListElement:hover{
       background-color: $clientOrangeHover;
     }
   }
 
+}
+
+.displayDogsContainer {
+  display: flex;
+  width: 100%;
+
+  .displayDogs {
+    display: flex;
+    flex-direction: column;
+  }
 }

@@ -73,8 +73,8 @@
   background-color: #ffd87d;
 }
 
-.orderAWalk form .summary .listElement:hover {
-  background-color: white;
+.orderAWalk form .summary .dogListElement:hover, .orderAWalk form .summary .trainerListElement:hover {
+  background-color: #ffd87d;
 }
 
 .orderAWalk form fieldset {
@@ -111,7 +111,7 @@
   border: none;
 }
 
-.orderAWalk form div .listElement {
+.orderAWalk form div .dogListElement, .orderAWalk form div .trainerListElement {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -125,9 +125,12 @@
   -webkit-transition: 200ms;
   transition: 200ms;
   cursor: pointer;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border-radius: 0px;
 }
 
-.orderAWalk form div .listElement > div {
+.orderAWalk form div .dogListElement > div, .orderAWalk form div .trainerListElement > div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -140,15 +143,32 @@
           justify-content: space-between;
 }
 
-.orderAWalk form div .listElement > div div {
+.orderAWalk form div .dogListElement > div div, .orderAWalk form div .trainerListElement > div div {
   width: 40px;
   height: 40px;
 }
 
-.orderAWalk form div .listElement > div p {
+.orderAWalk form div .dogListElement > div p, .orderAWalk form div .trainerListElement > div p {
   min-width: 40px;
 }
 
-.orderAWalk form div .listElement:hover {
+.orderAWalk form div .dogListElement:hover, .orderAWalk form div .trainerListElement:hover {
   background-color: #ffd87d;
+}
+
+.displayDogsContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.displayDogsContainer .displayDogs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
