@@ -149,6 +149,8 @@ class UsersDogsListForTrainerView(generics.ListAPIView):
     permission_classes = (IsAuthenticated, IsTrainer)
 
     def get_queryset(self):  # noqa: D102
+        if getattr(self, "swagger_fake_view", False):
+            return Dog.objects.none()
         dogs = Dog.objects.filter(owner_id=self.kwargs['pk'])
         return dogs
 
@@ -268,5 +270,7 @@ class TrainersWalksList(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
+        if getattr(self, "swagger_fake_view", False):
+            return Walk.objects.none()
         return Walk.objects.filter(trainer_id=self.kwargs['pk'])
 
