@@ -149,6 +149,8 @@ class UsersDogsListForTrainerView(generics.ListAPIView):
     permission_classes = (IsAuthenticated, IsTrainer)
 
     def get_queryset(self):  # noqa: D102
+        if getattr(self, "swagger_fake_view", False):
+            return Dog.objects.none()
         dogs = Dog.objects.filter(owner_id=self.kwargs['pk'])
         return dogs
 
@@ -201,7 +203,9 @@ class UpdateWalk(generics.RetrieveUpdateDestroyAPIView):
     queryset = Walk.objects.all()
 
     def get_serializer_context(self):
-        return {'pk': self.kwargs['pk']}
+        context = super(UpdateWalk, self).get_serializer_context()
+        context.update({'pk': self.kwargs.get('pk')})
+        return context
 
 
 class CheckTrainerInWalk(generics.GenericAPIView):
@@ -241,3 +245,32 @@ class CheckTrainerInWalk(generics.GenericAPIView):
                 data['is_available'] = False
             return Response(data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class WalksList(generics.ListAPIView):
+    """
+    Walks list.
+
+    permissions - is authenticated
+    """
+
+    serializer_class = WalkSerializer
+    permission_classes = (IsAuthenticated,)
+    queryset = Walk.objects.all()
+
+
+class TrainersWalksList(generics.ListAPIView):
+    """
+    Trainer's walks list.
+
+    permissions - is authenticated
+    """
+
+    serializer_class = WalkSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        if getattr(self, "swagger_fake_view", False):
+            return Walk.objects.none()
+        return Walk.objects.filter(trainer_id=self.kwargs['pk'])
+
