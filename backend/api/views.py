@@ -201,7 +201,9 @@ class UpdateWalk(generics.RetrieveUpdateDestroyAPIView):
     queryset = Walk.objects.all()
 
     def get_serializer_context(self):
-        return {'pk': self.kwargs['pk']}
+        context = super(UpdateWalk, self).get_serializer_context()
+        context.update({'pk': self.kwargs.get('pk')})
+        return context
 
 
 class CheckTrainerInWalk(generics.GenericAPIView):
