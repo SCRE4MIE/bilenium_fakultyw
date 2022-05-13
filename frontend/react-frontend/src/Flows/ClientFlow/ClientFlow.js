@@ -13,6 +13,8 @@ import ClientEditProfile from './ClientEditProfile/ClientEditProfile';
 import AddNewDog from './AddNewDog/AddNewDog';
 import EditDog from './EditDog/EditDog';
 import DogAdded from './DogAdded/DogAdded';
+import TestComponent from './TestComponent';
+import OrderWalkConfirm from './OrderWalkConfirm/OrderWalkConfirm';
 
 const ClientFlow = () => {
 
@@ -32,6 +34,8 @@ const ClientFlow = () => {
           <Route exact path='/editDog' element={<EditDog dogId={sessionStorage.getItem('currentDog')}/>} />
           <Route exact path='/addNewDog' element={<AddNewDog dogId={sessionStorage.getItem('currentDog')}/>} />
           <Route exact path='/dogAdded' element={<DogAdded/>} />
+          <Route exact path="/test" element={<TestComponent />} />
+          <Route exact path="/orderWalkConfirm" element={<OrderWalkConfirm />} />
         </Routes>
       </div>
       // to='/walksHistory'

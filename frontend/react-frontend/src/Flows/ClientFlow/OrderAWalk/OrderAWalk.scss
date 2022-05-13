@@ -14,6 +14,7 @@
   h1 {
     @include text($fontSize: 36px);
     margin-bottom: 20px;
+    margin-top: 30px;
   }
 
   * div::before {
@@ -38,12 +39,15 @@
     justify-content: center;
     display: flex;
     gap: 10px;
+    margin-bottom: 30px;
   }
 
   .button:hover {
     background-color: $clientOrangeHover;
   }
-
+    .summary{
+      margin: ;
+    }
     .summary .dogListElement:hover, .summary .trainerListElement:hover {
       background-color: $clientOrangeHover;
     }
@@ -86,6 +90,7 @@
       cursor: pointer;
       box-shadow: none;
       border-radius: 0px;
+      margin: 0px;
       > div {
         display: flex;
         width: 200px;

@@ -1,0 +1,28 @@
+@import '../../../Variables/Variables.scss';
+
+@mixin text($fontSize){
+  font-family: $Jost;
+  color: $blueColor;
+  font-weight: 400;
+}
+
+.oderWalkConfirm {
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+  div {
+    width: 70%;
+  }
+
+  .button {
+    @include button($color: $clientOrange, $fontColor: $blueColor);
+  }
+
+  h2 {
+    @include text(36px);
+    margin-bottom: 34px;
+  }
+}

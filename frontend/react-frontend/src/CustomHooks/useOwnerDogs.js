@@ -8,8 +8,7 @@ function useOwnerDogs() {
 
   useEffect(() => {
     instance.get(requests.ownerDogList)
-    .then(response => setUserDogs(response.data))
-    .catch(error => console.log(error.response.data));
+    .then(response => setUserDogs(response.data));
   }, [])
 
   return userDogs;

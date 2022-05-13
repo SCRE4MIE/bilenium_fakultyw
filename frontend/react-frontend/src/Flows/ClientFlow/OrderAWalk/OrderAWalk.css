@@ -16,6 +16,7 @@
   color: #577590;
   font-weight: 400;
   margin-bottom: 20px;
+  margin-top: 30px;
 }
 
 .orderAWalk * div::before {
@@ -67,6 +68,7 @@
   display: -ms-flexbox;
   display: flex;
   gap: 10px;
+  margin-bottom: 30px;
 }
 
 .orderAWalk form .button:hover {
@@ -128,6 +130,7 @@
   -webkit-box-shadow: none;
           box-shadow: none;
   border-radius: 0px;
+  margin: 0px;
 }
 
 .orderAWalk form div .dogListElement > div, .orderAWalk form div .trainerListElement > div {

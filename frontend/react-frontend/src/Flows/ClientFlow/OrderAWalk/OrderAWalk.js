@@ -13,9 +13,13 @@ import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import ClearIcon from '@mui/icons-material/Clear';
 import instance from '../../../axios';
 import requests from '../../../requests';
+import useCheckSlots from '../../../CustomHooks/useCheckSlots';
+import { useNavigate } from 'react-router-dom';
 
 
 const OrderAWalk = () => {
+
+  const navigate = useNavigate();
 
   const dayjs = require('dayjs');
 
@@ -28,6 +32,13 @@ const OrderAWalk = () => {
     trainer: '',
   });
 
+  const [errors, setErrors] = useState({
+    dogError: "",
+    arrayError: "",
+    fullSlotError: "",
+    trainerError: "",
+  })
+
   let minHour = date.hour(8).minute(0).second(0);
   let maxHour = date.hour(17).minute(0).second(0);
   if (formData.date.day() === 0 || formData.date.day() === 6) {
@@ -38,6 +49,7 @@ const OrderAWalk = () => {
   const [time, setFormTime] = useState(minHour);
 
   const handleDateChange = (e) => {
+    setErrors(prevErrors => ({...prevErrors, dogError: ""}));
     setFormData(prevData => {
       return {
         ...prevData,
@@ -47,6 +59,7 @@ const OrderAWalk = () => {
   }
 
   const handleTimeChange = (e) => {
+    setErrors(prevErrors => ({...prevErrors, dogError: ""}));
     setFormTime(e);
   }
 
@@ -70,7 +83,8 @@ const OrderAWalk = () => {
       setActiveDog(prevDogs => {
         return [...prevDogs, {id: id, component: <DogListElement key={id} id={id} avatar={avatar} name={name}/>}]
       });
-      setDogCount(prevDogCount => (prevDogCount + 1))
+      setDogCount(prevDogCount => (prevDogCount + 1));
+      setErrors(prevErrors => ({...prevErrors, fullSlotError: ""}));
     }
   };
 
@@ -83,7 +97,7 @@ const OrderAWalk = () => {
   }
   
   const chooseTrainer = (id, avatar, name, rating) => {
-    setActiveTrainer({id: id, component: <TrainerListElement id={id} avatar={avatar} name={name} rating={rating} clear={clearTrainer}/>});
+    setActiveTrainer({id: id, component: <TrainerListElement id={id} avatar={avatar} name={name} rating={rating} disable={true}/>});
   }  
 
   const dogs = useOwnerDogs().map(e => {
@@ -101,24 +115,39 @@ const OrderAWalk = () => {
     return <TrainerListElement
       key={e.pk}
       id={e.pk}
-      avatar={e.avatar_url}
+      avatar={`${instance.defaults.baseURL.substring(0, instance.defaults.baseURL.length - 4)}${e.avatar_url.substring(1)}`}
       name={e.username}
       rating={e.rating_trainer}
       chooseTrainer={chooseTrainer}
+      current={activeTrainer.id}
     />
   });
+
+  const trainerSlots =  useCheckSlots(
+    activeTrainer?.id,
+    `${formData.date.format("YYYY-MM-DD")}T${time.add(1, 'minute').format("HH:mm:ss")}` 
+  );
+
 
   useEffect(() => {
     setFormTime(minHour);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData]);
 
-  const [trainerAvailible, setTrainerAvailible] = useState(true);
+  useEffect(() => {
+    if(activeTrainer) {
+      setErrors(prevErrors => ({...prevErrors, trainerError: ""}));
+    }
+    if(activeDog) {
+      setErrors(prevErrors => ({...prevErrors, arrayError: ""}))
+    }
+  }, [activeDog, activeTrainer]);
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const startDate = `${formData.date.format("YYYY-MM-DD")}T${time.add(1, 'minute').format("HH:mm:ss")}`;
     const endDate = `${formData.date.format("YYYY-MM-DD")}T${time.add(1, 'hour').format("HH:mm:ss")}`;
+    const slots = trainerSlots[0];
     const dogs = activeDog?.map(element => {
       return element.id;
     });
@@ -128,36 +157,68 @@ const OrderAWalk = () => {
       trainer: activeTrainer.id,
       dogs: dogs,
     }
-    
-    instance.post(requests.trainerAvailible, {
-      trainer_id: activeTrainer.id,
-      date_start: startDate,
-      date_end: endDate,
-    }).then(response => {
-      if (response.data.is_available === false) {
-        console.log(response.data);
-        setTrainerAvailible(false);
-        // return;
+
+    if (dogs.length === 0){ setErrors(prevErrors => ({...prevErrors, arrayError: "No dogs selected."}))};
+    if (!activeTrainer.id){ setErrors(prevErrors => ({...prevErrors, trainerError: "Trainer not selected."}))};
+    if (slots) {
+      if(slots.dogs.length - 3 === 0) {
+        setErrors(prevErrors => ({...prevErrors, fullSlotError: "Unable to assign more dogs to this slot"}));
+      } else if(dogs.length > 3 - slots.dogs.length) {
+        setErrors(prevErrors => ({
+          ...prevErrors, 
+          arrayError: `Maximum number of dogs per slot exceeded, you can choose only ${3-slots.dogs.length} 
+          ${3-slots.dogs.length === 1 ? "dog." : "dogs."}`
+        })); 
       } else {
-        instance.post(requests.orderAWalk, body)
+        setErrors(prevErrors => ({
+          ...prevErrors,
+          fullSlotError: "",
+          arrayError: "",
+        }))
+      }
+    }
+
+    if(errors.arrayError === "" && errors.fullSlotError === "" && errors.trainerError === ""){
+      if(slots && errors.arrayError === "" && errors.fullSlotError === "" && errors.trainerError === ""){
+        const patchedDogs = slots.dogs.concat(dogs);
+        body.dogs = patchedDogs;
+        
+        instance.patch(`${requests.updateWalk}${slots.id}/`, body)
         .then(response => {
-          console.log(response.data);
+          navigate("/orderWalkConfirm");
         }).catch(error => {
           console.log(error.response.data);
         });
       }
-    })
+      
+      else {
+        instance.post(requests.orderAWalk, body)
+        .then(response => {
+          navigate("/orderWalkConfirm");
+        }).catch(error => {
+          if(body.dogs.length > 0) {
+            setErrors(prevErrors => ({...prevErrors, dogError: "One of the dogs you chose is already assigned to a walk during the selected time and date"}));
+          }
+        })
+      }
+    } else {
+      console.log("clear the errors");
+    }
+
   }
 
   const displayDogs = activeDog ? 
     activeDog.map(e => {return e.component})
     : null;
 
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className='orderAWalk'>
         <h1>Order a walk</h1>
         <form>
+          {errors.arrayError && <p className='error'>{errors.arrayError}</p>}
+          {errors.dogError && <p className='error'>{errors.dogError}</p>}
           <Accordion>
             <AccordionSummary
               className='summary'
@@ -202,7 +263,6 @@ const OrderAWalk = () => {
               renderInput={(params) => <TextField  {...params} />}
             />
           </div>
-          {!trainerAvailible && <p>Trainer unavailible at the time</p>}
           <Accordion>
             <AccordionSummary
               className='summary'
@@ -215,7 +275,8 @@ const OrderAWalk = () => {
             </AccordionSummary>
             {trainers}
           </Accordion>
-
+          {errors.trainerError && <p className='error'>{errors.trainerError}</p>}
+          {errors.fullSlotError && <p className='error'>{errors.fullSlotError}</p>}
           <button className='button' onClick={handleSubmit}><EventAvailableIcon className='icon'/><p>Confirm your choices</p></button>
         </form>
       </div>
@@ -252,16 +313,28 @@ const DogListElement = ({id, avatar, name, chooseDog, count}) => {
   );
 }
 
-const TrainerListElement = ({id, avatar, name, rating, chooseTrainer}) => {
+const TrainerListElement = ({id, avatar, name, rating, chooseTrainer, current, disable}) => {
 
   const [selected, setSelected] = useState(false);
 
   const handleSelect = () => {
-    if(!selected){
-     setSelected(true);
-     chooseTrainer(id, avatar, name, rating);
+    if(!disable){
+      if(!selected){
+        const elements = document.getElementsByClassName('trainerListElement'); // get all elements
+        for(let i = 0; i < elements.length; i++){
+          elements[i].style.backgroundColor = "white";
+        };
+        setSelected(true)
+        chooseTrainer(id, avatar, name, rating);
+      }
     }
+
   }
+
+  useEffect(() => {
+    if(current !== id)
+      setSelected(false);
+  }, [current]);
 
   let averageRating = 0;
 
@@ -283,4 +356,4 @@ const TrainerListElement = ({id, avatar, name, rating, chooseTrainer}) => {
   )
 }
 
-export default OrderAWalk
+export default OrderAWalk;
