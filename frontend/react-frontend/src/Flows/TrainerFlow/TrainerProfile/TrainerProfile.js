@@ -7,7 +7,7 @@ import woman from '../../../Images/womanPlaceholder.jpg';
 import StarIcon from '@mui/icons-material/Star';
 import OpinionAboutTrainerElement from '../../../Components/OpinionAboutTrainer/OpinionAboutTrainerElement';
 import ApiPicture from '../../../Components/ApiPicture';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import instance from '../../../axios';
 import requests from '../../../requests';
 import { useNavigate } from 'react-router-dom';
@@ -25,10 +25,11 @@ const TrainerProfile = () => {
     .then(response => {
       sessionStorage.setItem('userType', response.data.is_trainer ? 'trainer' : 'client');
       sessionStorage.setItem('userDetails', JSON.stringify(response.data));
+      sessionStorage.setItem('currentTrainer', JSON.stringify(response.data.pk));
     }).catch(error => {
       console.log(error.details);
-    })
-  }, [])
+    });
+  }, []);
 
   const details = JSON.parse(sessionStorage.getItem('userDetails'));
 

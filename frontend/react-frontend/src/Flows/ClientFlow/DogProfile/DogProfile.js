@@ -10,7 +10,6 @@ import requests from '../../../requests';
 import { useEffect, useState } from 'react';
 
 const id = sessionStorage.getItem('currentDog')
-const details = JSON.parse(sessionStorage.getItem('dogDetails'));
 
 const DogProfile = ({dogId}) => {
 
