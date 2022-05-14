@@ -15,14 +15,15 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 # Local
-from .models import Dog
+from .models import Dog, TrainersWorksDays
 from .models import Walk
-from .serializers import CheckTrainerInWalkSerializer
+from .serializers import CheckTrainerInWalkSerializer, TrainersWorksDaysSerializer
 from .serializers import DogListSerializer
 from .serializers import DogSerializer
 from .serializers import RatingSerializer
 from .serializers import TrainerSerializer
 from .serializers import WalkSerializer
+from .utils import day_dict
 
 
 class TrainersListView(generics.GenericAPIView):
@@ -243,6 +244,13 @@ class CheckTrainerInWalk(generics.GenericAPIView):
             )
             if walks_day.count() >= 5:
                 data['is_available'] = False
+            #  allowed days validation =========
+            try:
+                days = day_dict(TrainersWorksDays.objects.get(trainer_id=trainer_id))
+                if days[date_start.isoweekday()] == False or days[date_end.isoweekday()] == False:
+                    data['is_available'] = False
+            except TrainersWorksDays.DoesNotExist:
+                pass
             return Response(data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -274,3 +282,31 @@ class TrainersWalksList(generics.ListAPIView):
             return Walk.objects.none()
         return Walk.objects.filter(trainer_id=self.kwargs['pk'])
 
+
+class CreateTrainersWorksDays(generics.CreateAPIView):
+    """
+    Create trainer's work days.
+
+    permissions - is authenticated, is trainer
+    """
+    serializer_class = TrainersWorksDaysSerializer
+    permission_classes = (IsAuthenticated, IsTrainer)
+
+    def get_serializer_context(self):
+        context = super(CreateTrainersWorksDays, self).get_serializer_context()
+        context.update({'request': self.request})
+        return context
+
+
+class UpdateTrainersWorksDays(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Update trainer's work days.
+
+    permissions - is authenticated, is trainer
+    """
+
+    serializer_class = TrainersWorksDaysSerializer
+    permission_classes = (IsAuthenticated, IsTrainer)
+
+    def get_object(self, *args, **kwargs):  # noqa: D102
+        return TrainersWorksDays.objects.get(trainer_id=self.request.user.id)

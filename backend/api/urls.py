@@ -3,7 +3,7 @@
 from django.urls import path
 
 # Project
-from api.views import AddRating, WalksList, TrainersWalksList
+from api.views import AddRating, WalksList, TrainersWalksList, CreateTrainersWorksDays, UpdateTrainersWorksDays
 from api.views import CheckTrainerInWalk
 from api.views import CreateDogView
 from api.views import CreateWalk
@@ -35,4 +35,6 @@ urlpatterns = [
     path('check_trainer_in_walks/', CheckTrainerInWalk.as_view(), name='check_trainer_in_walks'),
     path('walks-list/', WalksList.as_view(), name='walks_list'),
     path('trainer-walks-list/<int:pk>/', TrainersWalksList.as_view(), name='trainers_walks_list'),
+    path('trainer-work-days/', CreateTrainersWorksDays.as_view(), name='trainer_work_days'),
+    path('update-trainer-work-days/', UpdateTrainersWorksDays.as_view(), name='update_trainer_work_days'),
 ]

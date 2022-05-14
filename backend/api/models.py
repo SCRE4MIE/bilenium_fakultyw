@@ -99,3 +99,33 @@ class Walk(models.Model):
         null=False,
         blank=False,
     )
+
+    class Meta:  # noqa: D106
+        verbose_name = 'Spacer'
+        verbose_name_plural = 'Spacery'
+
+
+class TrainersWorksDays(models.Model):
+    """Trainer's works days."""
+
+    monday = models.BooleanField(default=False)
+    tuesday = models.BooleanField(default=False)
+    wednesday = models.BooleanField(default=False)
+    thursday = models.BooleanField(default=False)
+    friday = models.BooleanField(default=False)
+    saturday = models.BooleanField(default=False)
+    sunday = models.BooleanField(default=False)
+
+    trainer = models.ForeignKey(
+        CustomUser,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return self.trainer.first_name + ' ' + self.trainer.last_name
+
+    class Meta:  # noqa: D106
+        verbose_name = 'Dni pracy trenera'
+        verbose_name_plural = 'Dni pracy trenera'
