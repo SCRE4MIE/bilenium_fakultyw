@@ -6,8 +6,9 @@ from accounts.serializers import UserDetailSerializer
 from rest_framework import serializers
 
 # Project
-from api.models import Dog, TrainersWorksDays
+from api.models import Dog
 from api.models import Rating
+from api.models import TrainersWorksDays
 from api.models import Walk
 from api.utils import day_dict
 
@@ -130,7 +131,7 @@ class WalkSerializer(serializers.ModelSerializer):
         #  allowed days validation ======
         try:
             days = day_dict(TrainersWorksDays.objects.get(trainer_id=trainer.id))
-            if days[req_date.isoweekday()] == False or days[req_date_end.isoweekday()] == False:
+            if not days[req_date.isoweekday()] or not days[req_date_end.isoweekday()]:
                 raise serializers.ValidationError('Trener w tym dniu nie pracuje!')
         except TrainersWorksDays.DoesNotExist:
             pass
@@ -140,7 +141,7 @@ class WalkSerializer(serializers.ModelSerializer):
             if Walk.objects.filter(dogs=dogs[i], date_end__gte=req_date, date__lte=req_date_end).exclude(pk=pk).exists():  # noqa: E501
                 raise serializers.ValidationError(f'{dogs[i]} jest już na spacerze w tym czasie!')
 
-        if trainer.walk_set.filter(date_end__gte=req_date, date__lte=req_date_end).exclude(pk=pk).exists():
+        if trainer.walk_set.filter(date_end__gte=req_date, date__lte=req_date_end).exclude(pk=pk).exists():  # noqa: E501
             # check if trainer is available in that time
             raise serializers.ValidationError('Trener jest już na spacerze w tym czasie!')
 
@@ -171,9 +172,22 @@ class TrainersWorksDaysSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+    def validate(self, attrs):  # noqa: D102
+        request = self.context.get('request')
+        attrs['trainer'] = request.user
+        instance = TrainersWorksDays(**attrs)
+
+        try:
+            pk = request.parser_context.get('kwargs')['pk']
+        except KeyError:
+            pk = None
+
+        instance.clean(pk)
+        return attrs
+
     class Meta:  # noqa: D106
         model = TrainersWorksDays
         fields = '__all__'
         extra_kwargs = {
-            'trainer': {'read_only': True}
+            'trainer': {'read_only': True},
         }

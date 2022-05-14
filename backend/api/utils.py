@@ -1,4 +1,8 @@
+"""Api utils."""
+
+
 def day_dict(day_obj):
+    """Create day's dict."""
     days = {
         1: day_obj.monday,
         2: day_obj.tuesday,

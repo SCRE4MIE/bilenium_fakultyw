@@ -5,7 +5,9 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 # Project
+from api.models import TrainersWorksDays
 from api.models import Walk
+from api.utils import day_dict
 
 
 class WalkLimit(forms.ModelForm):
@@ -45,11 +47,19 @@ class WalkLimit(forms.ModelForm):
         if start_date >= end_date:  # check correct dates
             raise ValidationError('Data początkowa jest starsza od daty końca!')
 
+        #  allowed days validation ======
+        try:
+            days = day_dict(TrainersWorksDays.objects.get(trainer_id=trainer.id))
+            if not days[start_date.isoweekday()] or not days[end_date.isoweekday()]:
+                raise ValidationError('Trener w tym dniu nie pracuje!')
+        except TrainersWorksDays.DoesNotExist:
+            pass
+
         for i in range(len(dogs)):  # check if dog is not in other walk in the same time
             if Walk.objects.filter(dogs=dogs[i], date_end__gte=start_date, date__lte=end_date).exclude(id=pk).exists():  # noqa: E501
                 raise ValidationError(f'{dogs[i]} jest już na spacerze w tym czasie!')
 
-        if trainer.walk_set.filter(date_end__gte=start_date, date__lte=end_date).exclude(id=pk).exists():
+        if trainer.walk_set.filter(date_end__gte=start_date, date__lte=end_date).exclude(id=pk).exists():  # noqa: E501
             # check if trainer is available in that time
             raise ValidationError('Trener jest już na spacerze w tym czasie!')
 
