@@ -6,6 +6,7 @@ from django.contrib import admin
 from api.forms import WalkLimit
 from api.models import Dog
 from api.models import Rating
+from api.models import TrainersWorksDays
 from api.models import Walk
 
 
@@ -36,3 +37,11 @@ class WalkAdmin(admin.ModelAdmin):  # noqa: D101
         'date_end',
     ]
     form = WalkLimit
+
+
+@admin.register(TrainersWorksDays)
+class TrainersWorksDaysAdmin(admin.ModelAdmin):  # noqa: D101
+    list_display = [
+        'pk',
+        'trainer',
+    ]

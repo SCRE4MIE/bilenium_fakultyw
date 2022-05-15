@@ -1,5 +1,6 @@
 """Api models."""
 # Django
+from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator
 from django.core.validators import MinValueValidator
 from django.db import models
@@ -99,3 +100,43 @@ class Walk(models.Model):
         null=False,
         blank=False,
     )
+
+    class Meta:  # noqa: D106
+        verbose_name = 'Spacer'
+        verbose_name_plural = 'Spacery'
+
+
+class TrainersWorksDays(models.Model):
+    """Trainer's works days."""
+
+    monday = models.BooleanField(default=False)
+    tuesday = models.BooleanField(default=False)
+    wednesday = models.BooleanField(default=False)
+    thursday = models.BooleanField(default=False)
+    friday = models.BooleanField(default=False)
+    saturday = models.BooleanField(default=False)
+    sunday = models.BooleanField(default=False)
+
+    trainer = models.ForeignKey(
+        CustomUser,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):  # noqa: D105
+        return self.trainer.first_name + ' ' + self.trainer.last_name
+
+    def clean(self, *args, **kwargs):  # noqa: D102
+        trainer = self.trainer
+        pk = self.id
+        try:
+            pk = args[0]
+        except IndexError:
+            pass
+        if TrainersWorksDays.objects.filter(trainer=trainer).exclude(id=pk).exists():
+            raise ValidationError('Może być tylko jedna instancja danego trenera!')
+
+    class Meta:  # noqa: D106
+        verbose_name = 'Dni pracy trenera'
+        verbose_name_plural = 'Dni pracy trenera'
