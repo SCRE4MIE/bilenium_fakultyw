@@ -16,6 +16,7 @@ from rest_framework.response import Response
 
 # Local
 from .models import Dog
+from .models import Rating
 from .models import TrainersWorksDays
 from .models import Walk
 from .permissions import TrainersWorkDaysIsOwner
@@ -180,6 +181,18 @@ class AddRating(generics.GenericAPIView):
         return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class GetRatingList(generics.ListAPIView):
+    """
+    Get rating list.
+
+    permissions - is authenticated
+    """
+
+    serializer_class = RatingSerializer
+    permission_classes = (IsAuthenticated,)
+    queryset = Rating.objects.all()
+
+
 class CreateWalk(generics.CreateAPIView):
     """
     Create walk.
@@ -317,6 +330,23 @@ class GetTrainersWorksDays(generics.ListAPIView):
         if getattr(self, 'swagger_fake_view', False):
             return TrainersWorksDays.objects.none()
         return TrainersWorksDays.objects.filter(trainer_id=self.request.user.id)
+
+
+class GetTrainerWorkDaysUserGet(generics.ListAPIView):
+    """
+    Get trainer's work days by user request.
+
+    id - trainer's id
+    permissions - is authenticated,
+    """
+
+    serializer_class = TrainersWorksDaysSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):  # noqa: D102
+        if getattr(self, 'swagger_fake_view', False):
+            return TrainersWorksDays.objects.none()
+        return TrainersWorksDays.objects.filter(trainer_id=self.kwargs['pk'])
 
 
 class UpdateTrainersWorksDays(generics.UpdateAPIView):

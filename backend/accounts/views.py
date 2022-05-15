@@ -108,3 +108,16 @@ class UsersList(generics.ListAPIView):
     def get_queryset(self):  # noqa: D102
         users = CustomUser.objects.filter(is_trainer=False)
         return users
+
+
+class GetUser(generics.RetrieveAPIView):
+    """
+    Get user.
+
+    id - user's id
+    permissions - is authenticated
+    """
+
+    serializer_class = UserDetailSerializer
+    permission_classes = (IsAuthenticated,)
+    queryset = CustomUser.objects.all()

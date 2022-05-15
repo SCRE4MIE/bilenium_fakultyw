@@ -16,6 +16,8 @@ from api.utils import day_dict
 class RatingSerializer(serializers.ModelSerializer):
     """Rating serializer."""
 
+    evaluator = UserDetailSerializer(read_only=True)
+
     def create(self, validated_data):  # noqa:  D102
         request = self.context.get('request')
         instance = self.Meta.model(**validated_data)
