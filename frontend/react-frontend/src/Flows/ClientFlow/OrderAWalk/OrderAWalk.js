@@ -15,6 +15,8 @@ import instance from '../../../axios';
 import requests from '../../../requests';
 import useCheckSlots from '../../../CustomHooks/useCheckSlots';
 import { useNavigate } from 'react-router-dom';
+import DogListElement from '../../../Components/OrderAWalkListElements/DogListElement';
+import TrainerListElement from '../../../Components/OrderAWalkListElements/TrainerListElement';
 
 
 const OrderAWalk = () => {
@@ -282,77 +284,6 @@ const OrderAWalk = () => {
       </div>
     </LocalizationProvider>
 
-  )
-}
-
-const DogListElement = ({id, avatar, name, chooseDog, count}) => {
-
-  const [selected, setSelected] = useState(false);
-
-  const handleSelect = () => {
-    if(!selected && count < 3){
-      setSelected(true);
-      chooseDog(id, avatar, name);
-    }
-  }
-
-  useEffect(() => {
-    if(count === 0) {
-      setSelected(false);
-    }
-  }, [count]);
-
-  return (
-    <div style={selected ? {backgroundColor: '#ffd87d',} : {backgroundColor: 'white'} } className='dogListElement' id={id} onClick={handleSelect}>
-      <div>
-        <Avatar src={avatar}/>
-        <p>{name}</p>
-        <div></div>
-      </div>
-    </div>
-  );
-}
-
-const TrainerListElement = ({id, avatar, name, rating, chooseTrainer, current, disable}) => {
-
-  const [selected, setSelected] = useState(false);
-
-  const handleSelect = () => {
-    if(!disable){
-      if(!selected){
-        const elements = document.getElementsByClassName('trainerListElement'); // get all elements
-        for(let i = 0; i < elements.length; i++){
-          elements[i].style.backgroundColor = "white";
-        };
-        setSelected(true)
-        chooseTrainer(id, avatar, name, rating);
-      }
-    }
-
-  }
-
-  useEffect(() => {
-    if(current !== id)
-      setSelected(false);
-  }, [current]);
-
-  let averageRating = 0;
-
-  if (rating.length > 0) {
-    rating.forEach(element => {
-      averageRating += Number(element);
-    });
-    averageRating = averageRating / rating.length;
-  } 
-
-  return (
-    <div style={selected ? {backgroundColor: '#ffd87d',} : {backgroundColor: 'white'} } className='trainerListElement' id={id} onClick={handleSelect}>
-      <div>
-        <Avatar src={avatar}/>
-        <p>{name}</p>
-        <p>{averageRating}</p>
-      </div>
-    </div>
   )
 }
 
