@@ -16,13 +16,18 @@ from rest_framework.response import Response
 
 # Local
 from .models import Dog
+from .models import Rating
+from .models import TrainersWorksDays
 from .models import Walk
+from .permissions import TrainersWorkDaysIsOwner
 from .serializers import CheckTrainerInWalkSerializer
 from .serializers import DogListSerializer
 from .serializers import DogSerializer
 from .serializers import RatingSerializer
 from .serializers import TrainerSerializer
+from .serializers import TrainersWorksDaysSerializer
 from .serializers import WalkSerializer
+from .utils import day_dict
 
 
 class TrainersListView(generics.GenericAPIView):
@@ -149,7 +154,7 @@ class UsersDogsListForTrainerView(generics.ListAPIView):
     permission_classes = (IsAuthenticated, IsTrainer)
 
     def get_queryset(self):  # noqa: D102
-        if getattr(self, "swagger_fake_view", False):
+        if getattr(self, 'swagger_fake_view', False):
             return Dog.objects.none()
         dogs = Dog.objects.filter(owner_id=self.kwargs['pk'])
         return dogs
@@ -174,6 +179,18 @@ class AddRating(generics.GenericAPIView):
             if new_rating:
                 return Response(status=status.HTTP_201_CREATED)
         return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetRatingList(generics.ListAPIView):
+    """
+    Get rating list.
+
+    permissions - is authenticated
+    """
+
+    serializer_class = RatingSerializer
+    permission_classes = (IsAuthenticated,)
+    queryset = Rating.objects.all()
 
 
 class CreateWalk(generics.CreateAPIView):
@@ -202,7 +219,7 @@ class UpdateWalk(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Walk.objects.all()
 
-    def get_serializer_context(self):
+    def get_serializer_context(self):  # noqa: D102
         context = super(UpdateWalk, self).get_serializer_context()
         context.update({'pk': self.kwargs.get('pk')})
         return context
@@ -243,6 +260,13 @@ class CheckTrainerInWalk(generics.GenericAPIView):
             )
             if walks_day.count() >= 5:
                 data['is_available'] = False
+            #  allowed days validation =========
+            try:
+                days = day_dict(TrainersWorksDays.objects.get(trainer_id=trainer_id))
+                if not days[date_start.isoweekday()] or not days[date_end.isoweekday()]:
+                    data['is_available'] = False
+            except TrainersWorksDays.DoesNotExist:
+                pass
             return Response(data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -269,8 +293,81 @@ class TrainersWalksList(generics.ListAPIView):
     serializer_class = WalkSerializer
     permission_classes = (IsAuthenticated,)
 
-    def get_queryset(self):
-        if getattr(self, "swagger_fake_view", False):
+    def get_queryset(self):  # noqa: D102
+        if getattr(self, 'swagger_fake_view', False):
             return Walk.objects.none()
         return Walk.objects.filter(trainer_id=self.kwargs['pk'])
 
+
+class CreateTrainersWorksDays(generics.CreateAPIView):
+    """
+    Create trainer's work days.
+
+    permissions - is authenticated, is trainer
+    there can only be one instance!!!
+    """
+
+    serializer_class = TrainersWorksDaysSerializer
+    permission_classes = (IsAuthenticated, IsTrainer)
+
+    def get_serializer_context(self):  # noqa: D102
+        context = super(CreateTrainersWorksDays, self).get_serializer_context()
+        context.update({'request': self.request})
+        return context
+
+
+class GetTrainersWorksDays(generics.ListAPIView):
+    """
+    Get trainer's work days.
+
+    permissions - is authenticated, is trainer
+    """
+
+    serializer_class = TrainersWorksDaysSerializer
+    permission_classes = (IsAuthenticated, IsTrainer)
+
+    def get_queryset(self):  # noqa: D102
+        if getattr(self, 'swagger_fake_view', False):
+            return TrainersWorksDays.objects.none()
+        return TrainersWorksDays.objects.filter(trainer_id=self.request.user.id)
+
+
+class GetTrainerWorkDaysUserGet(generics.ListAPIView):
+    """
+    Get trainer's work days by user request.
+
+    id - trainer's id
+    permissions - is authenticated,
+    """
+
+    serializer_class = TrainersWorksDaysSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):  # noqa: D102
+        if getattr(self, 'swagger_fake_view', False):
+            return TrainersWorksDays.objects.none()
+        return TrainersWorksDays.objects.filter(trainer_id=self.kwargs['pk'])
+
+
+class UpdateTrainersWorksDays(generics.UpdateAPIView):
+    """
+    Update trainer's work days.
+
+    permissions - is authenticated, is trainer
+    """
+
+    serializer_class = TrainersWorksDaysSerializer
+    permission_classes = (IsAuthenticated, IsTrainer, TrainersWorkDaysIsOwner)
+    queryset = TrainersWorksDays.objects.all()
+
+
+class DeleteTrainersWorksDays(generics.DestroyAPIView):
+    """
+    Delete trainer's work days.
+
+    permissions - is authenticated, is trainer
+    """
+
+    serializer_class = TrainersWorksDaysSerializer
+    permission_classes = (IsAuthenticated, IsTrainer, TrainersWorkDaysIsOwner)
+    queryset = TrainersWorksDays.objects.all()

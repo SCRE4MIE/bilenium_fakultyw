@@ -8,11 +8,15 @@ from rest_framework import serializers
 # Project
 from api.models import Dog
 from api.models import Rating
+from api.models import TrainersWorksDays
 from api.models import Walk
+from api.utils import day_dict
 
 
 class RatingSerializer(serializers.ModelSerializer):
     """Rating serializer."""
+
+    evaluator = UserDetailSerializer(read_only=True)
 
     def create(self, validated_data):  # noqa:  D102
         request = self.context.get('request')
@@ -126,12 +130,20 @@ class WalkSerializer(serializers.ModelSerializer):
         if req_date >= req_date_end:  # check correct dates
             raise serializers.ValidationError('Data początkowa jest starsza od daty końca!')
 
+        #  allowed days validation ======
+        try:
+            days = day_dict(TrainersWorksDays.objects.get(trainer_id=trainer.id))
+            if not days[req_date.isoweekday()] or not days[req_date_end.isoweekday()]:
+                raise serializers.ValidationError('Trener w tym dniu nie pracuje!')
+        except TrainersWorksDays.DoesNotExist:
+            pass
+
         dogs = attrs.get('dogs')
         for i in range(len(dogs)):  # check if dog is not in other walk in the same time
             if Walk.objects.filter(dogs=dogs[i], date_end__gte=req_date, date__lte=req_date_end).exclude(pk=pk).exists():  # noqa: E501
                 raise serializers.ValidationError(f'{dogs[i]} jest już na spacerze w tym czasie!')
 
-        if trainer.walk_set.filter(date_end__gte=req_date, date__lte=req_date_end).exclude(pk=pk).exists():
+        if trainer.walk_set.filter(date_end__gte=req_date, date__lte=req_date_end).exclude(pk=pk).exists():  # noqa: E501
             # check if trainer is available in that time
             raise serializers.ValidationError('Trener jest już na spacerze w tym czasie!')
 
@@ -150,3 +162,34 @@ class CheckTrainerInWalkSerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):  # noqa: D102
         pass
+
+
+class TrainersWorksDaysSerializer(serializers.ModelSerializer):
+    """Trainer's work days serializer."""
+
+    def create(self, validated_data):  # noqa: D102
+        request = self.context.get('request')
+        instance = self.Meta.model(**validated_data)
+        instance.trainer = request.user
+        instance.save()
+        return instance
+
+    def validate(self, attrs):  # noqa: D102
+        request = self.context.get('request')
+        attrs['trainer'] = request.user
+        instance = TrainersWorksDays(**attrs)
+
+        try:
+            pk = request.parser_context.get('kwargs')['pk']
+        except KeyError:
+            pk = None
+
+        instance.clean(pk)
+        return attrs
+
+    class Meta:  # noqa: D106
+        model = TrainersWorksDays
+        fields = '__all__'
+        extra_kwargs = {
+            'trainer': {'read_only': True},
+        }
