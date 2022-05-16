@@ -2,17 +2,18 @@ import React from 'react';
 import AddDogButton from '../../../Components/AddDogButton/AddDogButton';
 import DogListElement from '../../../Components/ClientDogList/DogListElement';
 import './ClientProfile.css';
-import dogPicture from '../../../Images/dogPlaceholder.jpg';
-import cashtan from '../../../Images/Cashtan.png';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Tooltip } from '@mui/material/';
 import { useNavigate } from 'react-router-dom';
 import ApiPicture from '../../../Components/ApiPicture';
+import useOwnerDogs from '../../../CustomHooks/useOwnerDogs';
 
 const ClientProfile = () => {
 
   const navigate = useNavigate();
+
+  const userDogs = useOwnerDogs();
 
   const goToEditProfile = () => {
     navigate('/editProfile');
@@ -24,6 +25,10 @@ const ClientProfile = () => {
     details.phone_number.slice(3, 6), " ",
     details.phone_number.slice(6, 9)]
     .join('');
+
+  const dogList = userDogs.map(dog => {
+    return <DogListElement key={dog.pk} id={dog.pk} name={dog.name} imageSrc={dog.avatar}/>
+  })
 
   return (
     <div className='clientProfile'>
@@ -50,8 +55,7 @@ const ClientProfile = () => {
       </div>
       <div className='dogList'>
         <h3 className='dogListTitle'>Your dogs</h3>
-        <DogListElement id={1} name='Milo' imageSrc={dogPicture}/>
-        <DogListElement id={2} name='Cashtan' imageSrc={cashtan}/>
+        {dogList}
         <AddDogButton />
       </div>
     </div>

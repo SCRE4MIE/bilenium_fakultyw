@@ -20,8 +20,6 @@ const RegisterForm = (props) => {
     username: '',
   });
 
-  console.log(registerError);
-
   const [snackbar, setSnackbar] = React.useState({
     open: false,
     vertical: 'center',
