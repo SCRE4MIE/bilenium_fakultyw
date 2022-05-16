@@ -26,24 +26,6 @@ const ClientTrainerProfile = () => {
         })
     }, []);
 
-
-    const opinion = [
-        {
-        name: "Jessica",
-        imageSrc: woman,
-        rating: 4,
-        id: 321,
-        opinion: "Dla mnie super!!!",
-        },
-        {
-            name: "John",
-            imageSrc: woman,
-            rating: 3,
-            id: 432,
-            opinion: "Vivamus eleifend est pharetra metus fringilla, in vehicula est sagittis. Pellentesque sem mauris metus. ",
-        }
-    ]
-
     const phone_number = trainer ? [
     trainer.phone_number.slice(0, 3), " ",
     trainer.phone_number.slice(3, 6), " ",
@@ -70,29 +52,39 @@ const ClientTrainerProfile = () => {
                 </div>
                 </div>
                 <span>
+                    {isNaN(ratingSum(trainer.rating_trainer)) ?
+                    <h2 className="rating">No opinion yet</h2>
+                    :
                     <h2 className="rating">
-                    4/5
-                    {/* {ratingSum(trainer.rating_trainer)}/5 */}
-                    </h2>
+                    {ratingSum(trainer.rating_trainer)}/5
                     <StarIcon className='starIcon'/>
+                    </h2>}
                 </span>
                 <h2>
                 {phone_number}
                 </h2>
             </div>
+            <div className="opinionsHeader">
+                <h3 className='opinionListTitle'>Opinions:</h3>
+            </div>
             <div className="opinionList">
-                <h3 className='opinionListTitle'>Opinions</h3>
-                <OpinionAboutTrainerElement
-                imageSrc={opinion[0].imageSrc}
-                name={opinion[0].name}
-                rating = {opinion[0].rating}
-                opinion={opinion[0].opinion}/>
-
-                <OpinionAboutTrainerElement
-                imageSrc={opinion[1].imageSrc}
-                name={opinion[1].name}
-                rating = {opinion[1].rating}
-                opinion={opinion[1].opinion}/>
+                {trainer.rating_trainer.length !== 0 ? (
+                    <>
+                    {trainer.rating_trainer.map((item) => (
+                        <OpinionAboutTrainerElement
+                        key = {item.pk}
+                        id = {item.pk}
+                        username = {item.evaluator.username}
+                        comment = {item.comment}
+                        value = {item.value}
+                        avatar = {item.evaluator.avatar_url}/>
+                    ))}
+                    </>
+                ) : (
+                    <div className="noOpinion">
+                        <h3>Trainer have no opinions yet</h3>
+                    </div>
+                )}
             </div>
             </>
             ):
