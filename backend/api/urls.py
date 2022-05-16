@@ -10,6 +10,7 @@ from api.views import CreateTrainersWorksDays
 from api.views import CreateWalk
 from api.views import DeleteTrainersWorksDays
 from api.views import DogsListView
+from api.views import GetDog
 from api.views import GetRatingList
 from api.views import GetTrainersWorksDays
 from api.views import GetTrainerView
@@ -29,6 +30,7 @@ urlpatterns = [
     path('trainers-list/', TrainersListView.as_view(), name='trainers_list'),
     path('get-trainer/<int:pk>/', GetTrainerView.as_view(), name='get_trainer'),
     path('get-dog-list/', DogsListView.as_view(), name='get_dogs_list'),
+    path('get-dog/<int:pk>/', GetDog.as_view(), name='get_dog'),
     path('get-update-del-dog/<int:pk>/', GetUpdateDeleteDog.as_view(), name='get_update_del_dog'),
     path('create-dog/', CreateDogView.as_view(), name='create_dog'),
     path('users-dog-list/', UsersDogsListView.as_view(), name='users_dog_list'),

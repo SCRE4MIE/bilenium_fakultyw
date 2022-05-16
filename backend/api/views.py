@@ -91,6 +91,19 @@ class DogsListView(generics.GenericAPIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
+class GetDog(generics.RetrieveAPIView):
+    """
+    Get dog by id.
+
+    id - dog's id
+    permissions - is authenticated
+    """
+
+    serializer_class = DogSerializer
+    permission_classes = (IsAuthenticated,)
+    queryset = Dog.objects.all()
+
+
 class GetUpdateDeleteDog(generics.RetrieveUpdateDestroyAPIView):
     """
     Update dog profile.
