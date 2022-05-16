@@ -36,7 +36,7 @@ const LoggedInTrainerNavbar = ({ signOut }) => {
   }
 
   return (
-    <div className={`loggedInTrainerNavbar ${!navHidden && 'menuShow'}`}>
+    <div style={{zIndex: '10'}} className={`loggedInTrainerNavbar ${!navHidden && 'menuShow'}`}>
       <div className='navButtons'>
         {navHidden && <ArrowBackIcon onClick={navigateBack} className='menuIcons'/>}
         <AccountCircleOutlinedIcon onClick={navigateToProfile} className='menuIcons'/>

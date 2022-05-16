@@ -1,0 +1,39 @@
+.oderWalkConfirm {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+}
+
+.oderWalkConfirm div {
+  width: 70%;
+}
+
+.oderWalkConfirm .button {
+  padding: 12px 15px;
+  background-color: #F9C74F;
+  color: #577590;
+  font-family: "Jost", sans-serif;
+  border-radius: 10px;
+  font-size: 18px;
+  border: none;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-transition: 100ms;
+  transition: 100ms;
+  cursor: pointer;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.oderWalkConfirm h2 {
+  font-family: "Jost", sans-serif;
+  color: #577590;
+  font-weight: 400;
+  margin-bottom: 34px;
+}
