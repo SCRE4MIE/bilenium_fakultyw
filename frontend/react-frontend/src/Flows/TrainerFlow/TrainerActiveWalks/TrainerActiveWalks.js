@@ -7,22 +7,23 @@ import * as dayjs from 'dayjs'
 
 const TrainerActiveWalks = ({trainerId}) => {
 
-  const [walkData, setWalkData] = useState({});
   const hourNow =  dayjs(dayjs()).get('hour');
   const dayNow = dayjs(dayjs()).get('day');
+  const dateNow = dayjs();
 
   useEffect(() => {
     instance.get(`${requests.walkDetails}${trainerId}/`)
     .then(response => {
-      sessionStorage.setItem('walkData', JSON.stringify(response.data));
+
       for(var i = 0; i < response.data.length; i++)
       {
         const day = dayjs(response.data[i].date).get('day');
-        const hourStart = dayjs(response.data[i].date).get('hour');
+        const hourStart = dayjs(response.data[i].date)
         if(day == dayNow)
         {
-          if(hourStart <= hourNow && hourStart >= hourNow)
+          if(hourStart <= dateNow && hourStart >= dateNow)
           {
+            
             sessionStorage.setItem('activeWalkDogs', JSON.stringify(response.data[i].dogs));
             sessionStorage.setItem('activeWalkDate', dayjs(response.data[i].date).format('YYYY/MM/DD'));
             sessionStorage.setItem('activeWalkStart', dayjs(response.data[i].date).format('HH:mm'));
@@ -31,15 +32,6 @@ const TrainerActiveWalks = ({trainerId}) => {
           }
         }
       }  
-    });
-  }, []);
-
-  const [dogData, setDogData] = useState({});
-
-  useEffect(() => {
-    instance.get(`${requests.dogDetails}${dogId}/`)
-    .then(response => {
-      setDogData(response.data);
     });
   }, []);
 
