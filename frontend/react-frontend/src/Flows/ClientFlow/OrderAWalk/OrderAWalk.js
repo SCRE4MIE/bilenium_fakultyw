@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import './OrderAWalk.css';
 import useOwnerDogs from '../../../CustomHooks/useOwnerDogs';
 import useTrainerList from '../../../CustomHooks/useTrainerList';
-import { Accordion, AccordionSummary, Avatar } from '@mui/material';
+import { Accordion, AccordionSummary, Avatar, Alert } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -117,11 +117,12 @@ const OrderAWalk = () => {
     return <TrainerListElement
       key={e.pk}
       id={e.pk}
-      avatar={`${instance.defaults.baseURL.substring(0, instance.defaults.baseURL.length - 4)}${e.avatar_url.substring(1)}`}
+      avatar={`${instance.defaults.baseURL.substring(0, instance.defaults.baseURL.length - 4)}${e.avatar_url?.substring(1)}`}
       name={e.username}
       rating={e.rating_trainer}
       chooseTrainer={chooseTrainer}
       current={activeTrainer.id}
+      startDate={formData.date}
     />
   });
 
@@ -198,15 +199,14 @@ const OrderAWalk = () => {
         .then(response => {
           navigate("/orderWalkConfirm");
         }).catch(error => {
-          if(body.dogs.length > 0) {
+          if(error.response.data.non_field_errors[0][0] ==='T'){
+            setErrors(prevErrors => ({...prevErrors, trainerError: "Selected trainer is unavailible during that day of the week"}));
+          } else if(body.dogs.length > 0) {
             setErrors(prevErrors => ({...prevErrors, dogError: "One of the dogs you chose is already assigned to a walk during the selected time and date"}));
           }
         })
       }
-    } else {
-      console.log("clear the errors");
     }
-
   }
 
   const displayDogs = activeDog ? 
@@ -219,8 +219,8 @@ const OrderAWalk = () => {
       <div className='orderAWalk'>
         <h1>Order a walk</h1>
         <form>
-          {errors.arrayError && <p className='error'>{errors.arrayError}</p>}
-          {errors.dogError && <p className='error'>{errors.dogError}</p>}
+          {errors.arrayError && <Alert variant="filled" severity="warning">{errors.arrayError}</Alert>}
+          {errors.dogError && <Alert variant="filled" severity="warning">{errors.dogError}</Alert>}
           <Accordion>
             <AccordionSummary
               className='summary'
@@ -277,8 +277,8 @@ const OrderAWalk = () => {
             </AccordionSummary>
             {trainers}
           </Accordion>
-          {errors.trainerError && <p className='error'>{errors.trainerError}</p>}
-          {errors.fullSlotError && <p className='error'>{errors.fullSlotError}</p>}
+          {errors.trainerError && <Alert variant="filled" severity="warning">{errors.trainerError}</Alert>}
+          {errors.fullSlotError && <Alert variant="filled" severity="warning">{errors.fullSlotError}</Alert>}
           <button className='button' onClick={handleSubmit}><EventAvailableIcon className='icon'/><p>Confirm your choices</p></button>
         </form>
       </div>

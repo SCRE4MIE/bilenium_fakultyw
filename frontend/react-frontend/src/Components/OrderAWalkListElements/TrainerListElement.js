@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar } from '@mui/material';
+import instance from '../../axios';
+import requests from '../../requests';
 
-const TrainerListElement = ({id, avatar, name, rating, chooseTrainer, current, disable}) => {
+const TrainerListElement = ({id, avatar, name, rating, chooseTrainer, current, disable, startDate}) => {
+
+  const weekDays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+  const dayjs = require('dayjs');
 
   const [selected, setSelected] = useState(false);
 
+  const [isAvailible, setIsAvailible] = useState(true);
+
   const handleSelect = () => {
+
     if(!disable){
       if(!selected){
         const elements = document.getElementsByClassName('trainerListElement'); // get all elements
@@ -16,13 +24,19 @@ const TrainerListElement = ({id, avatar, name, rating, chooseTrainer, current, d
         chooseTrainer(id, avatar, name, rating);
       }
     }
-
   }
 
   useEffect(() => {
     if(current !== id)
       setSelected(false);
   }, [current]);
+
+  useEffect(() => {
+    instance.get(`${requests.getTrainerWorkDaysByUser}${id}/`)
+    .then(response => {
+      startDate ? setIsAvailible(response.data[0][weekDays[startDate.day()]]) : setIsAvailible(true);
+    })
+  }, [startDate])
 
   let averageRating = 0;
 
@@ -34,8 +48,11 @@ const TrainerListElement = ({id, avatar, name, rating, chooseTrainer, current, d
   } 
 
   return (
-    <div style={selected ? {backgroundColor: '#ffd87d',} : {backgroundColor: 'white'} } className='trainerListElement' id={id} onClick={handleSelect}>
-      <div>
+    <div style={
+      isAvailible ? selected ? {backgroundColor: '#ffd87d',} : {backgroundColor: 'white'} : {display: 'none'}
+      }
+      className='trainerListElement' id={id} onClick={handleSelect}>
+    <div>
         <Avatar src={avatar}/>
         <p>{name}</p>
         <p>{averageRating}</p>
