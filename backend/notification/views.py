@@ -13,6 +13,9 @@ class WalkNotificationView(generics.GenericAPIView):
     """
     Get Walk notification.
 
+    Get list of walk notification.
+    After get request, backend will automatically hide notification.
+    Actions - Create/Update/Delete
     permissions - is authenticated
     """
 
