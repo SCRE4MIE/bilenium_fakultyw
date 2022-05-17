@@ -18,7 +18,7 @@ const TrainerFlow = () => {
           <Route exact path='/activeWalks' element={<TrainerActiveWalks trainerId={sessionStorage.getItem('currentTrainer')} />} />
           <Route exact path='/walksHistory' element={<TrainerWalksHistory />} />
           <Route exact path='/editProfile' element={<TrainerEditProfile />} />
-          <Route exact path='/trainerDogProfile' element={<TrainerDogProfile />} /> 
+          <Route exact path='/trainerDogProfile' element={<TrainerDogProfile dogId={sessionStorage.getItem('currentDog')} />} />
         </Routes>
     </div>
   )

@@ -21,7 +21,6 @@ const TrainerDogProfile = ({dogId}) => {
     });
   }, []);
 
- 
 
   return (
     <div className='trainerDogProfile'>

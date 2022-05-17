@@ -11,9 +11,9 @@ const TrainerWalkDogs = ({id}) => {
   
   const navigate = useNavigate();
 
-  const openDogProfile = () => { 
+  const openTrainerDogProfile = () => { 
     sessionStorage.setItem('currentDog', id);
-    navigate('/dogProfile');
+    navigate('/trainerDogProfile');
   };
 
 
@@ -27,7 +27,7 @@ const TrainerWalkDogs = ({id}) => {
 
   return (
     <div className='trainerWalkDogs' >
-      <div className='dogWalkDataContainer' onClick={openDogProfile}>
+      <div className='dogWalkDataContainer' onClick={openTrainerDogProfile}>
         <div className='dogWalkPictureContainer'>
           <img src={dogData.avatar} alt='' />
         </div>
