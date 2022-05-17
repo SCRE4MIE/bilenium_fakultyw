@@ -7,6 +7,7 @@ from django.utils.dateparse import parse_datetime
 from accounts.models import CustomUser
 from accounts.permissions import IsDogOwner
 from accounts.permissions import IsTrainer
+from notification.models import WalkNotification
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.parsers import FormParser
@@ -236,6 +237,24 @@ class UpdateWalk(generics.RetrieveUpdateDestroyAPIView):
         context = super(UpdateWalk, self).get_serializer_context()
         context.update({'pk': self.kwargs.get('pk')})
         return context
+
+    def delete(self, request, *args, **kwargs):  # noqa: D102
+        instance = self.get_object()
+        id_list = [instance.trainer.id]
+        for dog in instance.dogs.all():
+            id_list.append(dog.owner_id)
+        walk_start_date = instance.date
+        instance.delete()
+
+        notifi_obj = WalkNotification.objects.create(
+            action='Delete',
+            walk_start_date=walk_start_date,
+        )
+        queryset = CustomUser.objects.filter(id__in=id_list)
+        for user in queryset:
+            notifi_obj.targets_ids.add(user)
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class CheckTrainerInWalk(generics.GenericAPIView):

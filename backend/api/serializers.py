@@ -3,6 +3,7 @@
 # 3rd-party
 from accounts.models import CustomUser
 from accounts.serializers import UserDetailSerializer
+from notification.models import WalkNotification
 from rest_framework import serializers
 
 # Project
@@ -103,6 +104,35 @@ class WalkSerializer(serializers.ModelSerializer):
     class Meta:  # noqa: D106
         model = Walk
         fields = '__all__'
+
+    def update(self, instance, validated_data):  # noqa: D102
+        print('wchodze tu')
+        instance = super(WalkSerializer, self).update(instance, validated_data)
+        id_list = [instance.trainer.id]
+        for dog in instance.dogs.all():
+            id_list.append(dog.owner_id)
+        notifi_obj = WalkNotification.objects.create(
+            action='Update',
+            walk_start_date=instance.date,
+        )
+        queryset = CustomUser.objects.filter(id__in=id_list)
+        for user in queryset:
+            notifi_obj.targets_ids.add(user)
+        return instance
+
+    def create(self, validated_data):  # noqa: D102
+        instance = super().create(validated_data)
+        id_list = [instance.trainer.id]
+        for dog in instance.dogs.all():
+            id_list.append(dog.owner_id)
+        notifi_obj = WalkNotification.objects.create(
+            action='Create',
+            walk_start_date=instance.date,
+        )
+        queryset = CustomUser.objects.filter(id__in=id_list)
+        for user in queryset:
+            notifi_obj.targets_ids.add(user)
+        return instance
 
     def validate_dogs(self, value):
         """Dogs limit validation: 3 dogs per walk."""
