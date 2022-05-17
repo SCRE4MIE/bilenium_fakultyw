@@ -4,50 +4,49 @@ import requests from '../../../requests';
 import instance from '../../../axios';
 import { useEffect, useState } from 'react';
 import * as dayjs from 'dayjs'
+import TrainerWalkDogs from '../../../Components/TrainerWalkDogs/TrainerWalkDogs';
 
 const TrainerActiveWalks = ({trainerId}) => {
 
-  const hourNow =  dayjs(dayjs()).get('hour');
   const dayNow = dayjs(dayjs()).get('day');
   const dateNow = dayjs();
+
+  const [walkData, setWalkData] = useState({});
 
   useEffect(() => {
     instance.get(`${requests.walkDetails}${trainerId}/`)
     .then(response => {
-
       for(var i = 0; i < response.data.length; i++)
       {
         const day = dayjs(response.data[i].date).get('day');
-        const hourStart = dayjs(response.data[i].date)
+        const dateStart = dayjs(response.data[i].date);
+        const dateEnd = dateStart.add(1, 'hour');
         if(day == dayNow)
         {
-          if(hourStart <= dateNow && hourStart >= dateNow)
+          if(dateStart <= dateNow && dateEnd >= dateNow)
           {
-            
-            sessionStorage.setItem('activeWalkDogs', JSON.stringify(response.data[i].dogs));
-            sessionStorage.setItem('activeWalkDate', dayjs(response.data[i].date).format('YYYY/MM/DD'));
-            sessionStorage.setItem('activeWalkStart', dayjs(response.data[i].date).format('HH:mm'));
-            sessionStorage.setItem('activeWalkEnd', dayjs(response.data[i].date).add(1, 'hour').format('HH:mm'));
-
-          }
+            setWalkData(response.data[i]);
+          } 
         }
-      }  
+      }
     });
   }, []);
 
-  const dogs = sessionStorage.getItem('activeWalkDogs');
-  const date = sessionStorage.getItem('activeWalkDate');
-  const start = sessionStorage.getItem('activeWalkStart');
-  const end = sessionStorage.getItem('activeWalkEnd');
+  const dateWalk = dayjs(walkData.date).format('YYYY-MM-DD');
+  const hourStart = dayjs(walkData.date).format('HH:mm');
+  const hourEnd = dayjs(walkData.date_end).format('HH:mm');
+
+  const dogComponents = walkData.dogs?.map(id => <TrainerWalkDogs key = {id} id = {id}/>);
+  
 
   return (
     <div className='trainerActiveWalks'>
-      <h1>Active walk</h1>
-      Dogs: {dogs}<br/>
-      Date: {date}<br/>
-      Start: {start} <br/>
-      End: {end}
+      <h1 className='activeWalkHeader'>Active walk</h1>
+      <p className='walkDate'>Walk date: {dateWalk}</p>
+      <p className='walkHours'>Walk hours: {hourStart} - {hourEnd}</p>
 
+      <h2 className='activeWalkDogs'>Dogs: </h2>
+      {dogComponents}
 
     </div>
   )
