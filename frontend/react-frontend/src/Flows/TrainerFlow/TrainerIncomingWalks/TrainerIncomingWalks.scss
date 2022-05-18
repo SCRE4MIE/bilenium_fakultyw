@@ -12,7 +12,9 @@
   text-align: center;
 
   h1 {
-    @include text($fontSize: 24px);
+    @include text($fontSize: 36px);
+    margin-top: 24px;
+    margin-bottom: -24px;
   }
   
 }

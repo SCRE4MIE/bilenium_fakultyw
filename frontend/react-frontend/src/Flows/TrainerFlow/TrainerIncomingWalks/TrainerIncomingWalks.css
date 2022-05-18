@@ -6,5 +6,7 @@
   font-family: "Jost", sans-serif;
   color: #577590;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 36px;
+  margin-top: 24px;
+  margin-bottom: -24px;
 }

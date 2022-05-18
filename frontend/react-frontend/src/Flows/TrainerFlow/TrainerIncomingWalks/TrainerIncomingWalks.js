@@ -13,6 +13,7 @@ const TrainerIncomingWalks = () => {
 
   return (
     <div className='trainerIncomingWalks'>
+      {incomingWalks.length > 0 && <h1>Incoming Walks</h1>}
       {incomingWalks.length > 0 ? incomingWalks : <h1>You have no incoming walks</h1>}
     </div>
   )

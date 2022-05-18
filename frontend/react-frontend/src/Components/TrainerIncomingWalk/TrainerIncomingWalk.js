@@ -29,7 +29,7 @@ const TrainerIncomingWalk = ({ id, startDate, endDate, dogs}) => {
           Start: {dayjs(startDate).subtract(1, 'minute').format('hh:mm')} - {dayjs(endDate).format('hh:mm')} : End
         </p>
         {before24h ? <button className='button'>Transfer to a different trainer</button> : 
-        <Alert severity="info" style={{width: '100%', borderRadius: '0px 0px 10px 10px', marginBottom: '-16px', justifyContent: 'center'}}>Transfer unavailible</Alert>}
+        <Alert severity="info" style={{letterSpacing: '1px', width: '100%', borderRadius: '0px 0px 10px 10px', marginBottom: '-16px', justifyContent: 'center'}}>Transfer unavailable</Alert>}
       </div>
     </div>
   )
