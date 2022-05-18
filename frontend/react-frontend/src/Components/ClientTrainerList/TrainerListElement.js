@@ -27,9 +27,13 @@ const TrainerListElement = ({ imageSrc, name, id, rating_trainer }) => {
       </div>
       <p className='trainerName'>{name}</p>
       <span>
-        {/* <p className="trainerRating">{ratingSum(rating_trainer)}/5</p> */}
-        <p className="trainerRating">4/5</p>
-        <StarIcon className='starIcon'/>
+        {isNaN(ratingSum(rating_trainer)) ?
+        <p className="trainerRating">No opinion yet</p>
+        :
+        <>
+          <p className="trainerRating">{ratingSum(rating_trainer)}/5</p>
+          <StarIcon className='starIcon'/>
+        </>}
       </span>
     </div>
   )

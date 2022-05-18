@@ -1,21 +1,22 @@
 import React from "react";
 import StarIcon from '@mui/icons-material/Star';
 import './OpinionAboutTrainerElement.css';
+import ApiPicture from "../ApiPicture";
 
-const OpinionAboutTrainerElement = ({ imageSrc, name, rating, opinion }) => {
+const OpinionAboutTrainerElement = ({ avatar, username, value, comment }) => {
   return (
     <div className='opinionAboutElement'>
         <div className="opinionHeader">
             <div className="pictureContainer">
-                <img src={imageSrc} alt='' />
+                <ApiPicture src={avatar} />
             </div>
-            <h2 className="authorName">{name}</h2>
+            <h2 className="authorName">{username}</h2>
         </div>
         <div className="opinionDescription">
-            <p>{opinion}</p>
+            <p>{comment}</p>
         </div>
         <div className="opinionFooter">
-            <p>{rating}/5</p>
+            <p>{value}/5</p>
             <StarIcon className='starIcon'/>
         </div>
     </div>
