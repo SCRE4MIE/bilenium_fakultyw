@@ -8,7 +8,7 @@ const TrainerIncomingWalks = () => {
   const userId = JSON.parse(sessionStorage.getItem('userDetails')).pk;
 
   const incomingWalks = useIncomingWalks(userId).map(e => {
-    return <TrainerIncomingWalk id={e.id} startDate={e.date} endDate={e.date_end} dogs={e.dogs}/>
+    return <TrainerIncomingWalk key={e.id} id={e.id} startDate={e.date} endDate={e.date_end} dogs={e.dogs}/>
   });
 
   return (

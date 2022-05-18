@@ -9,7 +9,7 @@ const TrainerIncomingWalk = ({ id, startDate, endDate, dogs}) => {
   const today = dayjs();
 
   const dogElements = dogs.map(e => (
-    <TrainerDogElement id = {e} />
+    <TrainerDogElement key={e} id = {e} />
   ));
 
   const before24h = dayjs(startDate).diff(today, 'hour') > 24;
