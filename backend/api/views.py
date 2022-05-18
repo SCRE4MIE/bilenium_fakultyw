@@ -403,3 +403,17 @@ class DeleteTrainersWorksDays(generics.DestroyAPIView):
     serializer_class = TrainersWorksDaysSerializer
     permission_classes = (IsAuthenticated, IsTrainer, TrainersWorkDaysIsOwner)
     queryset = TrainersWorksDays.objects.all()
+
+
+class UsersWalkList(generics.ListAPIView):
+    """
+    User's walks list.
+
+    permissions - is authenticated,
+    """
+
+    serializer_class = WalkSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):  # noqa: D102
+        return Walk.objects.filter(dogs__owner=self.request.user)
