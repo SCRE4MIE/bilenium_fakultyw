@@ -1,0 +1,18 @@
+@import '../../../Variables/Variables.scss';
+
+@mixin text($fontSize){
+  font-family: $Jost;
+  color: $blueColor;
+  font-weight: 400;
+  font-size: $fontSize;
+}
+
+.trainerIncomingWalks {
+
+  text-align: center;
+
+  h1 {
+    @include text($fontSize: 24px);
+  }
+  
+}

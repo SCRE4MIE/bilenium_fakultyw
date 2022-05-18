@@ -1,1 +1,10 @@
-/* No CSS */
+.trainerIncomingWalks {
+  text-align: center;
+}
+
+.trainerIncomingWalks h1 {
+  font-family: "Jost", sans-serif;
+  color: #577590;
+  font-weight: 400;
+  font-size: 24px;
+}

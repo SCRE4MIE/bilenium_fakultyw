@@ -15,6 +15,7 @@ import EditDog from './EditDog/EditDog';
 import DogAdded from './DogAdded/DogAdded';
 import TestComponent from './TestComponent';
 import OrderWalkConfirm from './OrderWalkConfirm/OrderWalkConfirm';
+import ClientNotifications from './ClientNotifications/ClientNotifications';
 
 const ClientFlow = () => {
 
@@ -36,6 +37,7 @@ const ClientFlow = () => {
           <Route exact path='/dogAdded' element={<DogAdded/>} />
           <Route exact path="/test" element={<TestComponent />} />
           <Route exact path="/orderWalkConfirm" element={<OrderWalkConfirm />} />
+          <Route exact path="/notifications" element={<ClientNotifications />} />
         </Routes>
       </div>
       // to='/walksHistory'

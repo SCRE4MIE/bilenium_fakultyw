@@ -84,7 +84,7 @@
 }
 
 .trainerProfile .userInfo .avatarSection .trainerProfilePicture img {
-  height: 100%;
+  width: 100%;
 }
 
 .trainerProfile .userInfo .avatarSection .notifications-rating {

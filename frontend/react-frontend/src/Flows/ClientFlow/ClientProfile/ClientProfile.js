@@ -41,7 +41,7 @@ const ClientProfile = () => {
           </div>
           <div className='icons'>
             <Tooltip title='Notifications'>
-              <NotificationsNoneOutlinedIcon className='icon'  style={{marginTop: '8px', cursor: 'pointer'}}/>
+              <NotificationsNoneOutlinedIcon className='icon'  style={{marginTop: '8px', cursor: 'pointer'}} onClick={() => navigate('/notifications')}/>
             </Tooltip>
             <Tooltip title='Edit your profile'>
               <EditOutlinedIcon className='icon'  style={{marginBottom: '8px', cursor: 'pointer'}} onClick={goToEditProfile}/>

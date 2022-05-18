@@ -6,6 +6,7 @@ import TrainerIncomingWalks from './TrainerIncomingWalks/TrainerIncomingWalks';
 import TrainerActiveWalks from './TrainerActiveWalks/TrainerActiveWalks';
 import TrainerWalksHistory from './TrainerWalksHistory/TrainerWalksHistory';
 import TrainerEditProfile from './TrainerEditProfile/TrainerEditProfile';
+import TrainerNotifications from './TrainerNotifications/TrainerNotifications';
 
 const TrainerFlow = () => {
   return (
@@ -17,6 +18,7 @@ const TrainerFlow = () => {
           <Route exact path='/activeWalks' element={<TrainerActiveWalks />} />
           <Route exact path='/walksHistory' element={<TrainerWalksHistory />} />
           <Route exact path='/editProfile' element={<TrainerEditProfile />} />
+          <Route exact path='/notifications' element={<TrainerNotifications />} />
         </Routes>
     </div>
   )

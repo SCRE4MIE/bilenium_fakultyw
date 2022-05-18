@@ -50,7 +50,7 @@ const TrainerProfile = () => {
           <div className='notifications-rating'>
             <div className='icons'>
               <Tooltip title='Notifications'>
-                <NotificationsNoneOutlinedIcon className='icon'  style={{cursor: 'pointer'}}/>
+                <NotificationsNoneOutlinedIcon className='icon' style={{cursor: 'pointer'}} onClick={() => navigate('/notifications')}/>
               </Tooltip>
               <Tooltip title='Edit your profile'>
                 <EditOutlinedIcon className='icon'  style={{cursor: 'pointer'}} onClick={goToEditProfile}/>
