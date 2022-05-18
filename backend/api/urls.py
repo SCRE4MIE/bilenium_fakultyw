@@ -22,6 +22,7 @@ from api.views import UpdateTrainersWorksDays
 from api.views import UpdateWalk
 from api.views import UsersDogsListForTrainerView
 from api.views import UsersDogsListView
+from api.views import UsersWalkList
 from api.views import WalksList
 
 app_name = 'api_v1'
@@ -63,4 +64,5 @@ urlpatterns = [
         DeleteTrainersWorksDays.as_view(),
         name='delete_trainer_work_days',
     ),
+    path('walk-list-user/', UsersWalkList.as_view(), name='walk_list_user'),
 ]
