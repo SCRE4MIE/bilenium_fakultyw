@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AddDogButton from '../../../Components/AddDogButton/AddDogButton';
 import DogListElement from '../../../Components/ClientDogList/DogListElement';
 import './ClientProfile.css';
@@ -8,12 +8,16 @@ import { Tooltip } from '@mui/material/';
 import { useNavigate } from 'react-router-dom';
 import ApiPicture from '../../../Components/ApiPicture';
 import useOwnerDogs from '../../../CustomHooks/useOwnerDogs';
+import instance from '../../../axios';
+import requests from '../../../requests';
 
 const ClientProfile = () => {
 
   const navigate = useNavigate();
 
   const userDogs = useOwnerDogs();
+
+  const [notificationCount, setNotificationCount] = useState();
 
   const goToEditProfile = () => {
     navigate('/editProfile');
@@ -30,6 +34,17 @@ const ClientProfile = () => {
     return <DogListElement key={dog.pk} id={dog.pk} name={dog.name} imageSrc={dog.avatar}/>
   })
 
+  useEffect(() => {
+    instance.get(requests.getNotificationCount)
+    .then(response => setNotificationCount(response.data.count));
+  }, []);
+
+  const [tooltip, setTooltip] = useState("")
+
+  useEffect(() => {
+    setTooltip(`You have ${notificationCount} unread notification${notificationCount?.length === 1 ? "" : "s"}.`)
+  }, [notificationCount])
+
   return (
     <div className='clientProfile'>
       <h1>Your profile</h1>
@@ -40,9 +55,12 @@ const ClientProfile = () => {
             <ApiPicture src={details.avatar_url} />
           </div>
           <div className='icons'>
-            <Tooltip title='Notifications'>
-              <NotificationsNoneOutlinedIcon className='icon'  style={{marginTop: '8px', cursor: 'pointer'}} onClick={() => navigate('/notifications')}/>
-            </Tooltip>
+            <div>
+              <Tooltip title={notificationCount ? tooltip : 'Notifications'}>
+                <NotificationsNoneOutlinedIcon className='icon'  style={{marginTop: '8px', cursor: 'pointer'}} onClick={() => navigate('/notifications')}/>
+              </Tooltip>
+              {notificationCount && <div className='notificationCount'>{notificationCount}</div>}
+            </div>
             <Tooltip title='Edit your profile'>
               <EditOutlinedIcon className='icon'  style={{marginBottom: '8px', cursor: 'pointer'}} onClick={goToEditProfile}/>
             </Tooltip>
@@ -62,4 +80,4 @@ const ClientProfile = () => {
   )
 }
 
-export default ClientProfile
+export default ClientProfile;

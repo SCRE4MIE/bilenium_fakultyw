@@ -9,7 +9,7 @@ const TrainerDogElement = ({ id }) => {
   const [dogInfo, setDogInfo] = useState({})
 
   useEffect(() => {
-    instance.get(`${requests.getDogById}${id}/`)
+    instance.get(`${requests.getDog}${id}/`)
     .then(response => setDogInfo(response.data))
   }, []);
 

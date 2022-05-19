@@ -1,5 +1,4 @@
 import { Tooltip } from '@mui/material';
-import React, {useState} from 'react';
 import './TrainerProfile.css';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
@@ -15,6 +14,9 @@ import { useNavigate } from 'react-router-dom';
 const TrainerProfile = () => {
 
   const navigate = useNavigate();
+
+  
+  const [notificationCount, setNotificationCount] = useState();
 
   const goToEditProfile = () => {
     navigate('/editProfile');
@@ -63,6 +65,13 @@ const TrainerProfile = () => {
     details.phone_number.slice(6, 9)]
     .join('');
 
+  useEffect(() => {
+    instance.get(requests.getNotificationCount)
+    .then(response => setNotificationCount(response.data.count));
+  }, []);
+
+  const tooltip = `You have ${notificationCount} unread notifications.`;
+
   return (
     <div className='trainerProfile'>
       <h1>Your profile</h1>
@@ -74,12 +83,18 @@ const TrainerProfile = () => {
           </div>
           <div className='notifications-rating'>
             <div className='icons'>
-              <Tooltip title='Notifications'>
-                <NotificationsNoneOutlinedIcon className='icon' style={{cursor: 'pointer'}} onClick={() => navigate('/notifications')}/>
-              </Tooltip>
-              <Tooltip title='Edit your profile'>
-                <EditOutlinedIcon className='icon'  style={{cursor: 'pointer'}} onClick={goToEditProfile}/>
-              </Tooltip>
+              <div>
+                <Tooltip title={notificationCount ? tooltip : 'Notifications'}>
+                  <NotificationsNoneOutlinedIcon className='icon' style={{cursor: 'pointer'}} onClick={() => navigate('/notifications')}/>
+                </Tooltip>
+                {notificationCount && <div className='notificationCount'>{notificationCount}</div>}
+              </div>
+              <div>
+                <Tooltip title='Edit your profile'>
+                  <EditOutlinedIcon className='icon'  style={{cursor: 'pointer'}} onClick={goToEditProfile}/>
+                </Tooltip>
+                {notificationCount && <div className='notificationCountEpmty'>{notificationCount}</div>}
+              </div>
             </div>
             <Tooltip title='Your average rating'>
               <div className='rating'>

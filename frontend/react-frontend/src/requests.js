@@ -21,6 +21,8 @@ const requests = {
   walkDetails: 'v1/trainer-walks-list/',
   dogList: 'v1/get-dog-list/',
   getDog: 'v1/get-dog/',
+  getNotificationCount: 'notification/get-notification-count/',
+  getNotifications: 'notification/get-notification/',
 }
 
 export default requests;

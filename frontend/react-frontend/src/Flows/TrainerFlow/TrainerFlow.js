@@ -6,6 +6,8 @@ import TrainerIncomingWalks from './TrainerIncomingWalks/TrainerIncomingWalks';
 import TrainerActiveWalks from './TrainerActiveWalks/TrainerActiveWalks';
 import TrainerWalksHistory from './TrainerWalksHistory/TrainerWalksHistory';
 import TrainerEditProfile from './TrainerEditProfile/TrainerEditProfile';
+import TrainerDogProfile from './TrainerDogProfile/TrainerDogProfile';
+import TrainerNotifications from './TrainerNotifications/TrainerNotifications';
 
 const TrainerFlow = () => {
   return (
