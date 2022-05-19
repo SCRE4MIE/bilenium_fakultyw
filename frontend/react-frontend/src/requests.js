@@ -18,7 +18,9 @@ const requests = {
   getTrainerWalks: 'v1/trainer-walks-list/',
   updateWalk: 'v1/update-walk/',
   getTrainerWorkDaysByUser: 'v1/get-trainer-work-days-by-user/',
-  getDogById: 'v1/get-dog/',
+  walkDetails: 'v1/trainer-walks-list/',
+  dogList: 'v1/get-dog-list/',
+  getDog: 'v1/get-dog/',
 }
 
 export default requests;

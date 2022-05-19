@@ -1,0 +1,55 @@
+@import '../../../Variables/Variables.scss';
+
+@mixin text($fontSize){
+    font-family: $Jost;
+    color: $blueColor;
+    font-weight: 400;
+  }
+
+.trainerActiveWalks{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    p{
+        font-family: $Inter;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 22px;
+        color: $blueColor;
+        text-align: justify;
+        width:38ch;
+    }
+
+    .walkDate{
+        display:flex;
+        justify-content: center;
+    }
+
+    .walkHours{
+        display:flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .activeWalkHeader{
+        @include text($fontSize: 48px);
+        margin-top: 10px;
+        text-align: center;
+        display: flex;
+      }
+
+    .activeWalkDogs{
+        @include text($fontSize: 48px);
+        display: flex;
+        margin-top: 20px;
+        margin-left: 10px;
+      }
+
+    .line{
+        border: 1px solid $blueColor;
+        width: 90%;
+        display:flex;
+    }
+}

@@ -39,6 +39,10 @@
           align-items: center;
 }
 
+.AddNewDog .AddNewDog--form .formError {
+  color: #F94144;
+}
+
 .AddNewDog .AddNewDog--form input[type=text], .AddNewDog .AddNewDog--form input[type=number] {
   text-indent: 13px;
   padding: 12px 0;

@@ -26,6 +26,10 @@
         gap: 34px;
         align-items: center;
 
+        .formError{
+          color: $errorColor;
+        }
+
         input[type=text], input[type=number]{
             @include textInput($greenColor);
             width: 100%;
