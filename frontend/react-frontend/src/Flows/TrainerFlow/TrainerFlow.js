@@ -6,6 +6,7 @@ import TrainerIncomingWalks from './TrainerIncomingWalks/TrainerIncomingWalks';
 import TrainerActiveWalks from './TrainerActiveWalks/TrainerActiveWalks';
 import TrainerWalksHistory from './TrainerWalksHistory/TrainerWalksHistory';
 import TrainerEditProfile from './TrainerEditProfile/TrainerEditProfile';
+import TrainerDogProfile from './TrainerDogProfile/TrainerDogProfile';
 
 const TrainerFlow = () => {
   return (
@@ -14,9 +15,10 @@ const TrainerFlow = () => {
           <Route path="*" element={<TrainerProfile />} />
           <Route path='/' element={<TrainerProfile />} />
           <Route exact path='/incomingWalks' element={<TrainerIncomingWalks />} />
-          <Route exact path='/activeWalks' element={<TrainerActiveWalks />} />
+          <Route exact path='/activeWalks' element={<TrainerActiveWalks trainerId={sessionStorage.getItem('currentTrainer')} />} />
           <Route exact path='/walksHistory' element={<TrainerWalksHistory />} />
           <Route exact path='/editProfile' element={<TrainerEditProfile />} />
+          <Route exact path='/trainerDogProfile' element={<TrainerDogProfile dogId={sessionStorage.getItem('currentDog')} />} />
         </Routes>
     </div>
   )

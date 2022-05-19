@@ -1,0 +1,71 @@
+@import '../../../Variables/Variables.scss';
+
+@mixin text($fontSize){
+    font-family: $Jost;
+    color: $blueColor;
+    font-weight: 400;
+  }
+
+
+.trainerDogProfile{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    p{
+        margin-top: 20px;
+        font-family: $Inter;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 22px;
+        display:flex;
+        color: $blueColor;
+        text-align: justify;
+        width:38ch;
+    }
+
+    h2{
+        @include text($fontSize: 24px);
+        display: flex;
+        margin-top: 10px;
+      }
+}
+
+.trainerDogProfile--icons{
+    display:flex;
+}
+
+.trainerDogProfile--imageContainer{
+    flex:1;
+
+    .trainerDogProfile--image{
+        border-radius: 50%;
+        width:200px;
+        height:200px;
+    }
+}
+
+.editIcon{
+    flex:1;
+    color: $blueColor;
+    transition: 100ms;
+}
+
+.editIcon:hover {
+    transform: scale(1.4);
+  }
+
+.trainerDogProfile--header {
+    @include text($fontSize: 36px);
+    display: flex;
+    margin-bottom: 25px;
+  }
+
+
+
+
+
+

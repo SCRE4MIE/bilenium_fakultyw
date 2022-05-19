@@ -38,6 +38,10 @@
           align-items: center;
 }
 
+.EditDog .EditDog--form .formError {
+  color: #F94144;
+}
+
 .EditDog .EditDog--form input[type=text], .EditDog .EditDog--form input[type=number] {
   text-indent: 13px;
   padding: 12px 0;

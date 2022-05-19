@@ -10,7 +10,7 @@ const DogListElement = ({ imageSrc, name, id }) => {
   
   const navigate = useNavigate();
 
-  const openDogProfile = () => { //wchodzi do profilu psa i dopiero zmienia details na innego
+  const openDogProfile = () => { 
     sessionStorage.setItem('currentDog', id);
     navigate('/dogProfile');
   };
