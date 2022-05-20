@@ -39,8 +39,8 @@ const DogProfile = ({dogId}) => {
       </div>
       <h2>Breed: {dogData.breed}</h2>
       <h2>Age: {dogData.age}</h2>
-      <p>Description:</p>
-      <p>{dogData.description}</p>
+      <h2>Description:</h2>
+      <p className='DogProfile--description'>{dogData.description}</p>
       
     </div>
 

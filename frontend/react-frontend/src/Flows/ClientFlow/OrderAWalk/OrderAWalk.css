@@ -75,6 +75,10 @@
   background-color: #ffd87d;
 }
 
+.orderAWalk form .summary {
+  margin: 0px;
+}
+
 .orderAWalk form .summary .dogListElement:hover, .orderAWalk form .summary .trainerListElement:hover {
   background-color: #ffd87d;
 }

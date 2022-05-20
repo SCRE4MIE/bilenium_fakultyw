@@ -13,6 +13,8 @@
   cursor: pointer;
   -webkit-transition: 300ms;
   transition: 300ms;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .trainerListElement .trainerPictureContainer {

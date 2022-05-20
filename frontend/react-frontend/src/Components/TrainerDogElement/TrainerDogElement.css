@@ -1,0 +1,23 @@
+.trainerDogElement {
+  margin: 10px auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+}
+
+.trainerDogElement .dogImage {
+  width: 40px;
+  height: 40px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.trainerDogElement .dogImage img {
+  height: 100%;
+}
