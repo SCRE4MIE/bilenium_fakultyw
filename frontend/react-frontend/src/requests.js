@@ -23,6 +23,7 @@ const requests = {
   getDog: 'v1/get-dog/',
   getNotificationCount: 'notification/get-notification-count/',
   getNotifications: 'notification/get-notification/',
+  getUserWalks: 'v1/walk-list-user/',
 }
 
 export default requests;
