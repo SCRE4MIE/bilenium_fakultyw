@@ -3,8 +3,7 @@ import './DogListElement.css'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Tooltip } from '@mui/material/';
 import { useNavigate } from 'react-router-dom';
-import requests from '../../requests';
-import instance from '../../axios';
+import PetsIcon from '@mui/icons-material/Pets';
 
 const DogListElement = ({ imageSrc, name, id }) => {
   
@@ -24,7 +23,11 @@ const DogListElement = ({ imageSrc, name, id }) => {
     <div className='dogListElement' >
       <div className='dogDataContainer' onClick={openDogProfile}>
         <div className='dogPictureContainer'>
-          <img src={imageSrc} alt='' />
+          {
+            imageSrc ? 
+            <img src={imageSrc} alt=''/> 
+            : <PetsIcon style={{alignSelf: 'center', fontSize: '35px', color: 'lightgray', width: '100%'}}/>
+          }
         </div>
         <p className='dogName'>{name}</p>
       </div>

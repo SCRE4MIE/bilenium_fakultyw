@@ -23,7 +23,7 @@ const TrainerListElement = ({ imageSrc, name, id, rating_trainer }) => {
   return (
     <div className='trainerListElement' onClick={openTrainerProfile}>
        <div className='trainerPictureContainer'>
-         <ApiPicture src={imageSrc} />
+         <ApiPicture src={imageSrc} style={{width: '100%'}}/>
       </div>
       <p className='trainerName'>{name}</p>
       <span>
