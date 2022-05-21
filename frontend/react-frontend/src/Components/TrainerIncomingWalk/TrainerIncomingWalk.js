@@ -21,7 +21,7 @@ const TrainerIncomingWalk = ({ id, startDate, endDate, dogs}) => {
   ));
 
   const before24h = dayjs(startDate).diff(today, 'hour') > 24;
-  
+
   return (
     <div className='trainerIncomingWalk'>
       <div className='dogElements'>
@@ -36,7 +36,7 @@ const TrainerIncomingWalk = ({ id, startDate, endDate, dogs}) => {
         <p>
           Start: {dayjs(startDate).subtract(1, 'minute').format('hh:mm')} - {dayjs(endDate).format('hh:mm')} : End
         </p>
-        {before24h ? <button className='button' onClick={() => setToggleTransfer(prev => !prev)}>Transfer to a different trainer</button> : 
+        {before24h ? <button className='button' onClick={() => setToggleTransfer(prev => !prev)}>Transfer to a different trainer</button> :
         <Alert severity="info" style={{letterSpacing: '1px', width: '100%', borderRadius: '0px 0px 10px 10px', marginBottom: '-16px', justifyContent: 'center'}}>Transfer unavailable</Alert>}
       </div>
       {toggleTransfer && <TransferAWalk toggleModal={setToggleTransfer} myId={userDetails.pk} walkData={{id:id, startDate:startDate, endDate:endDate, dogs:dogs}}/>}
