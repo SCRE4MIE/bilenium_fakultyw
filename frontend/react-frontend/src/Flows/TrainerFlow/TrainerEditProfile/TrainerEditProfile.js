@@ -42,8 +42,6 @@ const TrainerEditProfile = () => {
 
     imageFile.files[0] ? formData.append("avatar", imageFile.files[0]) : formData.append("avatar", "");
 
-    console.log(imageFile.files[0]);
-
     instance.patch(requests.editProfile, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -57,10 +55,10 @@ const TrainerEditProfile = () => {
           sessionStorage.setItem('userDetails', JSON.stringify(response.data));
           navigate('/');
         }).catch(error => {
-          console.log(error.details);
+          console.log(error);
         })
       }).catch(error => {
-        console.log(error.response.data);
+        console.log(error);
       });
     // navigate("/");
   }

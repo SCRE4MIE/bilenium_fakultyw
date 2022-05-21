@@ -7,6 +7,7 @@ from django.utils.dateparse import parse_datetime
 from accounts.models import CustomUser
 from accounts.permissions import IsDogOwner
 from accounts.permissions import IsTrainer
+from notification.models import WalkNotification
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.parsers import FormParser
@@ -237,6 +238,24 @@ class UpdateWalk(generics.RetrieveUpdateDestroyAPIView):
         context.update({'pk': self.kwargs.get('pk')})
         return context
 
+    def delete(self, request, *args, **kwargs):  # noqa: D102
+        instance = self.get_object()
+        id_list = [instance.trainer.id]
+        for dog in instance.dogs.all():
+            id_list.append(dog.owner_id)
+        walk_start_date = instance.date
+        instance.delete()
+
+        notifi_obj = WalkNotification.objects.create(
+            action='Delete',
+            walk_start_date=walk_start_date,
+        )
+        queryset = CustomUser.objects.filter(id__in=id_list)
+        for user in queryset:
+            notifi_obj.targets_ids.add(user)
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 class CheckTrainerInWalk(generics.GenericAPIView):
     """
@@ -384,3 +403,17 @@ class DeleteTrainersWorksDays(generics.DestroyAPIView):
     serializer_class = TrainersWorksDaysSerializer
     permission_classes = (IsAuthenticated, IsTrainer, TrainersWorkDaysIsOwner)
     queryset = TrainersWorksDays.objects.all()
+
+
+class UsersWalkList(generics.ListAPIView):
+    """
+    User's walks list.
+
+    permissions - is authenticated,
+    """
+
+    serializer_class = WalkSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):  # noqa: D102
+        return Walk.objects.filter(dogs__owner=self.request.user)

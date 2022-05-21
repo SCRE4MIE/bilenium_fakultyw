@@ -15,6 +15,10 @@
   text-align: center;
 }
 
+.DogProfile p.DogProfile--description {
+  line-height: 30px;
+}
+
 .DogProfile p {
   margin-top: 20px;
   font-family: "Inter", sans-serif;
@@ -26,8 +30,8 @@
   display: -ms-flexbox;
   display: flex;
   color: #577590;
-  text-align: justify;
-  width: 38ch;
+  text-align: left;
+  max-width: 30ch;
 }
 
 .DogProfile h2 {

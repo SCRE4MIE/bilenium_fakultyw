@@ -14,7 +14,11 @@
     flex-direction: column;
     text-align: center;
 
-    p{
+    p.DogProfile--description {
+        line-height: 30px;
+    }
+
+    p {
         margin-top: 20px;
         font-family: $Inter;
         font-style: normal;
@@ -23,8 +27,8 @@
         line-height: 22px;
         display:flex;
         color: $blueColor;
-        text-align: justify;
-        width:38ch;
+        text-align: left;
+        max-width:30ch;
     }
 
     h2{

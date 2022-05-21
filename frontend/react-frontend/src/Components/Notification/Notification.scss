@@ -1,0 +1,52 @@
+@import '../../../../Variables/Variables.scss';
+
+.notification {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  margin: 18px auto;
+  width: 100%;
+  outline: 1px solid $blueColorLighter;
+  outline-offset: -6px;
+  border: 1px solid $blueColorLighter;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  transition: 100ms;
+  font-size: 18px;
+  color: $blueColor;
+  
+  .description {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-family: $Inter;
+
+    .icon {
+      font-size: 40px;
+    }
+
+    .icon:hover {
+      transform: scale(1);
+    }
+  }
+
+  .time {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+.notification:hover {
+  outline-offset: -2px;
+  outline-color: white;
+}
+
+@media screen and (max-width: 450px) {
+  .notification {
+    max-width: 80%;
+  }
+}

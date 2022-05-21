@@ -23,13 +23,17 @@ const TrainerListElement = ({ imageSrc, name, id, rating_trainer }) => {
   return (
     <div className='trainerListElement' onClick={openTrainerProfile}>
        <div className='trainerPictureContainer'>
-         <ApiPicture src={imageSrc} />
+         <ApiPicture src={imageSrc} style={{width: '100%'}}/>
       </div>
       <p className='trainerName'>{name}</p>
       <span>
-        {/* <p className="trainerRating">{ratingSum(rating_trainer)}/5</p> */}
-        <p className="trainerRating">4/5</p>
-        <StarIcon className='starIcon'/>
+        {isNaN(ratingSum(rating_trainer)) ?
+        <p className="trainerRating">No opinion yet</p>
+        :
+        <>
+          <p className="trainerRating">{ratingSum(rating_trainer)}/5</p>
+          <StarIcon className='starIcon'/>
+        </>}
       </span>
     </div>
   )

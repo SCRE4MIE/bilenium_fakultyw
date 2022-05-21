@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     # custom apps
     'accounts',
     'api',
+    'notification',
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'

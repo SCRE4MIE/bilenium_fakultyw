@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react';
-import PersonIcon from '@mui/icons-material/Person';
+import PetsIcon from '@mui/icons-material/Pets';
 
 const DogEditPicture = ({ src }) => {
   return (
@@ -8,7 +8,7 @@ const DogEditPicture = ({ src }) => {
       {
         src ?
         <img src={src} alt='dog profile picture' />
-        : <PersonIcon style={{alignSelf: 'center', fontSize: '100px', color: 'lightgray'}}/>
+        : <PetsIcon style={{alignSelf: 'center', fontSize: '100px', color: 'lightgray'}}/>
       }
 
     </>

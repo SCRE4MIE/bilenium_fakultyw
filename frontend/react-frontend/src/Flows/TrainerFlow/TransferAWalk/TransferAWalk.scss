@@ -1,0 +1,82 @@
+
+@import '../../../Variables/Variables.scss';
+
+.transferModal {
+  position: absolute;
+  width: 100Vw;
+  height: 100Vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba($color: #000000, $alpha: 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .transferAWalk {
+    background-color: white;
+    padding: 34px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+
+    .buttons {
+      display: flex;
+      width: 100%;
+      gap: 34px;
+
+      .button {
+        @include button($color: $blueColor, $fontColor: white);
+
+        &:hover {
+          background-color: $blueColorLighter;
+          color: black;
+        }
+      }
+    }
+
+
+    .summary .trainerListElement:hover {
+      background-color: $clientOrangeHover;
+
+      .clearIcon {
+        margin: 0px;
+      }
+    }
+
+    .trainerListElement {
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 14px;
+      transition: 200ms;
+      cursor: pointer;
+      box-shadow: none;
+      border-radius: 0px;
+      margin: 0px;
+
+      > div {
+        display: flex;
+        width: 200px;
+        align-items: center;
+        justify-content: space-between;
+
+        div {
+          width: 40px;
+          height: 40px; 
+        }
+
+        p {
+          min-width: 40px;
+        }
+      }
+    }
+
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 24px;
+    }
+  }
+}

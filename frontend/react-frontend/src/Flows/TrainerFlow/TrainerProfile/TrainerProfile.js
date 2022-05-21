@@ -1,5 +1,4 @@
 import { Tooltip } from '@mui/material';
-import React from 'react';
 import './TrainerProfile.css';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
@@ -15,6 +14,9 @@ import { useNavigate } from 'react-router-dom';
 const TrainerProfile = () => {
 
   const navigate = useNavigate();
+
+  
+  const [notificationCount, setNotificationCount] = useState();
 
   const goToEditProfile = () => {
     navigate('/editProfile');
@@ -32,12 +34,43 @@ const TrainerProfile = () => {
   }, []);
 
   const details = JSON.parse(sessionStorage.getItem('userDetails'));
+  const currentTrainerId = details.pk;
+  const [trainerDetails, setTrainerDetails] = useState({});
+  const trainer = trainerDetails.trainerDetails;
+  useEffect(() => {
+    instance.get(requests.trainerDetails + currentTrainerId.toString())
+        .then(response => {
+
+        setTrainerDetails(prevUserData => ({
+            ...prevUserData,
+            trainerDetails: response.data,
+        }));
+
+        }).catch(error => {
+        console.log(error.details);
+        })
+  }, [])
+
+  const ratingSum = (ratingArr) => {
+      let rating = 0;
+      for (let index = 0; index < ratingArr.length; ++index) {
+      rating = rating + ratingArr[index].value;
+      }
+      return Math.round((rating/ratingArr.length)*100)/100;
+  };
 
   const phone_number = [
     details.phone_number.slice(0, 3), " ",
     details.phone_number.slice(3, 6), " ",
     details.phone_number.slice(6, 9)]
     .join('');
+
+  useEffect(() => {
+    instance.get(requests.getNotificationCount)
+    .then(response => setNotificationCount(response.data.count));
+  }, []);
+
+  const tooltip = `You have ${notificationCount} unread notifications.`;
 
   return (
     <div className='trainerProfile'>
@@ -50,17 +83,32 @@ const TrainerProfile = () => {
           </div>
           <div className='notifications-rating'>
             <div className='icons'>
-              <Tooltip title='Notifications'>
-                <NotificationsNoneOutlinedIcon className='icon'  style={{cursor: 'pointer'}}/>
-              </Tooltip>
-              <Tooltip title='Edit your profile'>
-                <EditOutlinedIcon className='icon'  style={{cursor: 'pointer'}} onClick={goToEditProfile}/>
-              </Tooltip>
+              <div>
+                <Tooltip title={notificationCount ? tooltip : 'Notifications'}>
+                  <NotificationsNoneOutlinedIcon className='icon' style={{cursor: 'pointer'}} onClick={() => navigate('/notifications')}/>
+                </Tooltip>
+                {notificationCount && <div className='notificationCount'>{notificationCount}</div>}
+              </div>
+              <div>
+                <Tooltip title='Edit your profile'>
+                  <EditOutlinedIcon className='icon'  style={{cursor: 'pointer'}} onClick={goToEditProfile}/>
+                </Tooltip>
+                {notificationCount && <div className='notificationCountEpmty'>{notificationCount}</div>}
+              </div>
             </div>
             <Tooltip title='Your average rating'>
               <div className='rating'>
-                <p>4.5/5</p>
-                <StarIcon className='starIcon' />
+                {trainer ?
+                  <>
+                  {isNaN(ratingSum(trainer.rating_trainer)) ?
+                  <p className="trainerRating">No opinion yet</p>
+                  :
+                  <>
+                    <p>{ratingSum(trainer.rating_trainer)}/5</p>
+                    <StarIcon className='starIconTrainer' />
+                  </>}
+                  </>
+                : null}
               </div>
             </Tooltip>
           </div>
@@ -70,21 +118,30 @@ const TrainerProfile = () => {
           {phone_number}
         </h2>
       </div>
-      <div className='opinionList'>
-        <h3 className='opinionListHeader'>Your ratings</h3>
-        <OpinionAboutTrainerElement 
-          imageSrc={woman} 
-          name='Jessica' 
-          rating={4.5} 
-          opinion='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-        />
-        <OpinionAboutTrainerElement 
-          imageSrc={woman} 
-          name='Samantha' 
-          rating={4.5} 
-          opinion='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
-        />
+      {trainer ?
+      <>
+      <div className="opinionsHeader">
+          <h3 className='opinionListTitle'>Your ratings:</h3>
       </div>
+      <div className="opinionList">
+        {trainer.rating_trainer.length !== 0 ? (
+          <>
+          {trainer.rating_trainer.map((item) => (
+          <OpinionAboutTrainerElement
+          key = {item.pk}
+          id = {item.pk}
+          username = {item.evaluator.username}
+          comment = {item.comment}
+          value = {item.value}
+          avatar = {item.evaluator.avatar_url}/>
+          ))}
+          </>
+          ) : (
+          <div className="noOpinion">
+              <h3>You have no opinions yet</h3>
+          </div>
+          )}
+      </div></> : null }
     </div>
   )
 }
