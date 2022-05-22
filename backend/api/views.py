@@ -416,4 +416,4 @@ class UsersWalkList(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):  # noqa: D102
-        return Walk.objects.filter(dogs__owner=self.request.user)
+        return Walk.objects.filter(dogs__owner=self.request.user).distinct()
