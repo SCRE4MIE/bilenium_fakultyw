@@ -13,10 +13,6 @@ const TrainerActiveWalks = ({trainerId}) => {
   useEffect(() => {
     instance.get(`${requests.walkDetails}${trainerId}/`)
     .then(response => {
-      if(response.data.length === 0)
-      {
-        console.log("No walks");
-      }
       for(var i = 0; i < response.data.length; i++)
       {
         const day = dayjs(response.data[i].date).format('YYYY-MM-DD');
@@ -28,15 +24,8 @@ const TrainerActiveWalks = ({trainerId}) => {
           if(hourStart <= hourNow && hourNow <= hourEnd)
           {
             setWalkData(response.data[i]);
+            console.log(walkData);
           }
-          else
-          {
-            console.log("Hours don't match")
-          }
-        }
-        else
-        {
-          console.log("Dates don't match");
         }
       }
     });
@@ -45,19 +34,19 @@ const TrainerActiveWalks = ({trainerId}) => {
   const dateWalk = 'Walk date: ' + dayjs(walkData.date).format('YYYY-MM-DD');
   const hourStart = 'Walk hours: ' + dayjs(walkData.date).format('HH:mm');
   const hourEnd = dayjs(walkData.date_end).format('HH:mm');
+  const isData = walkData.length;
+  console.log(isData);
   
 
-  const dogComponents = walkData.dogs?.map(id => <TrainerWalkDogs key = {id} id = {id}/>);
-  
+  //const dogComponents = walkData.dogs?.map(id => <TrainerWalkDogs key = {id} id = {id}/>);
+  const dogComponents = walkData.dogs?.map(id => {
+    return <TrainerWalkDogs key = {id} id = {id}/>
+  });
 
   return (
     <div className='trainerActiveWalks'>
-      <h1 className='activeWalkHeader'>Active walk</h1>
-      <p className='walkDate'> {dateWalk}</p>
-      <p className='walkHours'> {hourStart} - {hourEnd}</p>
-
-      <h2 className='activeWalkDogs'></h2>
-      {dogComponents}
+      {dogComponents.length > 0 && <h1>Active walk</h1>}
+      {dogComponents.length > 0 ? dogComponents : <h1>You have no active walks</h1>}
 
     </div>
   )
