@@ -15,7 +15,7 @@ const TrainerProfile = () => {
 
   const navigate = useNavigate();
 
-  
+
   const [notificationCount, setNotificationCount] = useState();
 
   const goToEditProfile = () => {
@@ -37,6 +37,7 @@ const TrainerProfile = () => {
   const currentTrainerId = details.pk;
   const [trainerDetails, setTrainerDetails] = useState({});
   const trainer = trainerDetails.trainerDetails;
+  const rating_trainer_arr = trainer ? Object.values(trainer.rating_trainer).reverse() : null;
   useEffect(() => {
     instance.get(requests.trainerDetails + currentTrainerId.toString())
         .then(response => {
@@ -126,7 +127,7 @@ const TrainerProfile = () => {
       <div className="opinionList">
         {trainer.rating_trainer.length !== 0 ? (
           <>
-          {trainer.rating_trainer.map((item) => (
+          {rating_trainer_arr.map((item) => (
           <OpinionAboutTrainerElement
           key = {item.pk}
           id = {item.pk}
