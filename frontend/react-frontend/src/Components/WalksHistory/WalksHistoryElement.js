@@ -37,6 +37,7 @@ const WalksHistoryElement= ({dogs, trainer, date, date_end }) => {
         setTrainerDetails(response.data);
       }).catch(error => {
         console.log(error.details);
+        alert(error.details);
     })
     }, []);
     return(
