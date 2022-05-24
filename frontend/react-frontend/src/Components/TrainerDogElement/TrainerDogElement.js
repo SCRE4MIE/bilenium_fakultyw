@@ -19,7 +19,7 @@ const TrainerDogElement = ({ id }) => {
         {
           dogInfo.avatar ?
           <img src={dogInfo.avatar} alt='' />
-          : <PersonIcon style={{alignSelf: 'center', fontSize: '100px', color: 'lightgray'}}/>
+          : <PersonIcon style={{alignSelf: 'center', fontSize: '40px', color: 'lightgray'}}/>
         }
       </div>
 

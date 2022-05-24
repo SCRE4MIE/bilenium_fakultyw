@@ -1,0 +1,18 @@
+.trainerElement {
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .trainerImage {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        overflow: hidden;
+        border-radius: 50%;
+
+        img {
+            height: 100%;
+        }
+    }
+}
