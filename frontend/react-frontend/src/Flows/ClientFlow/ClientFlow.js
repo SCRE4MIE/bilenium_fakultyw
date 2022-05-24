@@ -16,6 +16,8 @@ import DogAdded from './DogAdded/DogAdded';
 import TestComponent from './TestComponent';
 import OrderWalkConfirm from './OrderWalkConfirm/OrderWalkConfirm';
 import ClientNotifications from './ClientNotifications/ClientNotifications';
+import RateTrainer from './RateTrainer/RateTrainer';
+import TrainerRated from './TrainerRated/TrainerRated';
 
 const ClientFlow = () => {
 
@@ -28,6 +30,7 @@ const ClientFlow = () => {
           <Route exact path='/orderAWalk' element={<OrderAWalk />} />
           <Route exact path='/trainerList' element={<ClientTrainerList />} />
           <Route exact path='/walksHistory' element={<WalksHistory />} />
+          <Route exact path='/walksHistory/rateTrainer' element={<RateTrainer />} />
           <Route exact path='/activeWalks' element={<ActiveWalks />} />
           <Route exact path='/futureWalks' element={<IncomingWalks />} />
           <Route exact path='/trainerProfile' element={<ClientTrainerProfile />} />
@@ -35,6 +38,7 @@ const ClientFlow = () => {
           <Route exact path='/editDog' element={<EditDog dogId={sessionStorage.getItem('currentDog')}/>} />
           <Route exact path='/addNewDog' element={<AddNewDog dogId={sessionStorage.getItem('currentDog')}/>} />
           <Route exact path='/dogAdded' element={<DogAdded/>} />
+          <Route exact path='/trainerRated' element={<TrainerRated/>} />
           <Route exact path="/test" element={<TestComponent />} />
           <Route exact path="/orderWalkConfirm" element={<OrderWalkConfirm />} />
           <Route exact path="/notifications" element={<ClientNotifications />} />

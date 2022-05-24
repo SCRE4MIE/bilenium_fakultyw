@@ -20,6 +20,7 @@
     overflow: hidden;
     text-overflow: clip;
     max-width: 2000px;
+    border-radius: 10px;
     .line{
         size:2px;
         background-color: $blueColor;;
@@ -34,6 +35,51 @@
         @include text($fontSize: 24px);
     }
     .dogContainer{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: left;
+        // padding-left: 50px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        // .dog{
+        //     width: 40%;
+        // }
+        // .dogNameImage{
+        //     position: relative;
+        //     width: 60%;
+        //     display: flex;
+        //     flex-direction: row;
+        //     align-items: center;
+        //     justify-content: flex-start;
+        //     .dogImage{
+        //         position: absolute;
+        //         width: 50%;
+        //         display: flex;
+        //         align-items: center;
+        //         justify-content: flex-start;
+        //         text-align: left;
+        //         background-color: red;
+        //         img{
+        //             border-radius: 50%;
+        //         }
+                
+        //     }
+        //     .dogName{
+        //         position: absolute;
+        //         padding-left: 90px;
+        //         width: 50%;
+        //         justify-content: flex-start;
+        //         text-align: left;
+                
+        //     }
+        // }
+    
+    }
+    .trainerContainer{
         width: 100%;
         height: 150px;
         display: flex;
@@ -62,6 +108,7 @@
                 align-items: center;
                 justify-content: flex-start;
                 text-align: left;
+                background-color: red;
                 img{
                     border-radius: 50%;
                 }

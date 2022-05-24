@@ -24,6 +24,8 @@ const requests = {
   getNotificationCount: 'notification/get-notification-count/',
   getNotifications: 'notification/get-notification/',
   getUserWalks: 'v1/walk-list-user/',
+  userWalksHistory: 'v1/walk-list-user/',
+  rateTrainer: 'v1/add-rating/',
 }
 
 export default requests;
