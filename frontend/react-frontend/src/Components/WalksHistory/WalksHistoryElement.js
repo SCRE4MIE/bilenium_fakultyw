@@ -37,7 +37,6 @@ const WalksHistoryElement= ({dogs, trainer, date, date_end }) => {
         setTrainerDetails(response.data);
       }).catch(error => {
         console.log(error.details);
-        alert(error.details);
     })
     }, []);
     return(
@@ -46,7 +45,6 @@ const WalksHistoryElement= ({dogs, trainer, date, date_end }) => {
         <div className='walksHistoryElement' onClick={()=>{navigate("rateTrainer", {state:{trainerName: trainerDetails.username, trainerId: trainer}})}}>
         <div className='dogContainer'>
         {dogsDetails.map((dog) => <DogsListComp  key = {dog.id} dogImage={dog.image_url} dogName={dog.name} />)}
-         
        </div>
        <hr className='line'></hr>
        <div className='trainerContainer'>

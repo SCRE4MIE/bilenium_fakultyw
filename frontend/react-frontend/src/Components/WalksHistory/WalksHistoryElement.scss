@@ -14,7 +14,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 300px;
     margin-bottom: 20px;
     cursor: pointer;
     overflow: hidden;
@@ -38,46 +37,9 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        align-items: flex-start;
+        justify-content: flex-start;
         text-align: left;
-        // padding-left: 50px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        // .dog{
-        //     width: 40%;
-        // }
-        // .dogNameImage{
-        //     position: relative;
-        //     width: 60%;
-        //     display: flex;
-        //     flex-direction: row;
-        //     align-items: center;
-        //     justify-content: flex-start;
-        //     .dogImage{
-        //         position: absolute;
-        //         width: 50%;
-        //         display: flex;
-        //         align-items: center;
-        //         justify-content: flex-start;
-        //         text-align: left;
-        //         background-color: red;
-        //         img{
-        //             border-radius: 50%;
-        //         }
-                
-        //     }
-        //     .dogName{
-        //         position: absolute;
-        //         padding-left: 90px;
-        //         width: 50%;
-        //         justify-content: flex-start;
-        //         text-align: left;
-                
-        //     }
-        // }
-    
     }
     .trainerContainer{
         width: 100%;

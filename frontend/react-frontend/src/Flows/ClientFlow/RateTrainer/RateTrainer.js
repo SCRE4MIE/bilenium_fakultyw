@@ -84,7 +84,7 @@ const RateTrainer = () => {
             </div>
             <div className='trainerRatingWithStar'>
               <div className='trainerRating'>
-                <h2>{trainerDetails.rating_trainer ? ratingSum(trainerDetails.rating_trainer)+"/5": "No opinions yet"}</h2>
+                <h2>{trainerDetails.rating_trainer ? ratingSum(trainerDetails.rating_trainer)+"/5": " /5"}</h2>
               </div>
               <div className='trainerStar'>
                  <h2><StarBorderIcon fontSize='large'/></h2>

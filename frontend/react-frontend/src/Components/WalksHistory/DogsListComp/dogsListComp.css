@@ -1,9 +1,25 @@
-.dog {
+.container {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.container .dog {
   width: 40%;
 }
 
-.dogNameImage {
-  position: relative;
+.container .dogNameImage {
   width: 60%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -20,7 +36,7 @@
           justify-content: flex-start;
 }
 
-.dogNameImage .dogImage {
+.container .dogNameImage .dogImage {
   width: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -34,11 +50,12 @@
   text-align: left;
 }
 
-.dogNameImage .dogImage img {
+.container .dogNameImage .dogImage img {
   border-radius: 50%;
 }
 
-.dogNameImage .dogName {
+.container .dogNameImage .dogName {
+  padding-left: 90px;
   width: 50%;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
