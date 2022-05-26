@@ -40,6 +40,8 @@
 
 .trainerDogProfile--imageContainer{
     flex:1;
+    display: flex;
+    justify-content: center;
 
     .trainerDogProfile--image{
         border-radius: 50%;
