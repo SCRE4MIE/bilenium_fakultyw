@@ -69,7 +69,13 @@ const RegisterForm = (props) => {
       <h1>Create an account</h1>
       <form onSubmit={formik.handleSubmit}>
         {registerError.email && <p className='formError'>{registerError.email}</p>}
-        {formik.errors.email && formik.touched.email ? <p className="formError">{formik.errors.email}</p> : null}
+        <label htmlFor='email'>
+          {
+            formik.errors.email && formik.touched.email ? 
+            <p className="formError">{formik.errors.email}</p> 
+            : <p className='formLabel'>E-mail</p>
+          }
+        </label>
         <input 
           name='email' 
           type="text" 
@@ -79,7 +85,12 @@ const RegisterForm = (props) => {
           onChange={formik.handleChange} 
         />
         {registerError.username && <p className='formError'>{registerError.username}</p>}
-        {formik.errors.username && formik.touched.username ? <p className="formError">{formik.errors.username}</p> : null}
+        <label htmlFor='username'>
+          {
+          formik.errors.username && formik.touched.username ?
+          <p className="formError">{formik.errors.username}</p> 
+          : <p className='formLabel'>Username</p>}
+        </label>
         <input 
           name='username' 
           type="text" 
@@ -88,8 +99,12 @@ const RegisterForm = (props) => {
           value={formik.values.username} 
           onChange={formik.handleChange} 
         />
-
-        {formik.errors.password && formik.touched.password ?  <p className="formError">{formik.errors.password}</p> : null}
+        <label htmlFor='password'>
+          {
+            formik.errors.password && formik.touched.password ?  
+            <p className="formError">{formik.errors.password}</p> 
+            : <p className='formLabel'>Password</p>}
+        </label>
         <input 
           name='password' 
           type="password" 
@@ -99,7 +114,12 @@ const RegisterForm = (props) => {
           onChange={formik.handleChange} 
         />
 
-        {formik.errors.repeatPassword && formik.touched.repeatPassword ? <p className="formError">{formik.errors.repeatPassword}</p> : null}
+        <label htmlFor='repeatPassword'>
+          {
+            formik.errors.repeatPassword && formik.touched.repeatPassword ? 
+            <p className="formError">{formik.errors.repeatPassword}</p> 
+            : <p className='formLabel'>Repeat password</p>}
+        </label>
         <input 
          name='repeatPassword' 
          type="password" 
@@ -109,7 +129,12 @@ const RegisterForm = (props) => {
          onChange={formik.handleChange} 
         />
 
-        {formik.errors.phoneNumber && formik.touched.phoneNumber ? <p className="formError">{formik.errors.phoneNumber}</p> : null}
+        <label htmlFor='phoneNumber'>
+        {
+          formik.errors.phoneNumber && formik.touched.phoneNumber ? 
+          <p className="formError">{formik.errors.phoneNumber}</p> 
+          : <p className='formLabel'>Phone number</p>}
+        </label>
         <input 
          name='phoneNumber' 
          type="text" 

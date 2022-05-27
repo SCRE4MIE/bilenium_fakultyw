@@ -6,9 +6,8 @@
   flex: 1;
   padding-bottom: 20px;
 
-  .formError {
-    color: rgb(255, 77, 77);
-    margin-top: -22px;
+  .formError, .formLabel {
+    margin-top: -20px;
     margin-left: 15px;
     background-color: white;
     width: fit-content;
@@ -16,6 +15,12 @@
     border-radius: 0 10px 0 0;
     padding-right: 5px;
     margin-bottom: 0;
+  }
+  .formError {
+    color: rgb(255, 77, 77);
+  }
+  .formLabel{
+    color: $greenColor;
   }
 
   h1 {

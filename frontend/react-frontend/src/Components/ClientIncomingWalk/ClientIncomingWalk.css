@@ -86,7 +86,7 @@
 }
 
 @media screen and (max-width: 500px) {
-  .trainerIncomingWalk {
-    max-width: 70%;
+  .clientIncomingWalk {
+    min-width: 70%;
   }
 }

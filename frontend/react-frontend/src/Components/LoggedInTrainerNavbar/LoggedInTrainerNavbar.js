@@ -5,6 +5,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link, useNavigate } from 'react-router-dom';
+import { Tooltip } from '@mui/material';
 
 const LoggedInTrainerNavbar = ({ signOut }) => {
 
@@ -38,18 +39,29 @@ const LoggedInTrainerNavbar = ({ signOut }) => {
   return (
     <div style={{zIndex: '10'}} className={`loggedInTrainerNavbar ${!navHidden && 'menuShow'}`}>
       <div className='navButtons'>
-        {navHidden && <ArrowBackIcon onClick={navigateBack} className='menuIcons'/>}
-        <AccountCircleOutlinedIcon onClick={navigateToProfile} className='menuIcons'/>
+        {navHidden && 
+        <Tooltip title='Go back'>
+          <ArrowBackIcon onClick={navigateBack} className='menuIcons'/>
+        </Tooltip>
+        }
+        <Tooltip title='Go to your profile'>
+          <AccountCircleOutlinedIcon onClick={navigateToProfile} className='menuIcons'/>
+        </Tooltip>
         {navHidden ? 
-          <MenuIcon 
-            className='menuIcons'
-            onClick={toggleNav}
-          /> 
+          <Tooltip title='Expand Menu'>
+            <MenuIcon 
+              className='menuIcons'
+              onClick={toggleNav}
+            />
+          </Tooltip>
+
             : 
-          <CloseIcon 
-            className='menuIcons' 
-            onClick={toggleNav}
-          />
+          <Tooltip title='Close menu'>
+            <CloseIcon 
+              className='menuIcons' 
+              onClick={toggleNav}
+            />
+          </Tooltip>
           }
       </div>
       <div className='navLinks' style={hideElements}>

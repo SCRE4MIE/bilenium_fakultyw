@@ -21,18 +21,34 @@
       }
 
       .EditDog--form {
-        display: flex;
+        @include flexCenterCenter();
         flex-direction: column;
-        gap: 34px;
-        align-items: center;
+        flex: 1;
+        padding-bottom: 20px;
+        align-items: flex-start;
 
-        .formError{
-          color: $errorColor;
+        .formError, .formLabel {
+          margin-top: -20px;
+          margin-left: 15px;
+          background-color: white;
+          width: fit-content;
+          align-self: flex-start;
+          border-radius: 0 10px 0 0;
+          padding-right: 5px;
+          margin-bottom: 0;
+          max-width: 30ch;
+        }
+        .formError {
+          color: rgb(255, 77, 77);
+        }
+        .formLabel{
+          color: $greenColor;
         }
 
         input[type=text], input[type=number]{
             @include textInput($greenColor);
             width: 100%;
+            margin-bottom: 34px;
         }
   
         .EditDog--desc{
@@ -41,6 +57,7 @@
           width: 100%;
           border-radius: 11px;
           @include textInput($greenColor);
+          margin-bottom: 34px;
       }
   
         .EditDog--buttons{
@@ -95,6 +112,8 @@ input[type="file"] {
   background-color: gray;
   display: flex;
   justify-content: center;
+  box-shadow: 0px 2px 4px rgba($color: #000000, $alpha: 0.25);
+  border: 4px solid white;
   
   img {
     height: 100%;

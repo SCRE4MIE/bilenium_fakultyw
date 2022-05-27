@@ -76,7 +76,12 @@ const EditDog = ({dogId}) => {
         {imageURL[0] ? <img src={imageURL[0]} alt=''/> : <DogEditPicture src={dogData.avatar}/>}
       </div>
       <form id = "EditDog--form" className='EditDog--form' onSubmit={formik.handleSubmit}>
-            {formik.errors.name && formik.touched.name ? <p className="formError">{formik.errors.name}</p> : null}
+            <label htmlFor="name">
+            {
+              formik.errors.name && formik.touched.name ? 
+              <p className="formError">{formik.errors.name}</p> 
+              : <p className="formLabel">Name</p>}
+            </label>
             <input 
               name='name' 
               type="text" 
@@ -85,7 +90,13 @@ const EditDog = ({dogId}) => {
               value={formik.values.name} 
               onChange={formik.handleChange} 
             />
-            {formik.errors.breed && formik.touched.breed ? <p className="formError">{formik.errors.breed}</p> : null}
+
+            <label htmlFor="breed">
+            {
+              formik.errors.breed && formik.touched.breed ? 
+              <p className="formError">{formik.errors.breed}</p> 
+              : <p className="formLabel">Breed</p>}
+            </label>
             <input 
               name='breed' 
               type="text" 
@@ -94,7 +105,13 @@ const EditDog = ({dogId}) => {
               value={formik.values.breed} 
               onChange={formik.handleChange}
             />
-            {formik.errors.age && formik.touched.age ? <p className="formError">{formik.errors.age}</p> : null}
+
+            <label htmlFor="age">
+              {
+                formik.errors.age && formik.touched.age ? 
+                <p className="formError">{formik.errors.age}</p> 
+                : <p className="formLabel">Age</p>}
+            </label>
             <input 
               name='age' 
               type="number" 
@@ -103,7 +120,12 @@ const EditDog = ({dogId}) => {
               value={formik.values.age} 
               onChange={formik.handleChange}
             />
-            {formik.errors.description && formik.touched.description ? <p className="formError">{formik.errors.description}</p> : null}
+            <label htmlFor="description">
+              {
+                formik.errors.description && formik.touched.description ? 
+                <p className="formError">{formik.errors.description}</p> 
+                : <p className="formLabel">Decsription</p>}
+            </label>
             <textarea
               className='EditDog--desc' 
               name='description' 

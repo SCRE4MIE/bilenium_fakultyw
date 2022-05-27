@@ -6,6 +6,7 @@ import requests from '../../../requests';
 import instance from '../../../axios';
 import { AddDogSchema } from '../../../Validation/AddDogValidation';
 import ImageIcon from '@mui/icons-material/Image';
+import { PetsOutlined } from "@mui/icons-material";
 
 const AddNewDog = () => {
 
@@ -87,10 +88,16 @@ const AddNewDog = () => {
     <div className='AddNewDog'>
       <h1 className='AddNewDog--header '>Add new dog</h1>
       <div className='dogPicContainer' >
-        {selectedFile &&  <img src={preview}/> }
+        {selectedFile ? <img src={preview}/> : <PetsOutlined style={{color: 'white', fontSize: '100px'}}/>}
       </div>
       <form id = "addDog" className='AddNewDog--form' onSubmit={formik.handleSubmit}>
-            {formik.errors.name && formik.touched.name ? <p className="formError">{formik.errors.name}</p> : null}
+        
+            <label htmlFor="name">
+            {
+              formik.errors.name && formik.touched.name ? 
+              <p className="formError">{formik.errors.name}</p> 
+              : <p className="formLabel">Name</p>}
+            </label>
             <input 
               name='name' 
               type="text" 
@@ -99,7 +106,13 @@ const AddNewDog = () => {
               value={formik.values.name} 
               onChange={formik.handleChange} 
             />
-            {formik.errors.breed && formik.touched.breed ? <p className="formError">{formik.errors.breed}</p> : null}
+
+            <label htmlFor="breed">
+            {
+              formik.errors.breed && formik.touched.breed ? 
+              <p className="formError">{formik.errors.breed}</p> 
+              : <p className="formLabel">Breed</p>}
+            </label>
             <input 
               name='breed' 
               type="text" 
@@ -108,7 +121,13 @@ const AddNewDog = () => {
               value={formik.values.breed} 
               onChange={formik.handleChange}
             />
-            {formik.errors.age && formik.touched.age ? <p className="formError">{formik.errors.age}</p> : null}
+
+            <label htmlFor="age">
+              {
+                formik.errors.age && formik.touched.age ? 
+                <p className="formError">{formik.errors.age}</p> 
+                : <p className="formLabel">Age</p>}
+            </label>
             <input 
               name='age' 
               type="number" 
@@ -117,7 +136,13 @@ const AddNewDog = () => {
               value={formik.values.age} 
               onChange={formik.handleChange}
             />
-            {formik.errors.description && formik.touched.description ? <p className="formError">{formik.errors.description}</p> : null}
+
+            <label htmlFor="description">
+              {
+                formik.errors.description && formik.touched.description ? 
+                <p className="formError">{formik.errors.description}</p> 
+                : <p className="formLabel">Decsription</p>}
+            </label>
             <textarea
               className='AddDog--desc' 
               name='description' 
