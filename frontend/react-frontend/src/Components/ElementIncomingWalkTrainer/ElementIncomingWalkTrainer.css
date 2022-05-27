@@ -7,6 +7,7 @@
       -ms-flex-align: center;
           align-items: center;
   gap: 10px;
+  cursor: pointer;
 }
 
 .trainerElement .trainerImage {
@@ -20,4 +21,9 @@
 
 .trainerElement .trainerImage img {
   height: 100%;
+}
+
+.trainerElement:hover .trainerImage {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
 }

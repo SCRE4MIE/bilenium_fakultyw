@@ -1,9 +1,9 @@
-
 .trainerDogElement {
   margin: 10px auto;
   display: flex;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
 
   .dogImage {
     width: 40px;
@@ -11,9 +11,17 @@
     object-fit: contain;
     overflow: hidden;
     border-radius: 50%;
+    transform: 100ms;
 
     img {
       height: 100%;
     }
+  }
+  
+}
+
+.trainerDogElement:hover {
+  .dogImage {
+    transform: scale(1.2);
   }
 }

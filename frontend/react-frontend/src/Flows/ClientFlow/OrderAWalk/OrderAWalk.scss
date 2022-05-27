@@ -124,3 +124,17 @@
     flex-direction: column;
   }
 }
+
+.singleItem {
+  .dogListElement {
+
+    justify-content: center;
+
+    > div {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      justify-content: center;
+    }
+  }
+}

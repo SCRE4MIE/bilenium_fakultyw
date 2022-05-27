@@ -1,15 +1,14 @@
 @import '../../Variables/Variables.scss';
 
-.trainerWalkDogs {
-  box-shadow: 0px 4px 4px rgba($color: #000000, $alpha: 0.25);
+.trainerWalkDogs{
+  .dogWalkDataContainer {
   border-radius: 10px;
   padding: 13px 20px;
   display: flex;
   align-items: center;
-  margin-bottom: 26px;
   cursor: pointer;
   transition: 300ms;
-  margin: 20px;
+  margin-top: 20px;
   
   .dogWalkPictureContainer {
     width: 40px;
@@ -20,6 +19,10 @@
     overflow: hidden;
     transition: 100ms;
 
+    p {
+      transform: 100ms;
+    }
+
     img {
       height: 100%;
     }
@@ -28,9 +31,8 @@
   .dogWalkName {
     font-family: $Inter;
     font-size: 18px;
-    color: $blueColor;
-    margin-right: auto;
     margin-left: 20px;
+    width: auto;
   }
 
   .icon {
@@ -40,24 +42,16 @@
   }
 
 }
-
+}
 .dogPictureContainer:hover {
   transform: scale(1.4);
 }
 
-.trainerWalkDogs:hover {
-  box-shadow: 0px 0px 4px rgba($color: #000000, $alpha: 0.5);
-}
+.dogWalkDataContainer:hover {
+  background-color: $blueColorLighter;
+  box-shadow: 0px 0px 4px rgba($color: #000000, $alpha: 0.25);
 
-.dogWalkDataContainer{
-  display: flex;
-  width:90%;
-  height:100%;
-  align-items: center;
-}
-
-.dogWalkDataContainer{
-  display: flex;
-  align-items: center;
-  width: 90%;
+  p {
+    color: white;
+  }
 }

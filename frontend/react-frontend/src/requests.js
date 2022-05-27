@@ -24,6 +24,8 @@ const requests = {
   getNotificationCount: 'notification/get-notification-count/',
   getNotifications: 'notification/get-notification/',
   getUserWalks: 'v1/walk-list-user/',
+  getUserDogsForTrainer: 'v1/users-dog-list-for-trainer/',
+  getUserDetailsForTrainer: 'user/get-user/',
 }
 
 export default requests;

@@ -3,12 +3,20 @@ import "./TrainerDogProfile.css"
 import instance from '../../../axios';
 import requests from '../../../requests';
 import { useEffect, useState } from 'react';
+import { Tooltip } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const id = sessionStorage.getItem('currentDog')
 
 const TrainerDogProfile = ({dogId}) => {
 
   const [dogData, setDogData] = useState({});
+
+  const navigate = useNavigate();
+
+  const goToOwnerProfile = (pk) => {
+    navigate(`/ownerProfile/${pk}`);
+  }
 
   useEffect(() => {
     instance.get(`${requests.getDog}${dogId}/`)
@@ -17,12 +25,20 @@ const TrainerDogProfile = ({dogId}) => {
     });
   }, []);
 
+  const url = instance.defaults.baseURL.slice(0, -5);
 
   return (
     <div className='trainerDogProfile'>
       <h1 className='trainerDogProfile--header'> {dogData.name}'s profile </h1>
       <div className='trainerDogProfile--icons'>
-        <div className='trainerDogProfile--imageContainer'><img className='trainerDogProfile--image' src= {dogData.avatar}  alt='dog profile picture'/></div>
+        <div className='trainerDogProfile--imageContainer'>
+          <img className='trainerDogProfile--image' src= {`${url}${dogData.avatar_url}`}  alt=''/>
+          <Tooltip title={`Owner - ${dogData.owner?.username}`} placement="right-start">
+            <div className='trainerDogProfile--owner' onClick={() => goToOwnerProfile(dogData.owner.pk)}>
+              <img src={`${url}${dogData.owner?.avatar_url}`} alt=''/>
+            </div>
+          </Tooltip>
+        </div>
       </div>
       <h2>Breed: {dogData.breed}</h2>
       <h2>Age: {dogData.age}</h2>

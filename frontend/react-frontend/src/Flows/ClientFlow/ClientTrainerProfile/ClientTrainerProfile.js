@@ -83,7 +83,7 @@ const ClientTrainerProfile = () => {
                     </>
                 ) : (
                     <div className="noOpinion">
-                        <h3>Trainer have no opinions yet</h3>
+                        <h3>{trainer.username} has no opinions yet</h3>
                     </div>
                 )}
             </div>

@@ -3,6 +3,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    cursor: pointer;
 
     .trainerImage {
         width: 40px;
@@ -14,5 +15,11 @@
         img {
             height: 100%;
         }
+    }
+
+}
+.trainerElement:hover {
+    .trainerImage {
+        transform: scale(1.2);
     }
 }

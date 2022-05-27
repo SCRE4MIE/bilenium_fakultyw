@@ -31,7 +31,15 @@ const WalkActive = ({displayActiveWalk, dogComponents}) => {
     <p className='walkHours'>Walk hours: {dayjs(displayActiveWalk?.date).format("HH:mm")} - {dayjs(displayActiveWalk?.date_end).format("HH:mm")}</p>
 
     <h2 className='activeWalkDogs'>Dogs: </h2>
-    {dogComponents}
+    <div style={{
+      display:'flex', 
+      flexWrap: 'wrap', 
+      paddingLeft: '40px', 
+      paddingRight: '40px',
+      justifyContent: 'center'
+    }}>
+      {dogComponents}
+    </div>
   </div>
   )
 }

@@ -113,6 +113,8 @@ const OrderAWalk = () => {
     />
   });
 
+  const dogDataList = useOwnerDogs();
+
   const trainers = useTrainerList().map(e => {
     return <TrainerListElement
       key={e.pk}
@@ -213,15 +215,22 @@ const OrderAWalk = () => {
     activeDog.map(e => {return e.component})
     : null;
 
+  useEffect(() => {
+    if(dogs.length === 1 && activeDog.length < 1){
+      chooseDog(dogDataList[0].pk, dogDataList[0].avatar, dogDataList[0].name);
+    }
+  }, [dogDataList]);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div className='orderAWalk'>
+      <div className={`orderAWalk ${activeDog.length === 1 && 'singleItem'}`}>
         <h1>Order a walk</h1>
         <form>
           {errors.arrayError && <Alert variant="filled" severity="warning">{errors.arrayError}</Alert>}
           {errors.dogError && <Alert variant="filled" severity="warning">{errors.dogError}</Alert>}
-          <Accordion>
+          { dogs.length === 1 && activeDog[0]?.component}
+          { dogs.length !== 1 &&
+            <Accordion>
             <AccordionSummary
               className='summary'
               expandIcon={<ExpandMoreIcon />}
@@ -235,11 +244,13 @@ const OrderAWalk = () => {
             </AccordionSummary>
             {dogs}
           </Accordion>
+          }
           <DatePicker 
+          inputFormat = "DD/MM/YYYY"
             label="Date of the walk"
             className='datePicker'
             name='date'
-            minDate={date}
+            minDate={date.add(1, 'day')}
             value={formData.date.format()}
             onChange={handleDateChange}
             renderInput={(params) => (
@@ -248,6 +259,8 @@ const OrderAWalk = () => {
           />
           <div className='time'>
             <TimePicker
+            views={['hours']}
+              ampm = {false}
               label="Start of the walk"
               minutesStep={3600}
               minTime={minHour}
@@ -258,6 +271,7 @@ const OrderAWalk = () => {
             />
 
             <TimePicker
+              ampm = {false}
               label="End of the walk"
               value={time.add(1, 'hour')}
               onChange={() => null}
