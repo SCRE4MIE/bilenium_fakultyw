@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar } from '@mui/material';
 
-const DogListElement = ({id, avatar, name, chooseDog, count}) => {
+const DogListElement = ({id, avatar, name, chooseDog, count, dogListLength}) => {
 
   const [selected, setSelected] = useState(false);
 
@@ -17,6 +17,12 @@ const DogListElement = ({id, avatar, name, chooseDog, count}) => {
       setSelected(false);
     }
   }, [count]);
+
+  useEffect(() => {
+    if(dogListLength === 1) {
+      chooseDog(id, avatar, name);
+    }
+  }, [])
 
   return (
     <div style={selected ? {backgroundColor: '#ffd87d',} : {backgroundColor: 'white'} } className='dogListElement' id={id} onClick={handleSelect}>

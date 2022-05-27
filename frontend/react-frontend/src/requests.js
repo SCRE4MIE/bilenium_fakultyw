@@ -26,6 +26,8 @@ const requests = {
   getUserWalks: 'v1/walk-list-user/',
   userWalksHistory: 'v1/walk-list-user/',
   rateTrainer: 'v1/add-rating/',
+  getUserDogsForTrainer: 'v1/users-dog-list-for-trainer/',
+  getUserDetailsForTrainer: 'user/get-user/',
 }
 
 export default requests;

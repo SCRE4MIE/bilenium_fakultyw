@@ -100,7 +100,7 @@ class GetDog(generics.RetrieveAPIView):
     permissions - is authenticated
     """
 
-    serializer_class = DogSerializer
+    serializer_class = DogListSerializer
     permission_classes = (IsAuthenticated,)
     queryset = Dog.objects.all()
 

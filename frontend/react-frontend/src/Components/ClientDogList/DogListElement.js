@@ -21,6 +21,7 @@ const DogListElement = ({ imageSrc, name, id }) => {
 
   return (
     <div className='dogListElement' >
+      <Tooltip title={`Go to ${name}'s profile`}>
       <div className='dogDataContainer' onClick={openDogProfile}>
         <div className='dogPictureContainer'>
           {
@@ -31,6 +32,7 @@ const DogListElement = ({ imageSrc, name, id }) => {
         </div>
         <p className='dogName'>{name}</p>
       </div>
+      </Tooltip>
       <Tooltip title='Edit your dog'>
         <EditOutlinedIcon className='icon' style={{cursor: 'pointer'}} onClick={openDogEdit}/>
       </Tooltip>

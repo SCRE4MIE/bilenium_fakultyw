@@ -7,6 +7,7 @@
       -ms-flex-align: center;
           align-items: center;
   gap: 10px;
+  cursor: pointer;
 }
 
 .trainerDogElement .dogImage {
@@ -16,8 +17,15 @@
      object-fit: contain;
   overflow: hidden;
   border-radius: 50%;
+  -webkit-transform: 100ms;
+          transform: 100ms;
 }
 
 .trainerDogElement .dogImage img {
   height: 100%;
+}
+
+.trainerDogElement:hover .dogImage {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
 }

@@ -24,12 +24,13 @@ const TrainerWalkDogs = ({id}) => {
     .then(response => setDogData(response.data));
   }, [])
 
+  const url = instance.defaults.baseURL.slice(0, -5);
 
   return (
     <div className='trainerWalkDogs' >
       <div className='dogWalkDataContainer' onClick={openTrainerDogProfile}>
         <div className='dogWalkPictureContainer'>
-          <img src={dogData.avatar} alt='' />
+          <img src={`${url}${dogData.avatar_url}`} alt='' />
         </div>
         <p className='dogWalkName'>{dogData.name}</p>
       </div>

@@ -9,6 +9,7 @@ import TrainerEditProfile from './TrainerEditProfile/TrainerEditProfile';
 import TrainerDogProfile from './TrainerDogProfile/TrainerDogProfile';
 import TrainerNotifications from './TrainerNotifications/TrainerNotifications';
 import TransferAWalk from './TransferAWalk/TransferAWalk';
+import TrainerOwnerProfile from './TrainerOwnerProfile/TrainerOwnerProfile';
 
 const TrainerFlow = () => {
   return (
@@ -23,6 +24,7 @@ const TrainerFlow = () => {
           <Route exact path='/trainerDogProfile' element={<TrainerDogProfile dogId={sessionStorage.getItem('currentDog')} />} />
           <Route exact path='/notifications' element={<TrainerNotifications />} />
           <Route exact path='/transfer' element={<TransferAWalk />} />
+          <Route exact path='/ownerProfile/:id' element={<TrainerOwnerProfile />} />
         </Routes>
     </div>
   )
