@@ -1,5 +1,5 @@
 .transferModal {
-  position: absolute;
+  position: fixed;
   width: 100Vw;
   height: 100Vh;
   top: 50%;

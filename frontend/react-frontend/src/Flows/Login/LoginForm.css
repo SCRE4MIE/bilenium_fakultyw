@@ -17,9 +17,8 @@
           flex: 1;
 }
 
-.loginForm .formError {
-  color: #ff4d4d;
-  margin-top: -22px;
+.loginForm .formError, .loginForm .formLabel {
+  margin-top: -20px;
   margin-left: 15px;
   background-color: white;
   width: -webkit-fit-content;
@@ -30,6 +29,14 @@
   border-radius: 0 10px 0 0;
   padding-right: 5px;
   margin-bottom: 0;
+}
+
+.loginForm .formError {
+  color: #ff4d4d;
+}
+
+.loginForm .formLabel {
+  color: #90BE6D;
 }
 
 .loginForm h1 {
@@ -148,7 +155,7 @@
   .loginForm form .buttonsContainer {
     gap: 5px;
   }
-  .loginForm form .formError {
+  .loginForm form .formError .formLabel {
     margin-top: -18px;
   }
 }

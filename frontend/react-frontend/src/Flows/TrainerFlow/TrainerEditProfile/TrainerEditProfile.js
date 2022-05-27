@@ -91,7 +91,12 @@ const TrainerEditProfile = () => {
           accept="image/png, image/gif, image/jpeg" 
         />
 
-        {formik.errors.phone_number && formik.touched.phone_number ? <p className='formError'>{formik.errors.phone_number}</p> : null}
+        <label htmlFor='phone_number'>
+          {
+            formik.errors.phone_number && formik.touched.phone_number ? 
+            <p className='formError'>{formik.errors.phone_number}</p> 
+            : <p className='formLabel'>New phone number</p>}
+        </label>
         <input 
           name='phone_number' 
           type='text' 

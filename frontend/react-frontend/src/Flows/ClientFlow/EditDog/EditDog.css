@@ -28,18 +28,46 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 34px;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding-bottom: 20px;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.EditDog .EditDog--form .formError, .EditDog .EditDog--form .formLabel {
+  margin-top: -20px;
+  margin-left: 15px;
+  background-color: white;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  border-radius: 0 10px 0 0;
+  padding-right: 5px;
+  margin-bottom: 0;
+  max-width: 30ch;
 }
 
 .EditDog .EditDog--form .formError {
-  color: #F94144;
+  color: #ff4d4d;
+}
+
+.EditDog .EditDog--form .formLabel {
+  color: #90BE6D;
 }
 
 .EditDog .EditDog--form input[type=text], .EditDog .EditDog--form input[type=number] {
@@ -52,6 +80,7 @@
   -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
           box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
   width: 100%;
+  margin-bottom: 34px;
 }
 
 .EditDog .EditDog--form .EditDog--desc {
@@ -67,6 +96,7 @@
   font-size: 18px;
   -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
           box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 34px;
 }
 
 .EditDog .EditDog--form .EditDog--buttons {
@@ -172,6 +202,9 @@ input[type="file"] {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border: 4px solid white;
 }
 
 .dogPicContainer img {

@@ -18,9 +18,8 @@
   padding-bottom: 20px;
 }
 
-.registerForm .formError {
-  color: #ff4d4d;
-  margin-top: -22px;
+.registerForm .formError, .registerForm .formLabel {
+  margin-top: -20px;
   margin-left: 15px;
   background-color: white;
   width: -webkit-fit-content;
@@ -31,6 +30,14 @@
   border-radius: 0 10px 0 0;
   padding-right: 5px;
   margin-bottom: 0;
+}
+
+.registerForm .formError {
+  color: #ff4d4d;
+}
+
+.registerForm .formLabel {
+  color: #90BE6D;
 }
 
 .registerForm h1 {

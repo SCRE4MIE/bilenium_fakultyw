@@ -72,7 +72,7 @@ function App() {
       <Routes>
         {/* Register path */}
         {
-          !userData.access || !userData.refresh && 
+          (!userData.access || !userData.refresh) && 
           <Route path='/register/*'
             element={<Register />}
           />

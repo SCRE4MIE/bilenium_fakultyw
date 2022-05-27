@@ -71,12 +71,13 @@ const LoginForm = ({ signIn }) => {
 
       <form onSubmit={formik.handleSubmit}>
 
+        <label htmlFor='email'>
         {
           formik.errors.email && formik.touched.email
           ? <p className='formError'>{formik.errors.email}</p> 
-          : null
+          : <p className='formLabel'>E-mail</p>
         }
-
+        </label>
         <input 
           name='email' 
           placeholder='E-mail' 
@@ -86,12 +87,13 @@ const LoginForm = ({ signIn }) => {
           onChange={formik.handleChange}
         />
 
+        <label htmlFor='password'>
         {
           formik.errors.password && formik.touched.password
           ? <p className='formError'>{formik.errors.password}</p> 
-          : null
+          : <p className='formLabel'>Password</p>
         }
-
+        </label>
         <input 
           name='password' 
           placeholder='Password' 
@@ -110,7 +112,7 @@ const LoginForm = ({ signIn }) => {
           <button className='button' type='submit'>Sign in!</button>
         </div>
 
-        {loginError && <p style={{color: 'red', marginTop: '20px', textAlign: 'center', fontSize: '21px'}}>Invalid e-mail address or password.</p>}
+        {loginError && <p style={{color: 'red', marginTop: '20px', textAlign: 'center', fontSize: '21px'}}>Invalid credentials.</p>}
       </form>
     </div>
   )
