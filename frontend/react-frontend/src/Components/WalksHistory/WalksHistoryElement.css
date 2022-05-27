@@ -1,48 +1,18 @@
-.walksHistoryElement {
+.clientPreviousWalk {
+  max-width: 50%;
+  margin: 42px auto;
+  padding: 20px;
   -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  text-align: center;
-  position: relative;
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-bottom: 20px;
-  cursor: pointer;
-  overflow: hidden;
-  text-overflow: clip;
-  max-width: 2000px;
   border-radius: 10px;
-}
-
-.walksHistoryElement .line {
-  size: 2px;
-  background-color: #577590;
-  height: 1px;
-  width: 90%;
-}
-
-.walksHistoryElement h1 {
-  font-family: "Jost", sans-serif;
   color: #577590;
-  font-weight: 400;
 }
 
-.walksHistoryElement h2 {
-  font-family: "Jost", sans-serif;
-  color: #577590;
-  font-weight: 400;
+.clientPreviousWalk h1 {
+  margin: 0;
 }
 
-.walksHistoryElement .dogContainer {
-  width: 100%;
+.clientPreviousWalk .info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -50,107 +20,122 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  text-align: left;
 }
 
-.walksHistoryElement .trainerContainer {
+.clientPreviousWalk .info p {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+.clientPreviousWalk * {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.clientPreviousWalk .line {
   width: 100%;
-  height: 150px;
+  height: 2px;
+  background-color: #a5b9cb;
+  border: 1px solid #a5b9cb;
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.clientPreviousWalk .trainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  margin-top: 20px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  text-align: left;
-  padding-left: 50px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.walksHistoryElement .trainerContainer .dog {
-  width: 40%;
+.clientPreviousWalk .trainer .trainerElement {
+  margin: 10px;
 }
 
-.walksHistoryElement .trainerContainer .dogNameImage {
-  position: relative;
-  width: 60%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-}
-
-.walksHistoryElement .trainerContainer .dogNameImage .dogImage {
-  position: absolute;
-  width: 50%;
+.clientPreviousWalk .trainer .buttonUser {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  text-align: left;
-  background-color: red;
+  border-radius: 10px;
+  min-height: 50px;
+  padding: 10px;
+  border: none;
+  background-color: #F9C74F;
+  color: white;
+  cursor: pointer;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+  letter-spacing: 1px;
 }
 
-.walksHistoryElement .trainerContainer .dogNameImage .dogImage img {
-  border-radius: 50%;
+.clientPreviousWalk .trainer .buttonUser p {
+  margin: 0;
 }
 
-.walksHistoryElement .trainerContainer .dogNameImage .dogName {
-  position: absolute;
-  padding-left: 90px;
-  width: 50%;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  text-align: left;
-}
-
-.walksHistoryElement img {
-  width: 80px;
-  height: 80px;
-}
-
-.walksHistoryElement .walkSlotContainer {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+.clientPreviousWalk .trainer .buttonUser:hover {
+  background-color: #ffd87d;
   color: #577590;
-  margin-top: 10px;
 }
 
-.walksHistoryElement:hover {
-  -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
-          box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+.clientPreviousWalk .NamesElements {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.clientPreviousWalk .NamesElements p {
+  margin-right: 20px;
+}
+
+.clientPreviousWalk .NamesElements .names {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.clientPreviousWalk .info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+@media screen and (max-width: 500px) {
+  .trainerIncomingWalk {
+    max-width: 70%;
+  }
 }

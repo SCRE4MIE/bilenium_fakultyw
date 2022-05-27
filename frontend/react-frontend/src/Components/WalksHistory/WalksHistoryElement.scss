@@ -1,103 +1,105 @@
 @import '../../Variables/Variables.scss';
 
-@mixin text($fontSize) {
-    font-family: $Jost;
-    color: $blueColor;
-    font-weight: 400;
-}
+.clientPreviousWalk {
 
-.walksHistoryElement {
-    box-shadow: 0px 4px 4px rgba($color: #000000, $alpha: 0.25);
-    text-align: center;
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-    cursor: pointer;
-    overflow: hidden;
-    text-overflow: clip;
-    max-width: 2000px;
-    border-radius: 10px;
-    .line{
-        size:2px;
-        background-color: $blueColor;;
-        height: 1px;
-        width: 90%;
-    }
     h1 {
-        @include text($fontSize: 36px);
+        margin: 0;
     }
 
-    h2 {
-        @include text($fontSize: 24px);
-    }
-    .dogContainer{
-        width: 100%;
+    .info {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        text-align: left;
+
+        p {
+            align-self: flex-start;
+        }
     }
-    .trainerContainer{
+
+    max-width: 50%;
+    margin: 42px auto;
+    padding: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    color: $blueColor;
+
+    * {
+        font-family: $Inter;
+        font-weight: 500;
+        font-size: 16px;
+    }
+
+    .line {
         width: 100%;
-        height: 150px;
+        height: 2px;
+        background-color: $blueColorLighter;
+        border: 1px solid $blueColorLighter;
+        border-radius: 10px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .trainer {
         display: flex;
-        flex-direction: row;
+        margin-top: 20px ;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: center;
-        text-align: left;
-        padding-left: 50px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        .dog{
-            width: 40%;
+
+        .trainerElement {
+            margin: 10px;
         }
-        .dogNameImage{
-            position: relative;
-            width: 60%;
+
+        .buttonUser {
             display: flex;
-            flex-direction: row;
             align-items: center;
-            justify-content: flex-start;
-            .dogImage{
-                position: absolute;
-                width: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
-                text-align: left;
-                background-color: red;
-                img{
-                    border-radius: 50%;
-                }
-                
-            }
-            .dogName{
-                position: absolute;
-                padding-left: 90px;
-                width: 50%;
-                justify-content: flex-start;
-                text-align: left;
-                
+            border-radius: 10px;
+            min-height: 50px;
+            padding: 10px;
+            border: none;
+            background-color: $clientOrange;
+            color: white;
+            cursor: pointer;
+            transition: 200ms;
+            letter-spacing: 1px;
+
+            p {
+                margin: 0;
             }
         }
-    
+
+        .buttonUser:hover {
+            background-color: $clientOrangeHover;
+            color: $blueColor
+        }
     }
-    img{
-        width: 80px;
-        height: 80px;
-    }
-    .walkSlotContainer{
+
+    .NamesElements {
+        display: flex;
         align-items: center;
+        flex-wrap: wrap;
         justify-content: center;
-        color: $blueColor;
-        margin-top: 10px;
+
+        p {
+            margin-right: 20px;
+        }
+
+        .names {
+            display: flex;
+            flex: 1;
+            flex-wrap: wrap;
+        }
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        margin-top: 24px;
     }
 }
-.walksHistoryElement:hover {
-    box-shadow: 0px 0px 4px rgba($color: #000000, $alpha: 0.5);
+@media screen and (max-width: 500px) {
+    .trainerIncomingWalk {
+        max-width: 70%;
+    }
 }
