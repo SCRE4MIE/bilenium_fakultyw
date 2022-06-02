@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Avatar } from '@mui/material';
 import instance from '../../axios';
 import requests from '../../requests';
+import { Star } from '@mui/icons-material';
+
 
 const TrainerListElement = ({id, avatar, name, rating, chooseTrainer, current, disable, startDate}) => {
 
+
   const weekDays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-  const dayjs = require('dayjs');
 
   const [selected, setSelected] = useState(false);
 
@@ -29,6 +31,7 @@ const TrainerListElement = ({id, avatar, name, rating, chooseTrainer, current, d
   useEffect(() => {
     if(current !== id)
       setSelected(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current]);
 
   useEffect(() => {
@@ -36,26 +39,35 @@ const TrainerListElement = ({id, avatar, name, rating, chooseTrainer, current, d
     .then(response => {
       startDate ? setIsAvailible(response.data[0][weekDays[startDate.day()]]) : setIsAvailible(true);
     })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startDate])
 
   let averageRating = 0;
 
   if (rating.length > 0) {
     rating.forEach(element => {
-      averageRating += Number(element);
+      averageRating += Number(element.value);
     });
     averageRating = averageRating / rating.length;
   } 
 
+  const style = {
+    backgroundColor: selected ?  '#ffd87d' : 'white',
+    display: isAvailible ? 'flex' : 'none',
+    border: disable && 'none'
+  }
   return (
     <div style={
-      isAvailible ? selected ? {backgroundColor: '#ffd87d',} : {backgroundColor: 'white'} : {display: 'none'}
+      style
       }
       className='trainerListElement' id={id} onClick={handleSelect}>
     <div>
         <Avatar src={avatar}/>
         <p>{name}</p>
-        <p>{averageRating}</p>
+        {averageRating > 0 && 
+        <p className='rating'><span>{`${averageRating}/5`}</span> <Star style={{color: '#F9C74F'}}/></p>
+        }
+        {averageRating === 0 && <p className='rating'>No opinions</p>}
       </div>
     </div>
   )

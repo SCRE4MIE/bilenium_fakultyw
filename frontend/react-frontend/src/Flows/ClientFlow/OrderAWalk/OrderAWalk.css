@@ -135,6 +135,7 @@
           box-shadow: none;
   border-radius: 0px;
   margin: 0px;
+  border-top: 1px solid #a5b9cb;
 }
 
 .orderAWalk form div .dogListElement > div, .orderAWalk form div .trainerListElement > div {
@@ -157,6 +158,30 @@
 
 .orderAWalk form div .dogListElement > div p, .orderAWalk form div .trainerListElement > div p {
   min-width: 40px;
+}
+
+.orderAWalk form div .trainerListElement > div {
+  width: 80%;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 20px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.orderAWalk form div .trainerListElement > div .rating {
+  margin-left: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .orderAWalk form div .dogListElement:hover, .orderAWalk form div .trainerListElement:hover {
@@ -197,4 +222,10 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+@media screen and (max-width: 335px) {
+  .orderAWalk form {
+    width: 100%;
+  }
 }

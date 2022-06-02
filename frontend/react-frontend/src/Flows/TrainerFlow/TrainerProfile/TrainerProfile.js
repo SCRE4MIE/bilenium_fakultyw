@@ -2,7 +2,6 @@ import { Tooltip } from '@mui/material';
 import './TrainerProfile.css';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import woman from '../../../Images/womanPlaceholder.jpg';
 import StarIcon from '@mui/icons-material/Star';
 import OpinionAboutTrainerElement from '../../../Components/OpinionAboutTrainer/OpinionAboutTrainerElement';
 import ApiPicture from '../../../Components/ApiPicture';
@@ -10,6 +9,7 @@ import { useEffect, useState } from 'react';
 import instance from '../../../axios';
 import requests from '../../../requests';
 import { useNavigate } from 'react-router-dom';
+import TrainerAvailibility from '../../../Components/TrainerAvailibility/TrainerAvailibility';
 
 const TrainerProfile = () => {
 
@@ -17,6 +17,15 @@ const TrainerProfile = () => {
 
 
   const [notificationCount, setNotificationCount] = useState();
+  const [availibility, setAvailibility] = useState({
+    monday: true,
+    tuesday: true,
+    wednesday: true,
+    thursday: true,
+    friday: true,
+    saturday: true,
+    sunday: true,
+  })
 
   const goToEditProfile = () => {
     navigate('/editProfile');
@@ -71,6 +80,11 @@ const TrainerProfile = () => {
     .then(response => setNotificationCount(response.data.count));
   }, []);
 
+  useEffect(() => {
+    instance.get(`${requests.getTrainerWorkDaysByUser}${currentTrainerId}/`)
+    .then(response => setAvailibility(response.data[0]));
+  }, [currentTrainerId]);
+
   const tooltip = `You have ${notificationCount} unread notifications.`;
 
   return (
@@ -106,7 +120,7 @@ const TrainerProfile = () => {
                   :
                   <>
                     <p>{ratingSum(trainer.rating_trainer)}/5</p>
-                    <StarIcon className='starIconTrainer' />
+                    <StarIcon className='starIconTrainer' style={{color: '#F9C74F'}}/>
                   </>}
                   </>
                 : null}
@@ -118,6 +132,7 @@ const TrainerProfile = () => {
         <h2>
           {phone_number}
         </h2>
+          <TrainerAvailibility availibility={availibility} username={details.username}/>
       </div>
       {trainer ?
       <>

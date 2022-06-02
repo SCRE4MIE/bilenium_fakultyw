@@ -17,7 +17,7 @@ const OpinionAboutTrainerElement = ({ avatar, username, value, comment }) => {
         </div>
         <div className="opinionFooter">
             <p>{value}/5</p>
-            <StarIcon className='starIcon'/>
+            <StarIcon className='starIcon' style={{color: '#F9C74F'}}/>
         </div>
     </div>
   )

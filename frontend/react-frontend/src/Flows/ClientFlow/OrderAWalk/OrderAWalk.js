@@ -83,7 +83,7 @@ const OrderAWalk = () => {
   const chooseDog = (id, avatar, name, chooseDog) => {
     if(dogCount < 3) {
       setActiveDog(prevDogs => {
-        return [...prevDogs, {id: id, component: <DogListElement key={id} id={id} avatar={avatar} name={name}/>}]
+        return [...prevDogs, {id: id, component: <DogListElement key={id} id={id} avatar={avatar} name={name} disable={true}/>}]
       });
       setDogCount(prevDogCount => (prevDogCount + 1));
       setErrors(prevErrors => ({...prevErrors, fullSlotError: ""}));

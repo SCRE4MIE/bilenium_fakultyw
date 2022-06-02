@@ -32,6 +32,10 @@
   gap: 34px;
 }
 
+.transferModal .transferAWalk svg.clearIcon {
+  margin: 0px;
+}
+
 .transferModal .transferAWalk .buttons {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -75,9 +79,6 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -95,22 +96,21 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 200px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  gap: 20px;
 }
 
 .transferModal .transferAWalk .trainerListElement > div div {
   width: 40px;
   height: 40px;
-}
-
-.transferModal .transferAWalk .trainerListElement > div p {
-  min-width: 40px;
 }
 
 .transferModal .transferAWalk h2 {

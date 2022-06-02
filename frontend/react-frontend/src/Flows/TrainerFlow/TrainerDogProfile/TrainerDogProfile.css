@@ -27,7 +27,7 @@
   display: flex;
   color: #577590;
   text-align: justify;
-  width: 38ch;
+  max-width: 38ch;
 }
 
 .trainerDogProfile h2 {

@@ -1,14 +1,23 @@
 import React, {useState, useEffect} from "react";
-import woman from "../../../Images/womanPlaceholder.jpg"
 import './ClientTrainerProfile.css';
 import StarIcon from '@mui/icons-material/Star';
 import OpinionAboutTrainerElement from "../../../Components/OpinionAboutTrainer/OpinionAboutTrainerElement";
 import requests from "../../../requests";
 import instance from "../../../axios";
 import ApiPicture from "../../../Components/ApiPicture";
+import TrainerAvailibility from "../../../Components/TrainerAvailibility/TrainerAvailibility";
 
 
 const ClientTrainerProfile = () => {
+    const [availibility, setAvailibility] = useState({
+        monday: true,
+        tuesday: true,
+        wednesday: true,
+        thursday: true,
+        friday: true,
+        saturday: true,
+        sunday: true,
+      })
     const currentTrainerId = sessionStorage.getItem('currentTrainer');
     const [trainerDetails, setTrainerDetails] = useState({});
     const trainer = trainerDetails.trainerDetails;
@@ -41,6 +50,11 @@ const ClientTrainerProfile = () => {
         return Math.round((rating/ratingArr.length)*100)/100;
     };
 
+    useEffect(() => {
+        instance.get(`${requests.getTrainerWorkDaysByUser}${currentTrainerId}/`)
+        .then(response => setAvailibility(response.data[0]));
+      }, [currentTrainerId]);
+
     return (
         <div className='trainerProfile'>
             {trainer ? (
@@ -58,12 +72,13 @@ const ClientTrainerProfile = () => {
                     :
                     <h2 className="rating">
                     {ratingSum(trainer.rating_trainer)}/5
-                    <StarIcon className='starIcon'/>
+                    <StarIcon className='starIcon' style={{color: '#F9C74F'}}/>
                     </h2>}
                 </span>
                 <h2>
                 {phone_number}
                 </h2>
+                <TrainerAvailibility availibility={availibility} username={trainer.username} />
             </div>
             <div className="opinionsHeader">
                 <h3 className='opinionListTitle'>Opinions:</h3>
