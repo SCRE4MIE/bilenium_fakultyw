@@ -5,6 +5,7 @@ import requests from '../../../requests';
 import { useEffect, useState } from 'react';
 import { Tooltip } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { PetsOutlined } from '@mui/icons-material';
 
 const id = sessionStorage.getItem('currentDog')
 
@@ -32,7 +33,8 @@ const TrainerDogProfile = ({dogId}) => {
       <h1 className='trainerDogProfile--header'> {dogData.name}'s profile </h1>
       <div className='trainerDogProfile--icons'>
         <div className='trainerDogProfile--imageContainer'>
-          <img className='trainerDogProfile--image' src= {`${url}${dogData.avatar_url}`}  alt=''/>
+          {dogData.avatar_url && <img className='trainerDogProfile--image' src= {`${url}${dogData.avatar_url}`}  alt=''/>}
+          {!dogData.avatar_url && <PetsOutlined className='petIcon' style={{color: 'lightgray', fontSize: '100px'}}/>}
           <Tooltip title={`Owner - ${dogData.owner?.username}`} placement="right-start">
             <div className='trainerDogProfile--owner' onClick={() => goToOwnerProfile(dogData.owner.pk)}>
               <img src={`${url}${dogData.owner?.avatar_url}`} alt=''/>

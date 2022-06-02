@@ -1,13 +1,11 @@
-import { ClassNames } from '@emotion/react'
 import React from 'react'
 import "./DogProfile.css"
-import cashtan from '../../../Images/Cashtan.png';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { useNavigate } from 'react-router-dom';
-import ApiPicture from '../../../Components/ApiPicture';
 import instance from '../../../axios';
 import requests from '../../../requests';
 import { useEffect, useState } from 'react';
+import { PetsOutlined } from '@mui/icons-material';
 
 const id = sessionStorage.getItem('currentDog')
 
@@ -34,7 +32,10 @@ const DogProfile = ({dogId}) => {
       <h1 className='DogProfile--header'> {dogData.name}'s profile </h1>
       <div className='DogProfile--icons'>
         <div style={{width:'50px'}}></div>
-        <div className='DogProfile--imageContainer'><img className='DogProfile--image' src= {dogData.avatar}  alt='dog profile picture'/></div>
+        <div className={`DogProfile--imageContainer ${!dogData.avatar && 'noAvatar'}`}>
+          {dogData.avatar && <img className='DogProfile--image' src= {dogData.avatar}  alt=''/>}
+          {!dogData.avatar && <PetsOutlined className='petIcon' style={{color: 'lightgray', fontSize: '100px'}}/>}
+        </div>
         <EditOutlinedIcon className='editIcon'  style={{marginBottom: '8px', cursor: 'pointer', fontSize: '40px', transition: '100ms'}} onClick={openDogEdit}/>
       </div>
       <h2>Breed: {dogData.breed}</h2>
