@@ -50,6 +50,12 @@
       -ms-flex-direction: row;
           flex-direction: row;
   margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.opinionAboutElement .opinionHeader:hover div {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
 }
 
 .opinionAboutElement .opinionDescription {

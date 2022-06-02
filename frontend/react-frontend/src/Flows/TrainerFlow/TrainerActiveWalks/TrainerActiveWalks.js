@@ -1,15 +1,12 @@
 import React from 'react';
 import './TrainerActiveWalks.css';
-import requests from '../../../requests';
-import instance from '../../../axios';
-import { useEffect, useState } from 'react';
 import * as dayjs from 'dayjs'
 import TrainerWalkDogs from '../../../Components/TrainerWalkDogs/TrainerWalkDogs';
 import useTrainerActiveWalks from '../../../CustomHooks/useTrainerActiveWalks';
 
 const TrainerActiveWalks = () => {
 
-  const activeWalks = useTrainerActiveWalks();
+  const activeWalks = useTrainerActiveWalks(JSON.parse(sessionStorage.getItem('userDetails')).pk);
   
   const displayActiveWalk = activeWalks[0];
 

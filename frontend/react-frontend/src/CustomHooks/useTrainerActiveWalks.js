@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { act } from 'react-dom/test-utils';
+import { useEffect, useState } from 'react';
 import instance from '../axios';
 import requests from '../requests';
 
-const useTrainerActiveWalks = () => {
+const useTrainerActiveWalks = (id) => {
 
   const dayjs = require("dayjs");
   const today = dayjs();
@@ -27,7 +26,7 @@ const useTrainerActiveWalks = () => {
   }
 
   useEffect(() => {
-    instance.get(requests.getWalks)
+    instance.get(`${requests.getTrainerWalks}${id}/`)
     .then(response => setWalks(response.data));
   }, [])
 

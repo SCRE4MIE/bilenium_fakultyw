@@ -145,7 +145,7 @@ const TrainerProfile = () => {
           {rating_trainer_arr.map((item) => (
           <OpinionAboutTrainerElement
           key = {item.pk}
-          id = {item.pk}
+          id = {item.evaluator.pk}
           username = {item.evaluator.username}
           comment = {item.comment}
           value = {item.value}
