@@ -19,7 +19,7 @@ const TrainerAvailibility = ({availibility, username}) => {
         <span style={availibility.wednesday ? enabled : disabled}>Wed </span><span style={{color: '#577590'}}>/ </span>
         <span style={availibility.thursday ? enabled : disabled}>Thu </span><span style={{color: '#577590'}}>/ </span>
         <span style={availibility.friday ? enabled : disabled}>Fri </span><span style={{color: '#577590'}}>/ </span>
-        <span style={availibility.satudray ? enabled : disabled}>Sat </span><span style={{color: '#577590'}}>/ </span>
+        <span style={availibility.saturday ? enabled : disabled}>Sat </span><span style={{color: '#577590'}}>/ </span>
         <span style={availibility.sunday ? enabled : disabled}>Sun</span>
       </div>
     </Tooltip>

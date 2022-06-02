@@ -28,6 +28,7 @@ const requests = {
   rateTrainer: 'v1/add-rating/',
   getUserDogsForTrainer: 'v1/users-dog-list-for-trainer/',
   getUserDetailsForTrainer: 'user/get-user/',
+  updateTrainerworkDays: 'v1/update-trainer-work-days/',
 }
 
 export default requests;
