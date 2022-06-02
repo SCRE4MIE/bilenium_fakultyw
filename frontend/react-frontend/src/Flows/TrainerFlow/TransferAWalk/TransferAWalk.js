@@ -69,7 +69,7 @@ const TransferAWalk = ({toggleModal, walkData, myId}) => {
             style={{margin: '0'}}
           >
           {activeTrainer.component ? activeTrainer.component : "Choose a different Trainer"}
-          <ClearIcon style={{alignSelf: 'center', marginLeft: '70px', marginRight: '30px'}} onClick={clearTrainer} className='clearIcon'/>
+          <ClearIcon style={{alignSelf: 'center', marginLeft: '30px', marginRight: '30px'}} onClick={clearTrainer} className='clearIcon'/>
           </AccordionSummary>
           {trainers}
         </Accordion>

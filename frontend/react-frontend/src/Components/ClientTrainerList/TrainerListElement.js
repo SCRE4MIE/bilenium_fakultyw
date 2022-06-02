@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import './TrainerListElement.css'
 import { useNavigate } from 'react-router-dom';
 import StarIcon from '@mui/icons-material/Star';
@@ -28,7 +28,7 @@ const TrainerListElement = ({ imageSrc, name, id, rating_trainer }) => {
       <p className='trainerName'>{name}</p>
       <span>
         {isNaN(ratingSum(rating_trainer)) ?
-        <p className="trainerRating">No opinion yet</p>
+        <p className="trainerRating">No opinions</p>
         :
         <>
           <p className="trainerRating">{ratingSum(rating_trainer)}/5</p>

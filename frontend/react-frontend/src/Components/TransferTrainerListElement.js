@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Avatar } from '@mui/material';
 import instance from '../axios';
 import requests from '../requests';
+import StarIcon from '@mui/icons-material/Star';
+import { Star } from '@mui/icons-material';
 
 const TransferTrainerListElement = ({id, avatar, name, rating, chooseTrainer, current, disable, startDate}) => {
 
@@ -63,13 +65,15 @@ const TransferTrainerListElement = ({id, avatar, name, rating, chooseTrainer, cu
 
   return (
     <div style={
-      isAvailible ? selected ? {backgroundColor: '#ffd87d',} : {backgroundColor: 'white'} : {display: 'none'}
+      isAvailible ? selected ? {backgroundColor: '#ffd87d', alignItems: 'center'} : {backgroundColor: 'white'} : {display: 'none'}
       }
       className='trainerListElement' id={id} onClick={handleSelect}>
       <div>
         <Avatar src={avatar}/>
         <p className='name'>{name}</p>
-        <p className='rating'>{rating ? `${averageRating}/5`: null}</p>
+        {averageRating > 0 && <p className='rating'
+        style={{display:'flex', alignItems:'center'}}><span>{rating ? `${averageRating}/5`: null} </span><StarIcon style={{color: '#F9C74F'}}/></p>}
+        {averageRating === 0 && <p className='rating'>No opinions</p>}
       </div>
     </div>
   )

@@ -91,12 +91,12 @@
       box-shadow: none;
       border-radius: 0px;
       margin: 0px;
+      border-top: 1px solid $blueColorLighter;
       > div {
         display: flex;
         width: 200px;
         align-items: center;
         justify-content: space-between;
-
         div {
           width: 40px;
           height: 40px; 
@@ -104,6 +104,22 @@
 
         p {
           min-width: 40px;
+        }
+      }
+    }
+
+    div .trainerListElement {
+      > div {
+        width: 80%;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 20px;
+        flex: 1;
+        
+        .rating {
+          margin-left: auto;
+          display: flex;
+          align-items: center;
         }
       }
     }
@@ -135,6 +151,14 @@
       align-items: center;
       gap: 34px;
       justify-content: center;
+    }
+  }
+}
+
+@media screen and (max-width: 335px) {
+  .orderAWalk {
+    form{
+      width: 100%; 
     }
   }
 }
