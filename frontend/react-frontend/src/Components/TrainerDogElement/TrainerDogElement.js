@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import instance from '../../axios'
 import requests from '../../requests'
-import PersonIcon from '@mui/icons-material/Person';
 import './TrainerDogElement.css';
 import { useNavigate } from 'react-router-dom';
 import { Tooltip } from '@mui/material';
+import { PetsOutlined } from '@mui/icons-material';
 
 const TrainerDogElement = ({ id }) => {
 
@@ -37,7 +37,7 @@ const TrainerDogElement = ({ id }) => {
         {
           dogInfo.avatar_url ?
           <img src={`${url}${dogInfo.avatar_url}`} alt='' />
-          : <PersonIcon style={{alignSelf: 'center', fontSize: '40px', color: 'lightgray'}}/>
+          : <PetsOutlined style={{alignSelf: 'center', fontSize: '40px', color: 'lightgray'}}/>
         }
       </div>
 

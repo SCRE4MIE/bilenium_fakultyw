@@ -1,11 +1,10 @@
 import React from 'react'
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import { Tooltip } from '@mui/material/';
 import { useNavigate } from 'react-router-dom';
 import requests from '../../requests';
 import instance from '../../axios';
 import { useEffect, useState } from 'react';
 import './TrainerWalkDogs.css';
+import { PetsOutlined } from '@mui/icons-material';
 
 const TrainerWalkDogs = ({id}) => {
   
@@ -30,7 +29,8 @@ const TrainerWalkDogs = ({id}) => {
     <div className='trainerWalkDogs' >
       <div className='dogWalkDataContainer' onClick={openTrainerDogProfile}>
         <div className='dogWalkPictureContainer'>
-          <img src={`${url}${dogData.avatar_url}`} alt='' />
+          {dogData.avatar_url && <img src={`${url}${dogData.avatar_url}`} alt='' />}
+          {!dogData.avatar_url && <PetsOutlined style={{alignSelf: 'center', fontSize: '40px', color: 'lightgray'}}/>}
         </div>
         <p className='dogWalkName'>{dogData.name}</p>
       </div>

@@ -19,7 +19,6 @@
   border-radius: 50%;
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: gray;
   overflow: hidden;
   -webkit-transition: 100ms;
   transition: 100ms;
