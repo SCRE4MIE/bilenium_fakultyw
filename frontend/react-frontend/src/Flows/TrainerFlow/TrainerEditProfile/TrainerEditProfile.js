@@ -107,6 +107,12 @@ const TrainerEditProfile = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const phoneNumber = [
+    phone_number.slice(0, 3), " ",
+    phone_number.slice(3, 6), " ",
+    phone_number.slice(6, 9)]
+    .join('');
+
 
   return (
     <div className='trainerEditProfile'>
@@ -137,7 +143,7 @@ const TrainerEditProfile = () => {
         <input 
           name='phone_number' 
           type='text' 
-          placeholder={phone_number} 
+          placeholder={phoneNumber} 
           onChange={formik.handleChange} 
           onBlur={formik.handleBlur}
         />

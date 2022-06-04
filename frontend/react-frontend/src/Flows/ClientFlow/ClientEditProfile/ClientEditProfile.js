@@ -70,6 +70,12 @@ const ClientEditProfile = () => {
     onSubmit: () => handleSubmit(),
   });
 
+  const phone_number = [
+    phoneNumber.slice(0, 3), " ",
+    phoneNumber.slice(3, 6), " ",
+    phoneNumber.slice(6, 9)]
+    .join('');
+
   return (
     <div className='clientEditProfile'>
       <h1>Edit your profile</h1>
@@ -98,7 +104,7 @@ const ClientEditProfile = () => {
         <input 
           name='phone_number' 
           type='text' 
-          placeholder={phoneNumber} 
+          placeholder={phone_number} 
           onChange={formik.handleChange} 
           onBlur={formik.handleBlur}
         />
