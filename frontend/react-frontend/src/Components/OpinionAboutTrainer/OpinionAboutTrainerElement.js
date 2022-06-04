@@ -5,7 +5,7 @@ import ApiPicture from "../ApiPicture";
 import { Tooltip } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const OpinionAboutTrainerElement = ({ avatar, username, value, comment, id }) => {
+const OpinionAboutTrainerElement = ({trainer=true, avatar, username, value, comment, id }) => {
 
   const text = `Go to ${username}'s profile`;
 
@@ -17,14 +17,21 @@ const OpinionAboutTrainerElement = ({ avatar, username, value, comment, id }) =>
   
   return (
     <div className='opinionAboutElement'>
-        <Tooltip title={text}  placement="bottom-start">
+        {trainer && <Tooltip title={text}  placement="bottom-start">
             <div className="opinionHeader" onClick={goToClientProfile}>
                 <div className="pictureContainer">
                     <ApiPicture src={avatar} />
                 </div>
                 <h2 className="authorName">{username}</h2>
             </div>
-        </Tooltip>
+        </Tooltip>}
+        {!trainer &&
+            <div className="opinionHeader">
+                <div className="pictureContainer">
+                    <ApiPicture src={avatar} />
+                </div>
+                <h2 className="authorName">{username}</h2>
+            </div>}
         <div className="opinionDescription">
             <p>{comment}</p>
         </div>

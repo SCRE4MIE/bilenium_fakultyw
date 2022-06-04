@@ -88,6 +88,7 @@ const ClientTrainerProfile = () => {
                     <>
                     {rating_trainer_arr.map((item) => (
                         <OpinionAboutTrainerElement
+                        trainer={false}
                         key = {item.pk}
                         id = {item.pk}
                         username = {item.evaluator.username}

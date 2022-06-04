@@ -132,7 +132,7 @@ const TrainerProfile = () => {
         <h2>
           {phone_number}
         </h2>
-          <TrainerAvailibility availibility={availibility} username={details.username}/>
+          <TrainerAvailibility trainer={true} availibility={availibility} username={details.username}/>
       </div>
       {trainer ?
       <>

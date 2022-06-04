@@ -1,7 +1,7 @@
 import { Tooltip } from '@mui/material'
 import React from 'react'
 
-const TrainerAvailibility = ({availibility, username}) => {
+const TrainerAvailibility = ({availibility, username, trainer}) => {
 
   const enabled = {
     color: '#90BE6D',
@@ -9,7 +9,7 @@ const TrainerAvailibility = ({availibility, username}) => {
   const disabled = {
     color: '#EEEEEE'
   }
-  const tooltipText = `${username}'s availibility`
+  const tooltipText = trainer? 'Your availibility' :`${username}'s availibility`
 
   return (
     <Tooltip title={tooltipText}>
