@@ -11,6 +11,8 @@
         object-fit: contain;
         overflow: hidden;
         border-radius: 50%;
+        background-color: gray;
+        transition: 100ms;
 
         img {
             height: 100%;

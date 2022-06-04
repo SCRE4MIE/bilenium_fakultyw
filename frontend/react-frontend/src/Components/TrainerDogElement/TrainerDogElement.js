@@ -37,7 +37,7 @@ const TrainerDogElement = ({ id }) => {
         {
           dogInfo.avatar_url ?
           <img src={`${url}${dogInfo.avatar_url}`} alt='' />
-          : <PetsOutlined style={{alignSelf: 'center', fontSize: '40px', color: 'lightgray'}}/>
+          : <PetsOutlined style={{alignSelf: 'center', fontSize: '30px', padding: '5px', color: 'lightgray'}}/>
         }
       </div>
 

@@ -42,9 +42,9 @@ const ClientProfile = () => {
   const [tooltip, setTooltip] = useState("")
 
   useEffect(() => {
-    setTooltip(`You have ${notificationCount} unread notification${notificationCount?.length === 1 ? "" : "s"}.`)
-  }, [notificationCount])
-
+    setTooltip(`You have ${notificationCount} unread notification${notificationCount === 1 ? "" : "s"}.`)
+  }, [notificationCount]);
+  console.log(notificationCount)
   return (
     <div className='clientProfile'>
       <h1>Your profile</h1>
@@ -56,7 +56,7 @@ const ClientProfile = () => {
           </div>
           <div className='icons'>
             <div>
-              <Tooltip title={notificationCount ? tooltip : 'Notifications'}>
+              <Tooltip title={notificationCount ? tooltip : 'There are no new notifications'}>
                 <NotificationsNoneOutlinedIcon className='icon'  style={{marginTop: '8px', cursor: 'pointer'}} onClick={() => navigate('/notifications')}/>
               </Tooltip>
               {notificationCount && <div className='notificationCount'>{notificationCount}</div>}

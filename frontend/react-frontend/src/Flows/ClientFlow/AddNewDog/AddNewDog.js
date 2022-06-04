@@ -88,7 +88,7 @@ const AddNewDog = () => {
     <div className='AddNewDog'>
       <h1 className='AddNewDog--header '>Add new dog</h1>
       <div className='dogPicContainer' >
-        {selectedFile ? <img src={preview}/> : <PetsOutlined style={{color: 'white', fontSize: '100px'}}/>}
+        {selectedFile ? <img src={preview}/> : <PetsOutlined style={{color: 'lightgray', fontSize: '100px'}}/>}
       </div>
       <form id = "addDog" className='AddNewDog--form' onSubmit={formik.handleSubmit}>
         

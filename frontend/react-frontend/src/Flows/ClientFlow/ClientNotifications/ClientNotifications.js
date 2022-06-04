@@ -19,7 +19,7 @@ const ClientNotifications = () => {
     <div className='ClientNotifications'>
       <div>
         <h2>Notifications</h2>
-        {notificationsElements}
+        {notificationsElements.length > 0 ? notificationsElements : <p>There are no new notifications</p> }
       </div>
 
     </div>

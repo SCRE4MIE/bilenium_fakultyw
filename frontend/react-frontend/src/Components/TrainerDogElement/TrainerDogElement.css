@@ -19,6 +19,18 @@
   border-radius: 50%;
   -webkit-transform: 100ms;
           transform: 100ms;
+  background-color: gray;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: 100ms;
+  transition: 100ms;
 }
 
 .trainerDogElement .dogImage img {

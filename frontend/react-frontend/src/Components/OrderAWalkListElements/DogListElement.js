@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar } from '@mui/material';
+import { Pets, PetsOutlined } from '@mui/icons-material';
 
 const DogListElement = ({id, avatar, name, chooseDog, count, dogListLength, disable}) => {
 
@@ -32,7 +33,8 @@ const DogListElement = ({id, avatar, name, chooseDog, count, dogListLength, disa
   return (
     <div style={style} className='dogListElement' id={id} onClick={handleSelect}>
       <div>
-        <Avatar src={avatar}/>
+        {avatar && <Avatar src={avatar}/>}
+        {!avatar && <PetsOutlined style={{fontSize:'30px', padding: '5px', backgroundColor: 'gray', color: 'lightgray', borderRadius: '50%'}}/>}
         <p>{name}</p>
         <div></div>
       </div>

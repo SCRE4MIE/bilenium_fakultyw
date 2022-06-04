@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Avatar } from '@mui/material';
 import instance from '../../axios';
 import requests from '../../requests';
-import { Star } from '@mui/icons-material';
+import { Person, Star } from '@mui/icons-material';
 
 
 const TrainerListElement = ({id, avatar, name, rating, chooseTrainer, current, disable, startDate}) => {
@@ -56,13 +56,18 @@ const TrainerListElement = ({id, avatar, name, rating, chooseTrainer, current, d
     display: isAvailible ? 'flex' : 'none',
     border: disable && 'none'
   }
+
+  const avatarSplit = avatar.split('/');
+  const avatarExists = avatarSplit[avatarSplit.length-1] !== 'undefined';
+
   return (
     <div style={
       style
       }
       className='trainerListElement' id={id} onClick={handleSelect}>
     <div>
-        <Avatar src={avatar}/>
+        {avatarExists && <Avatar src={avatar}/>}
+        {!avatarExists && <Person style={{fontSize:'30px', padding: '5px', backgroundColor: 'gray', color: 'lightgray', borderRadius: '50%'}} />}
         <p>{name}</p>
         {averageRating > 0 && 
         <p className='rating'><span>{`${averageRating}/5`}</span> <Star style={{color: '#F9C74F'}}/></p>

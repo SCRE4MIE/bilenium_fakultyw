@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Alert } from '@mui/material';
+import { Alert, Tooltip } from '@mui/material';
 import TrainerDogElement from '../TrainerDogElement/TrainerDogElement';
 import './TrainerIncomingWalk.css';
 import { useNavigate } from 'react-router-dom';
@@ -34,10 +34,11 @@ const TrainerIncomingWalk = ({ id, startDate, endDate, dogs}) => {
       <div className='info'>
         <p>Date of the walk: {dayjs(startDate).format('DD/MM/YYYY')}</p>
         <p>
-          Start: {dayjs(startDate).subtract(1, 'minute').format('hh:mm')} - {dayjs(endDate).format('hh:mm')} : End
+          Start: {dayjs(startDate).subtract(1, 'minute').format('HH:mm')} - {dayjs(endDate).format('HH:mm')} : End
         </p>
         {before24h ? <button className='button' onClick={() => setToggleTransfer(prev => !prev)}>Transfer to a different trainer</button> :
-        <Alert severity="info" style={{letterSpacing: '1px', width: '100%', borderRadius: '0px 0px 10px 10px', marginBottom: '-16px', justifyContent: 'center'}}>Transfer unavailable</Alert>}
+        <Tooltip title="Time remaining for this walk to start is less than 24 hours">
+        <Alert severity="info" style={{letterSpacing: '1px', width: '100%', borderRadius: '0px 0px 10px 10px', marginBottom: '-16px', justifyContent: 'center'}}>Transfer unavailable</Alert></Tooltip>}
       </div>
       {toggleTransfer && <TransferAWalk toggleModal={setToggleTransfer} myId={userDetails.pk} walkData={{id:id, startDate:startDate, endDate:endDate, dogs:dogs}}/>}
     </div>

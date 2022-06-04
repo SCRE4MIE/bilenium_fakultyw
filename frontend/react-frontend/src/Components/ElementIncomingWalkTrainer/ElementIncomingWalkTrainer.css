@@ -17,6 +17,9 @@
      object-fit: contain;
   overflow: hidden;
   border-radius: 50%;
+  background-color: gray;
+  -webkit-transition: 100ms;
+  transition: 100ms;
 }
 
 .trainerElement .trainerImage img {

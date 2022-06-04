@@ -27,7 +27,7 @@
 
   h1 {
     @include text($fontSize: 36px);
-    margin-bottom: 20px;
+    margin-top: 200px;
   }
 
   h2 {
@@ -54,7 +54,7 @@
         overflow: hidden;
         box-shadow: 0px 2px 4px rgba($color: #000000, $alpha: 0.25);
         border: 4px solid white;
-        background-color: white;
+        background-color: gray;
 
         @media screen and (max-width: $breakpoint){
             height: 150px;
@@ -107,7 +107,7 @@
   margin-top: 95px;
   width: 100%;
   height: 10px;
-  background-color: #e1eaf3;
+  background-color: #ffe8b1;
   z-index: -1;
 }
 
@@ -119,7 +119,7 @@
     margin-top: 70px;
     width: 100%;
     height: 10px;
-    background-color: #e1eaf3;
+    background-color: #ffe8b1;
     z-index: -1;
   }
 }

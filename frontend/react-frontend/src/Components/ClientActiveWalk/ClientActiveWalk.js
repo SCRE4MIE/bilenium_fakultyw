@@ -62,7 +62,7 @@ const ClientActiveWalk = ({ id, startDate, endDate, dogs, trainerId}) => {
       <div className='info'>
         <p>Date of the walk: {dayjs(startDate).format('DD/MM/YYYY')}</p>
         <p>
-          Start: {dayjs(startDate).subtract(1, 'minute').format('hh:mm')} - {dayjs(endDate).format('hh:mm')} : End
+          Start: {dayjs(startDate).subtract(1, 'minute').format('HH:mm')} - {dayjs(endDate).format('HH:mm')} : End
         </p>
       </div>
       <Tooltip title="Walk progress">
