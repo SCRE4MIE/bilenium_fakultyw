@@ -46,7 +46,7 @@ const TransferTrainerListElement = ({id, avatar, name, rating, chooseTrainer, cu
     rating.forEach(element => {
       averageRating += Number(element.value);
     });
-    averageRating = (Math.round(averageRating / rating.length * 4) / 4).toFixed(2);
+    averageRating = averageRating / rating.length
   } 
 
   const date = dayjs(startDate);

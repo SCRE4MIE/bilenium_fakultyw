@@ -12,7 +12,11 @@
     overflow: hidden;
     border-radius: 50%;
     transform: 100ms;
-
+    background-color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 100ms;
     img {
       height: 100%;
     }

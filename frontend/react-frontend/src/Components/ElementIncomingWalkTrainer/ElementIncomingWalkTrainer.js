@@ -30,7 +30,7 @@ const ElementIncomingWalkTrainer = ({ id }) => {
         {
           trainerInfo.avatar_url ?
           < ApiPicture src={trainerInfo.avatar_url} />
-          : <PersonIcon style={{alignSelf: 'center', fontSize: '40px', color: 'lightgray'}}/>
+          : <PersonIcon style={{alignSelf: 'center', fontSize: '30px', padding: '5px', color: 'lightgray'}}/>
         }
       </div>
 

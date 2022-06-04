@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import ElementIncomingWalkTrainer from '../ElementIncomingWalkTrainer/ElementIncomingWalkTrainer';
 import instance from '../../axios';
 import requests from '../../requests';
-import { Alert } from '@mui/material';
+import { Alert, Tooltip } from '@mui/material';
 import DeleteWalkModal from '../DeleteWalkModal/DeleteWalkModal';
 
 const ClientIncomingWalk = ({ id, startDate, endDate, dogs, trainerId}) => {
@@ -72,10 +72,12 @@ const ClientIncomingWalk = ({ id, startDate, endDate, dogs, trainerId}) => {
       <div className='info'>
         <p>Date of the walk: {dayjs(startDate).format('DD/MM/YYYY')}</p>
         <p>
-          Start: {dayjs(startDate).subtract(1, 'minute').format('hh:mm')} - {dayjs(endDate).format('hh:mm')} : End
+          Start: {dayjs(startDate).subtract(1, 'minute').format('HH:mm')} - {dayjs(endDate).format('HH:mm')} : End
         </p>
         {before24h ? <button className='buttonUser' onClick={openModal}>Cancel the walk</button> :
-        <Alert severity="info" style={{letterSpacing: '1px', width: '100%', borderRadius: '0px 0px 10px 10px', marginBottom: '-16px', justifyContent: 'center'}}>Cancel unavailable</Alert>}
+        <Tooltip title="Time remaining for this walk to start is less than 24 hours">
+        
+        <Alert severity="info" style={{letterSpacing: '1px', width: '100%', borderRadius: '0px 0px 10px 10px', marginBottom: '-16px', justifyContent: 'center'}}>Cancel unavailable</Alert></Tooltip>}
       </div>
       {toggleCancel && <DeleteWalkModal toggleModal={openModal} walkData={{id:id, startDate:startDate, endDate:endDate, dogs:dogs, myDogs:myDogs, trainerId:trainerId}}/>}
     </div>

@@ -124,7 +124,7 @@ const EditDog = ({dogId}) => {
               {
                 formik.errors.description && formik.touched.description ? 
                 <p className="formError">{formik.errors.description}</p> 
-                : <p className="formLabel">Decsription</p>}
+                : <p className="formLabel">Description</p>}
             </label>
             <textarea
               className='EditDog--desc' 

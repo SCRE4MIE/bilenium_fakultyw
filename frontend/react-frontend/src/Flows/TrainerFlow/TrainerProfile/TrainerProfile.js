@@ -99,7 +99,7 @@ const TrainerProfile = () => {
           <div className='notifications-rating'>
             <div className='icons'>
               <div>
-                <Tooltip title={notificationCount ? tooltip : 'Notifications'}>
+                <Tooltip title={notificationCount ? tooltip : 'There are no new notifications'}>
                   <NotificationsNoneOutlinedIcon className='icon' style={{cursor: 'pointer'}} onClick={() => navigate('/notifications')}/>
                 </Tooltip>
                 {notificationCount && <div className='notificationCount'>{notificationCount}</div>}

@@ -3,6 +3,8 @@ import './TrainerActiveWalks.css';
 import * as dayjs from 'dayjs'
 import TrainerWalkDogs from '../../../Components/TrainerWalkDogs/TrainerWalkDogs';
 import useTrainerActiveWalks from '../../../CustomHooks/useTrainerActiveWalks';
+import TrainerDogElement from '../../../Components/TrainerDogElement/TrainerDogElement';
+
 
 const TrainerActiveWalks = () => {
 
@@ -10,7 +12,7 @@ const TrainerActiveWalks = () => {
   
   const displayActiveWalk = activeWalks[0];
 
-  const dogComponents = displayActiveWalk?.dogs.map(id => <TrainerWalkDogs key = {id} id = {id}/>);
+  const dogComponents = displayActiveWalk?.dogs.map(id => <TrainerDogElement key = {id} id = {id}/>);
   
 
   return (
@@ -44,7 +46,6 @@ const WalkActive = ({displayActiveWalk, dogComponents}) => {
 const NoActive = () => {
   return (
   <div className='trainerActiveWalks'>
-    <h1 className='activeWalkHeader'>Active walk</h1>
     <h1 className='activeWalkHeader'>You have no active walks</h1>
   </div>
   )

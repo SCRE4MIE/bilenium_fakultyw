@@ -25,7 +25,7 @@ const TransferAWalk = ({toggleModal, walkData, myId}) => {
   }
 
   const chooseTrainer = (id, avatar, name, rating) => {
-    setActiveTrainer({id: id, component: <TransferTrainerListElement id={id} avatar={avatar} name={name} disable={true}/>});
+    setActiveTrainer({id: id, component: <TransferTrainerListElement rating={rating} id={id} avatar={avatar} name={name} disable={true}/>});
   }  
 
   const trainersUnfiltered = useTrainerList();

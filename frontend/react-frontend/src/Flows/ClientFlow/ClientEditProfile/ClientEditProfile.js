@@ -14,6 +14,7 @@ const ClientEditProfile = () => {
   const navigate = useNavigate();
 
   const avatar = JSON.parse(sessionStorage.getItem('userDetails')).avatar_url;
+  const phoneNumber = JSON.parse(sessionStorage.getItem('userDetails')).phone_number;
 
   const [profilePicture, setProfilePicture] = useState([])
   const [imageURL, setImageURL] = useState([])
@@ -97,7 +98,7 @@ const ClientEditProfile = () => {
         <input 
           name='phone_number' 
           type='text' 
-          placeholder='New phone number' 
+          placeholder={phoneNumber} 
           onChange={formik.handleChange} 
           onBlur={formik.handleBlur}
         />

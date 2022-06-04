@@ -103,9 +103,6 @@ const LoginForm = ({ signIn }) => {
           onChange={formik.handleChange}
         />
 
-        
-
-        <a href='' style={{color: '#577590'}}>Forgot your password?</a>
 
         <div className='buttonsContainer'>
           <Link to={'/register'} className='button' >Sign Up!</Link>

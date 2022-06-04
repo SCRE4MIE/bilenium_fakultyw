@@ -30,9 +30,17 @@ const TrainerOwnerProfile = () => {
 
   const dogList = userDogs.map(e => <TrainerDogElement key={e.pk} id={e.pk}/>)
 
-  if(!userDetails) {
+  const phone_number = [
+    userDetails.phone_number?.slice(0, 3), " ",
+    userDetails.phone_number?.slice(3, 6), " ",
+    userDetails.phone_number?.slice(6, 9)]
+    .join('');
+
+    console.log(userDetails);
+
+  if(!userDetails.pk || userDetails.is_trainer === true) {
     return (
-      <div>There is no such user.</div>
+      <div className='TrainerOwnerProfile'><h1>There is no such user.</h1></div>
     )
   } else {
     return (
@@ -45,7 +53,7 @@ const TrainerOwnerProfile = () => {
             </div>
           </div>
           <h2>
-            {userDetails.phone_number}
+            {phone_number}
           </h2>
         </div>
         {userDogs.length > 0 && <h3 className='dogListTitle'>{userDetails.username}'s dogs</h3>}

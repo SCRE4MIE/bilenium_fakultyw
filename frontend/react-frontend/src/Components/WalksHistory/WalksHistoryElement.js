@@ -46,10 +46,10 @@ const WalksHistoryElement= ({dogs, trainer, date, date_end }) => {
         <div className='info'>
           <p>Date of the walk: {dayjs(startHour).format('DD/MM/YYYY')}</p>
           <p>
-            Started at: {dayjs(startHour).subtract(1, 'minute').format('hh:mm')}
+            Started at: {dayjs(startHour).subtract(1, 'minute').format('HH:mm')}
           </p>
           <p>
-            Ended at: {dayjs(endtHour).format('hh:mm')}
+            Ended at: {dayjs(endtHour).format('HH:mm')}
           </p>
         </div>
         <div className='line'></div>

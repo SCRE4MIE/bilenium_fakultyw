@@ -16,6 +16,7 @@
     align-items: center;
     h1 {
         @include text($fontSize: 36px);
+        margin: 34px auto 0px auto;
     }
 
     h2 {
