@@ -70,7 +70,7 @@ const TrainerListElement = ({id, avatar, name, rating, chooseTrainer, current, d
         {!avatarExists && <Person style={{fontSize:'30px', padding: '5px', backgroundColor: 'gray', color: 'lightgray', borderRadius: '50%'}} />}
         <p>{name}</p>
         {averageRating > 0 && 
-        <p className='rating'><span>{`${averageRating}/5`}</span> <Star style={{color: '#F9C74F'}}/></p>
+        <p className='rating'><span>{`${Math.round(averageRating * 100) / 100}/5`}</span> <Star style={{color: '#F9C74F'}}/></p>
         }
         {averageRating === 0 && <p className='rating'>No opinions</p>}
       </div>

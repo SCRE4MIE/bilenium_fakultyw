@@ -3,7 +3,8 @@ import UpdateIcon from '@mui/icons-material/Update';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import CheckIcon from '@mui/icons-material/Check';
 import AnnouncementOutlinedIcon from '@mui/icons-material/AnnouncementOutlined';
-import './Notification.css'
+import './Notification.css';
+import { useNavigate } from "react-router-dom";
 
 const Notification = ({data, type}) => {
 
@@ -14,6 +15,15 @@ const Notification = ({data, type}) => {
 
   let notification = "";
   let icon;
+
+  const navigate = useNavigate();
+
+  const goToWalks = () => {
+    const userType = JSON.parse(sessionStorage.getItem('userDetails')).is_trainer;
+    if(type !== 'Delete') {
+      userType ? navigate('/incomingWalks') : navigate('/futureWalks');
+    }
+  }
 
   switch(data.action) {
     case "Create":
@@ -33,7 +43,7 @@ const Notification = ({data, type}) => {
   }
 
   return (
-    <div className='notification'>
+    <div className='notification' onClick={goToWalks}>
       <div className='description'>
         {icon}
         <p>{notification}</p>

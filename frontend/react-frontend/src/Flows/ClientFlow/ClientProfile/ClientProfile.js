@@ -44,7 +44,6 @@ const ClientProfile = () => {
   useEffect(() => {
     setTooltip(`You have ${notificationCount} unread notification${notificationCount === 1 ? "" : "s"}.`)
   }, [notificationCount]);
-  console.log(notificationCount)
   return (
     <div className='clientProfile'>
       <h1>Your profile</h1>
