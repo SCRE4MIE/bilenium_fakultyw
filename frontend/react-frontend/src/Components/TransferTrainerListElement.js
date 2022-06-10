@@ -72,7 +72,7 @@ const TransferTrainerListElement = ({id, avatar, name, rating, chooseTrainer, cu
         <Avatar src={avatar}/>
         <p className='name'>{name}</p>
         {averageRating > 0 && <p className='rating'
-        style={{display:'flex', alignItems:'center'}}><span>{rating ? `${averageRating}/5`: null} </span><StarIcon style={{color: '#F9C74F'}}/></p>}
+        style={{display:'flex', alignItems:'center'}}><span>{rating ? `${Math.round(averageRating * 100) / 100}/5`: null} </span><StarIcon style={{color: '#F9C74F'}}/></p>}
         {averageRating === 0 && <p className='rating'>No opinions</p>}
       </div>
     </div>

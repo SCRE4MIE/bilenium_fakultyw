@@ -43,6 +43,11 @@
         display: flex;
         margin-top: 20px;
         margin-left: 10px;
+
+        div {
+            display: flex;
+            flex-direction: column;
+        }
       }
 
     .line{

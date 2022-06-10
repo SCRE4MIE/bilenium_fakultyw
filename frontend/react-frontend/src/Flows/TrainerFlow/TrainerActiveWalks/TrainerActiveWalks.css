@@ -61,6 +61,16 @@
   margin-left: 10px;
 }
 
+.trainerActiveWalks .activeWalkDogs div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 .trainerActiveWalks .line {
   border: 1px solid #577590;
   width: 90%;

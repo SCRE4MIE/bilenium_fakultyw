@@ -27,7 +27,7 @@ const WalkActive = ({displayActiveWalk, dogComponents}) => {
   <div className='trainerActiveWalks'>
     <h1 className='activeWalkHeader'>Active walk</h1>
     <p className='walkDate'>Walk date: {dayjs(displayActiveWalk?.date).format("YYYY-MM-DD")}</p>
-    <p className='walkHours'>Walk hours: {dayjs(displayActiveWalk?.date).format("HH:mm")} - {dayjs(displayActiveWalk?.date_end).format("HH:mm")}</p>
+    <p className='walkHours'>Walk hours: {dayjs(displayActiveWalk?.date).subtract(1, 'minute').format("HH:mm")} - {dayjs(displayActiveWalk?.date_end).format("HH:mm")}</p>
 
     <h2 className='activeWalkDogs'>Dogs: </h2>
     <div style={{
@@ -35,7 +35,8 @@ const WalkActive = ({displayActiveWalk, dogComponents}) => {
       flexWrap: 'wrap', 
       paddingLeft: '40px', 
       paddingRight: '40px',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      flexDirection: 'column',
     }}>
       {dogComponents}
     </div>
